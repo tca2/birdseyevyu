@@ -23,3 +23,19 @@ You can install the development version from
 # install.packages("devtools")
 devtools::install_github("jrosen48/datavyu")
 ```
+
+## Use
+
+1.  Run the following Ruby script within the datavyu software; select a
+    directory with an `.opf` file:
+
+`csv2opf.rb`
+
+2.  Open the directory that the Ruby script created; a number of CSV
+    files for each `.opf` file should now be created.
+
+3.  These CSV files can be loaded like any others (and can be opened in
+    Excel); within R, they can easily be a source for visualizations,
+    like the following:
+
+![example image](readme-img.png)

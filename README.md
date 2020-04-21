@@ -44,10 +44,14 @@ by a number of Ruby scripts.
 
 3.  These CSV files can be loaded like any others (and can be opened in
     Excel); within R, they can easily be used for visualizations, like
-    the following, which was created with the [analysis.R](analysis.R)
-    file:
+    the following, which was created with the [test.R](R/test.R) file:
 
 ![example image](readme-img.png)
+
+Ideally, this kind of plot would be created using an arbitrary number of
+files with a command such as:
+
+`plot_ts()` (for ‘plot time series’)
 
 ## Other packages
 

@@ -11,8 +11,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
 <!-- badges: end -->
 
-The goal of datavyu is to to to facilitate the use of the open-source
-datavyu software for the analysis of qualitative audiovisual data
+The goal of {datavyu} is to to to facilitate the use of the open-source
+**datavyu** software for the analysis of qualitative audiovisual data
 
 ## Installation
 
@@ -29,9 +29,10 @@ The datavyu software must also be installed; see
 
 ## Use
 
-*note*: The use of this package requires the use of the datavyu
+*note*: The use of this package requires the use of the **datavyu**
 software’s [Ruby API](https://datavyu.org/user-guide/api.html); note
-that datavyu provides a number of Ruby scripts.
+that while **datavyu** has a graphical user interface, it is accompanied
+by a number of Ruby scripts.
 
 1.  . Run the following Ruby script within the datavyu software; select
     a directory with one or more `.opf` files:
@@ -42,16 +43,16 @@ that datavyu provides a number of Ruby scripts.
     files for each `.opf` file should now be created.
 
 3.  These CSV files can be loaded like any others (and can be opened in
-    Excel); within R, they can easily be a source for visualizations,
-    like the following, which was created with the
-    [analysis.R](analysis.R) file:
+    Excel); within R, they can easily be used for visualizations, like
+    the following, which was created with the [analysis.R](analysis.R)
+    file:
 
 ![example image](readme-img.png)
 
 ## Other packages
 
 We note that there is another R package that provides an interface to
-datavyu; that package is
+**datavyu;** that package is
 [{datavyur}](https://github.com/iamamutt/datavyu).
 
 At this time, we are using this package in an experimental sense, and
@@ -63,7 +64,7 @@ recommend those looking for a more-developed package consider using
 ### Necessary to address
 
   - what is the core functionality of the package?
-  - what problems exist where it comes to usign data created in datavyu,
+  - what problems exist where it comes to using data created in datavyu,
     and how can this package speak to those problems?
 
 ## Maybe worth addressing

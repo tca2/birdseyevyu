@@ -44,14 +44,13 @@ by a number of Ruby scripts.
 
 3.  These CSV files can be loaded like any others (and can be opened in
     Excel); within R, they can easily be used for visualizations, like
-    the following, which was created with the [test.R](R/test.R) file:
-
-![example image](readme-img.png)
-
-Ideally, this kind of plot would be created using an arbitrary number of
-files with a command such as:
+    the following, which was created with the [test.R](R/test.R) file.
+    Ideally, this kind of plot would be created using an arbitrary
+    number of files with a command such as:
 
 `plot_ts()` (for ‘plot time series’)
+
+![example image](readme-img.png)
 
 ## Other packages
 
@@ -62,21 +61,3 @@ We note that there is another R package that provides an interface to
 At this time, we are using this package in an experimental sense, and
 recommend those looking for a more-developed package consider using
 {datavyur} instead of this package.
-
-## Questions/to do
-
-### Necessary to address
-
-  - what is the core functionality of the package?
-  - what problems exist where it comes to using data created in datavyu,
-    and how can this package speak to those problems?
-
-## Maybe worth addressing
-
-  - running the Ruby script from within R
-  - setting up templates/importing data
-
-## Probably out of scope
-
-  - interacting directly with datavyu, given the Ruby API (and the
-    challenge of running Ruby code from within R)

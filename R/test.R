@@ -19,7 +19,7 @@ d1 <- d1 %>%
   filter(!is.na(val)) %>%
   mutate(var = 2)
 
-d %>%
+p <- d %>%
 ggplot(aes(x = onset, y = var, shape = val, color = val)) +
   geom_point() +
   ylim(.75, 1.25) +
@@ -30,7 +30,7 @@ ggplot(aes(x = onset, y = var, shape = val, color = val)) +
   scale_shape_discrete("Activity Format") +
   xlab("time (minutes)")
 
-d1 %>%
+p1 <- d1 %>%
   ggplot(aes(x = onset, y = var, shape = val, color = val)) +
   geom_point() +
   ylim(.75, 1.25) +
@@ -41,7 +41,11 @@ d1 %>%
   scale_shape_discrete("Participation Format") +
   xlab("time (minutes)")
 
-li
+library(patchwork)
+
+p + p1 + patchwork::plot_layout(ncol = 1)
+
+ggsave("readme-img.png", width = 7, height = 5)
 
 d %>%
   bind_r

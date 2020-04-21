@@ -57,3 +57,21 @@ datavyu; that package is
 At this time, we are using this package in an experimental sense, and
 recommend those looking for a more-developed package consider using
 {datavyur} instead of this package.
+
+## Questions/to do
+
+### Necessary to address
+
+  - what is the core functionality of the package?
+  - what problems exist where it comes to usign data created in datavyu,
+    and how can this package speak to those problems?
+
+## Maybe worth addressing
+
+  - running the Ruby script from within R
+  - setting up templates/importing data
+
+## Probably out of scope
+
+  - interacting directly with datavyu, given the Ruby API (and the
+    challenge of running Ruby code from within R)

@@ -24,10 +24,17 @@ You can install the development version from
 devtools::install_github("jrosen48/datavyu")
 ```
 
+The datavyu software must also be installed; see
+[here](https://datavyu.org/download.html)
+
 ## Use
 
-1.  Run the following Ruby script within the datavyu software; select a
-    directory with an `.opf` file:
+*note*: The use of this package requires the use of the datavyu
+software’s [Ruby API](https://datavyu.org/user-guide/api.html); note
+that datavyu provides a number of Ruby scripts.
+
+1.  . Run the following Ruby script within the datavyu software; select
+    a directory with one or more `.opf` files:
 
 `csv2opf.rb`
 
@@ -36,6 +43,17 @@ devtools::install_github("jrosen48/datavyu")
 
 3.  These CSV files can be loaded like any others (and can be opened in
     Excel); within R, they can easily be a source for visualizations,
-    like the following:
+    like the following, which was created with the
+    [analysis.R](analysis.R) file:
 
 ![example image](readme-img.png)
+
+## Other packages
+
+We note that there is another R package that provides an interface to
+datavyu; that package is
+[{datavyur}](https://github.com/iamamutt/datavyu).
+
+At this time, we are using this package in an experimental sense, and
+recommend those looking for a more-developed package consider using
+{datavyur} instead of this package.

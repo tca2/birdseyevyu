@@ -46,12 +46,3 @@ library(patchwork)
 p + p1 + patchwork::plot_layout(ncol = 1)
 
 ggsave("readme-img.png", width = 7, height = 5)
-
-d %>%
-  bind_r
-
-d %>%
-
-d %>%
-  ggplot(aes(x = onset)) +
-  geom_point()

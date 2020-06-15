@@ -34,7 +34,7 @@ software’s [Ruby API](https://datavyu.org/user-guide/api.html); note
 that while **datavyu** has a graphical user interface, it is accompanied
 by a number of Ruby scripts.
 
-1.  . Run the following Ruby script within the datavyu software; select
+1.  Run the following Ruby script within the datavyu software; select
     a directory with one or more `.opf` files:
 
 `csv2opf.rb`

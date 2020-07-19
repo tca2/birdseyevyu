@@ -1,0 +1,168 @@
+datavyu2csv initated at: Date: 07/06/2020 Time: 14:46
+
+Found the following files:
+
+MM T102 14-02-17 Content Log.opf
+NM 14-12-03 T201 Content Log v.3.opf
+NM T401 14-11-21 Content Log v.2.opf
+
+================================================================================
+*Loading file: 'MM T102 14-02-17 Content Log.opf'
+..Found column: LogClass_AS_ParticipationFormat
+
+...Found arguments: code01, notesep, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_AS_ParticipationFormat__MM T102 14-02-17 Content Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_ActivityFormat
+
+...Found arguments: code01, studentpresentername, notesep, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_AS_ActivityFormat__MM T102 14-02-17 Content Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IS
+
+...Found arguments: i, notesep, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_IS__MM T102 14-02-17 Content Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IG
+
+...Found arguments: code01, notesep, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_IG__MM T102 14-02-17 Content Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TO_MathPresent
+
+...Found arguments: code01, notesep, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_TO_MathPresent__MM T102 14-02-17 Content Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TaskUsed
+
+...Found arguments: nameoftask, taskonserver, knowwhattaskis, notesep, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_TaskUsed__MM T102 14-02-17 Content Log.csv'
+
+.....done with .csv file
+
+..Found column: LogNotes
+
+...Found arguments: code01, notesep, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogNotes__MM T102 14-02-17 Content Log.csv'
+
+.....done with .csv file
+
+
+================================================================================
+*Loading file: 'NM 14-12-03 T201 Content Log v.3.opf'
+..Found column: LogClass_AS_ParticipationFormat
+
+...Found arguments: code01, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_AS_ParticipationFormat__NM 14-12-03 T201 Content Log v.3.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IS
+
+...Found arguments: code01, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_IS__NM 14-12-03 T201 Content Log v.3.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_ActivityFormat
+
+...Found arguments: code01, studentpresentername, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_AS_ActivityFormat__NM 14-12-03 T201 Content Log v.3.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TaskUsed
+
+...Found arguments: nameoftask, taskonserver, knowwhattaskis, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_TaskUsed__NM 14-12-03 T201 Content Log v.3.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TO_MathPresent
+
+...Found arguments: mathpresentcode, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_TO_MathPresent__NM 14-12-03 T201 Content Log v.3.csv'
+
+.....done with .csv file
+
+..Found column: LogNotes
+
+...Found arguments: code01, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogNotes__NM 14-12-03 T201 Content Log v.3.csv'
+
+.....done with .csv file
+
+
+================================================================================
+*Loading file: 'NM T401 14-11-21 Content Log v.2.opf'
+..Found column: LogClass_AS_ParticipationFormat
+
+...Found arguments: code01, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_AS_ParticipationFormat__NM T401 14-11-21 Content Log v.2.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_ActivityFormat
+
+...Found arguments: code01, studentpresentername, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_AS_ActivityFormat__NM T401 14-11-21 Content Log v.2.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IS
+
+...Found arguments: i, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_IS__NM T401 14-11-21 Content Log v.2.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TO_MathPresent
+
+...Found arguments: code01, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_TO_MathPresent__NM T401 14-11-21 Content Log v.2.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TaskUsed
+
+...Found arguments: nameoftask, taskonserver, knowwhattaskis, notesrw, notesmm, notesed, notesck, notesnm
+
+....Writing cells to file: 'LogClass_TaskUsed__NM T401 14-11-21 Content Log v.2.csv'
+
+.....done with .csv file
+
+..Found column: LogNotes
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

@@ -22,5 +22,5 @@ library(datavyur)
 ```
 
 ```{r}
-getOption("datavyur.folder")
+
 ```

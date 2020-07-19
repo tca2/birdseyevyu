@@ -9,6 +9,8 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: GPL-3
+Imports:
+    dplyr
 Suggests: 
     testthat,
     knitr,

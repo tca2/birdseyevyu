@@ -31,6 +31,8 @@ library(purrr)
 #   }
 # }
 
+
+
 plot_ts <- function(d) {
 
   names(d) <- names(d) %>%

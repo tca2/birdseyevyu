@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  message = FALSE
 )
 ```
 
@@ -35,6 +36,15 @@ The datavyu software must also be installed; see [here](https://datavyu.org/down
 
 ## Use
 
+```{r}
+library(dplyr)
+library(datavyur)
+```
+
+```{r, echo = FALSE}
+devtools::load_all(".")
+```
+
 *note*: The use of this package requires the use of the **datavyu** software's [Ruby API](https://datavyu.org/user-guide/api.html); note that while **datavyu** has a graphical user interface, it is accompanied by a number of Ruby scripts.
 
 1. . Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
@@ -50,35 +60,55 @@ The datavyu software must also be installed; see [here](https://datavyu.org/down
 ```{r}
 # find_unique_values("example-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
 
-f <- datavyur::datavyu_col_search(folder = "example-data/datavyu_output_07-06-2020_14-46", cnames = "LogClass_AS_ActivityFormat") %>% as_tibble()
+f <- datavyur::datavyu_col_search(folder = "example-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
 
 f$column %>% unique()
 f$file %>% unique()
-
-fc1 <- datavyur::import_column("LogClass_AS_ActivityFormat", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
-
-fc2 <- datavyur::import_column("LogClass_AS_ParticipationFormat", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
-
-fc1
-fc2
 ```
 
-# Not really sure this is useful, yet
+# load in certain columns 
 
 ```{r}
+datavyur::import_column("LogClass_AS_ActivityFormat", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
+  as_tibble()
 
-fc1_modified <- datavyur::temporal_align(all.cols = "LogClass_AS_ParticipationFormat", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
+datavyur::import_column("LogClass_AS_ParticipationFormat", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
+  as_tibble()
 
-fc1_modified
+datavyur::import_column("LogClass_TO_MathPresent", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
+  as_tibble()
+
+datavyur::import_column("LogClass_IS", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
+  as_tibble()
 ```
 
-3. These CSV files can be loaded like any others (and can be opened in Excel); within R, they can easily be used for visualizations, like the following, which was created with the [test.R](R/test.R) file. Ideally, this kind of plot would be created using an arbitrary number of files with a command such as:
+# Calculating code frequencies
 
-`plot_ts()` (for 'plot time series')
+Finds the code column automatically
 
-![example image](readme-img.png)
+```{r}
+calc_frequencies(column = "LogClass_AS_ActivityFormat",
+                 folder = "example-data/datavyu_output_07-06-2020_14-46")
+
+calc_frequencies(column = "LogClass_AS_ActivityFormat",
+                 folder = "example-data/datavyu_output_07-06-2020_14-46",
+                 by_file = TRUE)
+
+calc_frequencies(column = "LogClass_TO_MathPresent",
+                 folder = "example-data/datavyu_output_07-06-2020_14-46")
+
+calc_frequencies(column = "LogClass_IS",
+                 folder = "example-data/datavyu_output_07-06-2020_14-46")
+```
+# Calculate duration
+
+```{r}
+calc_duration(column = "LogClass_TO_MathPresent",
+          folder = "example-data/datavyu_output_07-06-2020_14-46")
+
+calc_duration(column = "LogClass_TO_MathPresent",
+          folder = "example-data/datavyu_output_07-06-2020_14-46", by_file = FALSE)
+```
 
 ## Other packages
 

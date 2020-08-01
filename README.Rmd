@@ -55,6 +55,8 @@ devtools::load_all(".")
 
 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
 
+This is the directory pass to the datavyu functions below.
+
 # Grab all of the files for one code:
 
 ```{r}
@@ -66,60 +68,28 @@ f$column %>% unique()
 f$file %>% unique()
 ```
 
-# load in certain columns 
+# Summarizing a column
 
 ```{r}
-datavyur::import_column("LogClass_AS_ActivityFormat", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                folder = "example-data/datavyu_output_07-06-2020_14-46")
 
-datavyur::import_column("LogClass_AS_ParticipationFormat", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                folder = "example-data/datavyu_output_07-06-2020_14-46",
+                by_file = TRUE)
 
-datavyur::import_column("LogClass_TO_MathPresent", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
-
-datavyur::import_column("LogClass_IS", folder = "example-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                folder = "example-data/datavyu_output_07-06-2020_14-46",
+                by_file = TRUE,
+                summarize_what = "duration")
 ```
 
-# Calculating code frequencies
-
-Finds the code column automatically
+# Plot the results of a summary of a column
 
 ```{r}
-calc_frequencies(column = "LogClass_AS_ActivityFormat",
-                 folder = "example-data/datavyu_output_07-06-2020_14-46")
-
-calc_frequencies(column = "LogClass_AS_ActivityFormat",
-                 folder = "example-data/datavyu_output_07-06-2020_14-46",
-                 by_file = TRUE)
-
-calc_frequencies(column = "LogClass_TO_MathPresent",
-                 folder = "example-data/datavyu_output_07-06-2020_14-46")
-
-calc_frequencies(column = "LogClass_IS",
-                 folder = "example-data/datavyu_output_07-06-2020_14-46")
-```
-# Calculate duration
-
-```{r}
-calc_duration(column = "LogClass_TO_MathPresent",
-          folder = "example-data/datavyu_output_07-06-2020_14-46")
-
-calc_duration(column = "LogClass_TO_MathPresent",
-          folder = "example-data/datavyu_output_07-06-2020_14-46", by_file = FALSE)
+plot_frequencies
 ```
 
-## Other packages
+## Other package
 
-We note that there is another R package that provides an interface to **datavyu;** that package is [{datavyur}](https://github.com/iamamutt/datavyu).
-
-```{r, eval = FALSE}
-library(datavyur)
-
-datavyu_col_search(folder = "example-data/datavyu_output_07-06-2020_14-46", cnames = "column")
-
-?datavyur::multi_merge()
-```
-
-At this time, we are using this package in an experimental sense, and recommend those looking for a more-developed package consider using {datavyur} instead of this package.
+This package extensively uses [{datavyur}](https://github.com/iamamutt/datavyu) for preparing the data for the summary statistic and plotting functions in this package. We do not intend to duplicate the functionality of that excellent package in ours; we focus instead on summarizing datavyu output and preparing the output for use in other analyses.

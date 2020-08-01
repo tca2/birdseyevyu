@@ -4,14 +4,14 @@
 \alias{calc_frequencies}
 \title{Calculate code frequencies for a datavu column}
 \usage{
-calc_frequencies(column = NULL, code = NULL, folder = NULL, by_file = FALSE)
+calc_frequencies(column = NULL, code = NULL, directory = NULL, by_file = FALSE)
 }
 \arguments{
 \item{column}{the column as a character string}
 
 \item{code}{the code as a character string}
 
-\item{folder}{the path to the folder as a character string}
+\item{directory}{the path to the directory as a character string}
 
 \item{by_file}{whether or not to calculate the frequencies by file (logical)}
 }
@@ -23,7 +23,7 @@ Calculate code frequencies for a datavu column
 }
 \examples{
 calc_frequencies(column = "LogClass_AS_ActivityFormat",
-                 folder = "example-data/datavyu_output_07-06-2020_14-46",
+                 directory = "example-data/datavyu_output_07-06-2020_14-46",
                  by_file = TRUE)
 
 }

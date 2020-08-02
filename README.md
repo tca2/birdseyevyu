@@ -9,8 +9,6 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
-[![Codecov test
-coverage](https://codecov.io/gh/jrosen48/datavyu/branch/master/graph/badge.svg)](https://codecov.io/gh/jrosen48/datavyu?branch=master)
 [![Travis build
 status](https://travis-ci.com/jrosen48/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
 <!-- badges: end -->

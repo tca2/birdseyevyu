@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • datavyu</title>
+<title>Summarize a datavyu column — summarize_column • datavyu</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Summarize a datavyu column — summarize_column" />
+<meta property="og:description" content="Summarize a datavyu column" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -117,90 +118,65 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Summarize a datavyu column</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tca2/datavyu/blob/master/R/summarize-column.R'><code>R/summarize-column.R</code></a></small>
+    <div class="hidden name"><code>summarize_column.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Summarize a datavyu column</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>summarize_column</span>(
+  <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"frequency"</span>
+)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="calc_duration.html">calc_duration()</a></code> </p>
-        </td>
-        <td><p>Calculate the duration of a code for a datavyu column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="calc_frequencies.html">calc_frequencies()</a></code> </p>
-        </td>
-        <td><p>Calculate code frequencies for a datavu column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.datavyu.html">plot(<i>&lt;datavyu&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Plot datavyu output</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_column_summary.html">plot_column_summary()</a></code> </p>
-        </td>
-        <td><p>Plot code duration for a datavu column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_duration.html">plot_duration()</a></code> </p>
-        </td>
-        <td><p>Plot code duration for a datavu column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_frequency.html">plot_frequency()</a></code> </p>
-        </td>
-        <td><p>Plot code frequency for a datavu column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.datavyu.html">print(<i>&lt;datavyu&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print datavyu output</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summarize_column.html">summarize_column()</a></code> </p>
-        </td>
-        <td><p>Summarize a datavyu column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summary.datavyu.html">summary(<i>&lt;datavyu&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Summarize datavyu output</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>column</th>
+      <td><p>the column as a character string</p></td>
+    </tr>
+    <tr>
+      <th>code</th>
+      <td><p>the code as a character string</p></td>
+    </tr>
+    <tr>
+      <th>directory</th>
+      <td><p>the path to the directory as a character string</p></td>
+    </tr>
+    <tr>
+      <th>by_file</th>
+      <td><p>whether or not to calculate the frequencies by file (logical)</p></td>
+    </tr>
+    <tr>
+      <th>what</th>
+      <td><p>either "frequency" or "duration"</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame generated with the janitor package</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>summarize_column</span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
+                 <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"example-data/datavyu_output_07-06-2020_14-46"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble() %&gt;% janitor::clean_names(): could not find function "%&gt;%"</span></div><div class='input'>
+<span class='fu'>summarize_column</span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
+                 <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"example-data/datavyu_output_07-06-2020_14-46"</span>,
+                 <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble() %&gt;% janitor::clean_names(): could not find function "%&gt;%"</span></div><div class='input'>
+<span class='fu'>summarize_column</span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
+                 <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"example-data/datavyu_output_07-06-2020_14-46"</span>,
+                 <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                 <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"duration"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble(): could not find function "%&gt;%"</span></div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

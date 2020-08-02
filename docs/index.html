@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What the Package Does (One Line, Title Case) • datavyu</title>
+<title>Summarize and Plot datavyu Output • datavyu</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (One Line, Title Case)">
-<meta property="og:description" content="What the package does (one paragraph).">
+<script src="pkgdown.js"></script><meta property="og:title" content="Summarize and Plot datavyu Output">
+<meta property="og:description" content="datavyu is designed to make it easier to summarize and plot output from the qualitative audiovisual data coding software datavyu. Relying on the {datavyu} R package to process the data, this package focuses on summarizing the frequency and duration of codes and plotting their output.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">datavyu</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -59,7 +59,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/tca2/datavyu/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -83,12 +90,12 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"jrosen48/datavyu"</span>)</pre></div>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"tca2/datavyu"</span>)</pre></div>
 <p>The datavyu software must also be installed; see <a href="https://datavyu.org/download.html">here</a></p>
 </div>
-<div id="use" class="section level2">
+<div id="preparing-files-for-analysis-within-datavyu" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Use</h2>
+<a href="#preparing-files-for-analysis-within-datavyu" class="anchor"></a>Preparing files for analysis within datavyu</h2>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">datavyur</span>)</pre></div>
 <p><em>note</em>: The use of this package requires the use of the <strong>datavyu</strong> software’s <a href="https://datavyu.org/user-guide/api.html">Ruby API</a>; note that while <strong>datavyu</strong> has a graphical user interface, it is accompanied by a number of Ruby scripts.</p>
@@ -100,14 +107,13 @@
 <ol>
 <li>Open the directory that the Ruby script created; a number of CSV files for each <code>.opf</code> file should now be created.</li>
 </ol>
-</div>
-</div>
-<div id="grab-all-of-the-files-for-one-code" class="section level1">
-<h1 class="hasAnchor">
-<a href="#grab-all-of-the-files-for-one-code" class="anchor"></a>Grab all of the files for one code:</h1>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="co"># find_unique_values("example-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]</span>
+<p>This is the directory pass to the datavyu functions below.</p>
+<ol>
+<li>Using the {datavyur} package (see the ‘other package’ setion below), it is easy to explore the unique <em>columns</em> and <em>files</em> in the output created.</li>
+</ol>
+<!-- end list --><div class="sourceCode" id="cb3"><pre class="r"><span class="co"># find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]</span>
 
-<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyu_col_search</a></span>(<span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()
+<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyu_col_search</a></span>(<span class="kw">folder</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()
 
 <span class="no">f</span>$<span class="no">column</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>()
 <span class="co">#&gt; [1] "LogClass_AS_ActivityFormat"      "LogClass_AS_ParticipationFormat"</span>
@@ -118,175 +124,133 @@
 <span class="co">#&gt; [1] "MM T102 14-02-17 Content Log"     "NM 14-12-03 T201 Content Log v.3"</span>
 <span class="co">#&gt; [3] "NM T401 14-11-21 Content Log v.2"</span></pre></div>
 </div>
-<div id="load-in-certain-columns" class="section level1">
-<h1 class="hasAnchor">
-<a href="#load-in-certain-columns" class="anchor"></a>load in certain columns</h1>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/import_column.html">import_column</a></span>(<span class="st">"LogClass_AS_ActivityFormat"</span>, <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()
-<span class="co">#&gt; # A tibble: 22 x 12</span>
-<span class="co">#&gt;    file  LogClass_AS_Act… LogClass_AS_Act… LogClass_AS_Act… LogClass_AS_Act…</span>
-<span class="co">#&gt;    &lt;chr&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;chr&gt;           </span>
-<span class="co">#&gt;  1 MM T…                1           235026           843282 aw              </span>
-<span class="co">#&gt;  2 MM T…                2           611292           640134 l               </span>
-<span class="co">#&gt;  3 MM T…                3           817954          1286274 l               </span>
-<span class="co">#&gt;  4 MM T…                4           834504          1286274 sp              </span>
-<span class="co">#&gt;  5 MM T…                5          1286505          1458831 sp              </span>
-<span class="co">#&gt;  6 MM T…                6          1465451          1765071 sp              </span>
-<span class="co">#&gt;  7 MM T…                7          1765071          2015937 sp              </span>
-<span class="co">#&gt;  8 MM T…                8          2015937          2145396 sp              </span>
-<span class="co">#&gt;  9 MM T…                9          2145396          2280828 sp              </span>
-<span class="co">#&gt; 10 MM T…               10          2280828                0 l               </span>
-<span class="co">#&gt; # … with 12 more rows, and 7 more variables:</span>
-<span class="co">#&gt; #   LogClass_AS_ActivityFormat.notesck &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ActivityFormat.notesed &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ActivityFormat.notesep &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ActivityFormat.notesmm &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ActivityFormat.notesnm &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ActivityFormat.notesrw &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ActivityFormat.studentpresentername &lt;chr&gt;</span>
-
-<span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/import_column.html">import_column</a></span>(<span class="st">"LogClass_AS_ParticipationFormat"</span>, <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()
-<span class="co">#&gt; # A tibble: 10 x 11</span>
-<span class="co">#&gt;    file  LogClass_AS_Par… LogClass_AS_Par… LogClass_AS_Par… LogClass_AS_Par…</span>
-<span class="co">#&gt;    &lt;chr&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;chr&gt;           </span>
-<span class="co">#&gt;  1 MM T…                1                0           235025 u               </span>
-<span class="co">#&gt;  2 MM T…                2           235026           843282 i               </span>
-<span class="co">#&gt;  3 MM T…                3           843282          1286505 s               </span>
-<span class="co">#&gt;  4 MM T…                4          1286505          2280828 w               </span>
-<span class="co">#&gt;  5 MM T…                5          2280828                0 s               </span>
-<span class="co">#&gt;  6 NM 1…                1           119559           254523 u               </span>
-<span class="co">#&gt;  7 NM 1…                2           254524           287687 w               </span>
-<span class="co">#&gt;  8 NM 1…                3           287687           581059 i               </span>
-<span class="co">#&gt;  9 NM T…                1                0           441592 u               </span>
-<span class="co">#&gt; 10 NM T…                2           441592           860175 w               </span>
-<span class="co">#&gt; # … with 6 more variables: LogClass_AS_ParticipationFormat.notesck &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ParticipationFormat.notesed &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ParticipationFormat.notesep &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ParticipationFormat.notesmm &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ParticipationFormat.notesnm &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_AS_ParticipationFormat.notesrw &lt;chr&gt;</span>
-
-<span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/import_column.html">import_column</a></span>(<span class="st">"LogClass_TO_MathPresent"</span>, <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()
-<span class="co">#&gt; # A tibble: 9 x 12</span>
-<span class="co">#&gt;   file  LogClass_TO_Mat… LogClass_TO_Mat… LogClass_TO_Mat… LogClass_TO_Mat…</span>
-<span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 MM T…                1           235026                0 m               </span>
-<span class="co">#&gt; 2 NM T…                1           441592           537968 nm              </span>
-<span class="co">#&gt; 3 NM T…                2           537968          5747038 m               </span>
-<span class="co">#&gt; 4 NM T…                3          5747038          5964552 nm              </span>
-<span class="co">#&gt; 5 NM 1…                1           254524           279658 &lt;NA&gt;            </span>
-<span class="co">#&gt; 6 NM 1…                2           279658          4344319 &lt;NA&gt;            </span>
-<span class="co">#&gt; 7 NM 1…                3          4344319          4395810 &lt;NA&gt;            </span>
-<span class="co">#&gt; 8 NM 1…                4          4395810          4710766 &lt;NA&gt;            </span>
-<span class="co">#&gt; 9 NM 1…                5          4710766          4808853 &lt;NA&gt;            </span>
-<span class="co">#&gt; # … with 7 more variables: LogClass_TO_MathPresent.mathpresentcode &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_TO_MathPresent.notesck &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_TO_MathPresent.notesed &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_TO_MathPresent.notesep &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_TO_MathPresent.notesmm &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_TO_MathPresent.notesnm &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_TO_MathPresent.notesrw &lt;chr&gt;</span>
-
-<span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/import_column.html">import_column</a></span>(<span class="st">"LogClass_IS"</span>, <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()
-<span class="co">#&gt; # A tibble: 4 x 12</span>
-<span class="co">#&gt;   file  LogClass_IS.ord… LogClass_IS.ons… LogClass_IS.off… LogClass_IS.cod…</span>
-<span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 NM 1…                1                0           254524 ni              </span>
-<span class="co">#&gt; 2 MM T…                1           235026                0 &lt;NA&gt;            </span>
-<span class="co">#&gt; 3 NM T…                1           441592          5931279 &lt;NA&gt;            </span>
-<span class="co">#&gt; 4 NM T…                2          5931279          5964552 &lt;NA&gt;            </span>
-<span class="co">#&gt; # … with 7 more variables: LogClass_IS.i &lt;chr&gt;, LogClass_IS.notesck &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_IS.notesed &lt;chr&gt;, LogClass_IS.notesep &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_IS.notesmm &lt;chr&gt;, LogClass_IS.notesnm &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LogClass_IS.notesrw &lt;chr&gt;</span></pre></div>
 </div>
-<div id="calculating-code-frequencies" class="section level1">
+<div id="summarizing-a-column" class="section level1">
 <h1 class="hasAnchor">
-<a href="#calculating-code-frequencies" class="anchor"></a>Calculating code frequencies</h1>
-<p>Finds the code column automatically</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu">calc_frequencies</span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
-                 <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>)
-<span class="co">#&gt;   LogClass_AS_ActivityFormat.code01 n    percent</span>
-<span class="co">#&gt; 1                                 l 7 0.31818182</span>
-<span class="co">#&gt; 2                                sp 7 0.31818182</span>
-<span class="co">#&gt; 3                                 a 2 0.09090909</span>
-<span class="co">#&gt; 4                                 o 2 0.09090909</span>
-<span class="co">#&gt; 5                                aw 1 0.04545455</span>
-<span class="co">#&gt; 6                 class discussion? 1 0.04545455</span>
-<span class="co">#&gt; 7        class discussion? lecture? 1 0.04545455</span>
-<span class="co">#&gt; 8                               l?? 1 0.04545455</span>
-
-<span class="fu">calc_frequencies</span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
-                 <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>,
-                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co">#&gt;                              file LogClass_AS_ActivityFormat.code01 n   percent</span>
-<span class="co">#&gt;      MM T102 14-02-17 Content Log                                aw 1 0.1000000</span>
-<span class="co">#&gt;      MM T102 14-02-17 Content Log                                 l 3 0.3000000</span>
-<span class="co">#&gt;      MM T102 14-02-17 Content Log                                sp 6 0.6000000</span>
-<span class="co">#&gt;  NM 14-12-03 T201 Content Log v.3                                 a 1 0.3333333</span>
-<span class="co">#&gt;  NM 14-12-03 T201 Content Log v.3                                 l 1 0.3333333</span>
-<span class="co">#&gt;  NM 14-12-03 T201 Content Log v.3                                 o 1 0.3333333</span>
-<span class="co">#&gt;  NM T401 14-11-21 Content Log v.2                                 a 1 0.1111111</span>
-<span class="co">#&gt;  NM T401 14-11-21 Content Log v.2                 class discussion? 1 0.1111111</span>
-<span class="co">#&gt;  NM T401 14-11-21 Content Log v.2        class discussion? lecture? 1 0.1111111</span>
-<span class="co">#&gt;  NM T401 14-11-21 Content Log v.2                                 l 3 0.3333333</span>
-<span class="co">#&gt;  NM T401 14-11-21 Content Log v.2                               l?? 1 0.1111111</span>
-<span class="co">#&gt;  NM T401 14-11-21 Content Log v.2                                 o 1 0.1111111</span>
-<span class="co">#&gt;  NM T401 14-11-21 Content Log v.2                                sp 1 0.1111111</span>
-
-<span class="fu">calc_frequencies</span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_TO_MathPresent"</span>,
-                 <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>)
-<span class="co">#&gt;   LogClass_TO_MathPresent.code01 n   percent valid_percent</span>
-<span class="co">#&gt; 1                           &lt;NA&gt; 5 0.5555556            NA</span>
-<span class="co">#&gt; 2                              m 2 0.2222222           0.5</span>
-<span class="co">#&gt; 3                             nm 2 0.2222222           0.5</span>
-
-<span class="fu">calc_frequencies</span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_IS"</span>,
-                 <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>)
-<span class="co">#&gt;   LogClass_IS.code01 n percent valid_percent</span>
-<span class="co">#&gt; 1               &lt;NA&gt; 3    0.75            NA</span>
-<span class="co">#&gt; 2                 ni 1    0.25             1</span></pre></div>
+<a href="#summarizing-a-column" class="anchor"></a>Summarizing a column</h1>
+<p>{datavyu} can help to summarize a column. It defaults to summarizing the frequency of codes for a specified column.</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>)
+<span class="co">#&gt;   log_class_as_activity_format_code01 n    percent</span>
+<span class="co">#&gt; 1                                   l 7 0.31818182</span>
+<span class="co">#&gt; 2                                  sp 7 0.31818182</span>
+<span class="co">#&gt; 3                                   a 2 0.09090909</span>
+<span class="co">#&gt; 4                                   o 2 0.09090909</span>
+<span class="co">#&gt; 5                                  aw 1 0.04545455</span>
+<span class="co">#&gt; 6                   class discussion? 1 0.04545455</span>
+<span class="co">#&gt; 7          class discussion? lecture? 1 0.04545455</span>
+<span class="co">#&gt; 8                                 l?? 1 0.04545455</span></pre></div>
+<p>We can also explore the frequencies <em>by file</em> by changing the <code>by_file</code> arguent to <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt;                                file log_class_as_activity_format_code01 n</span>
+<span class="co">#&gt; 1      MM T102 14-02-17 Content Log                                  aw 1</span>
+<span class="co">#&gt; 2      MM T102 14-02-17 Content Log                                   l 3</span>
+<span class="co">#&gt; 3      MM T102 14-02-17 Content Log                                  sp 6</span>
+<span class="co">#&gt; 4  NM 14-12-03 T201 Content Log v.3                                   a 1</span>
+<span class="co">#&gt; 5  NM 14-12-03 T201 Content Log v.3                                   l 1</span>
+<span class="co">#&gt; 6  NM 14-12-03 T201 Content Log v.3                                   o 1</span>
+<span class="co">#&gt; 7  NM T401 14-11-21 Content Log v.2                                   a 1</span>
+<span class="co">#&gt; 8  NM T401 14-11-21 Content Log v.2                   class discussion? 1</span>
+<span class="co">#&gt; 9  NM T401 14-11-21 Content Log v.2          class discussion? lecture? 1</span>
+<span class="co">#&gt; 10 NM T401 14-11-21 Content Log v.2                                   l 3</span>
+<span class="co">#&gt; 11 NM T401 14-11-21 Content Log v.2                                 l?? 1</span>
+<span class="co">#&gt; 12 NM T401 14-11-21 Content Log v.2                                   o 1</span>
+<span class="co">#&gt; 13 NM T401 14-11-21 Content Log v.2                                  sp 1</span>
+<span class="co">#&gt;      percent</span>
+<span class="co">#&gt; 1  0.1000000</span>
+<span class="co">#&gt; 2  0.3000000</span>
+<span class="co">#&gt; 3  0.6000000</span>
+<span class="co">#&gt; 4  0.3333333</span>
+<span class="co">#&gt; 5  0.3333333</span>
+<span class="co">#&gt; 6  0.3333333</span>
+<span class="co">#&gt; 7  0.1111111</span>
+<span class="co">#&gt; 8  0.1111111</span>
+<span class="co">#&gt; 9  0.1111111</span>
+<span class="co">#&gt; 10 0.3333333</span>
+<span class="co">#&gt; 11 0.1111111</span>
+<span class="co">#&gt; 12 0.1111111</span>
+<span class="co">#&gt; 13 0.1111111</span></pre></div>
+<p>To summarize durations (instead of frequencies) by changing the <code>what</code> argument, which defaults to <code>"frequency"</code>, but can be changed to <code>"duration"</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                <span class="kw">what</span> <span class="kw">=</span> <span class="st">"duration"</span>)
+<span class="co">#&gt; # A tibble: 13 x 3</span>
+<span class="co">#&gt;    LogClass_AS_ActivityFormat.code01 file                           sum_duration</span>
+<span class="co">#&gt;  * &lt;chr&gt;                             &lt;chr&gt;                          &lt;chr&gt;       </span>
+<span class="co">#&gt;  1 a                                 NM 14-12-03 T201 Content Log … 00:04:53:373</span>
+<span class="co">#&gt;  2 a                                 NM T401 14-11-21 Content Log … 00:22:22:932</span>
+<span class="co">#&gt;  3 aw                                MM T102 14-02-17 Content Log   00:10:08:256</span>
+<span class="co">#&gt;  4 class discussion?                 NM T401 14-11-21 Content Log … 00:20:39:356</span>
+<span class="co">#&gt;  5 class discussion? lecture?        NM T401 14-11-21 Content Log … 00:04:20:950</span>
+<span class="co">#&gt;  6 l                                 MM T102 14-02-17 Content Log   00:46:17:990</span>
+<span class="co">#&gt;  7 l                                 NM 14-12-03 T201 Content Log … 00:00:08:029</span>
+<span class="co">#&gt;  8 l                                 NM T401 14-11-21 Content Log … 00:05:34:297</span>
+<span class="co">#&gt;  9 l??                               NM T401 14-11-21 Content Log … 00:06:06:588</span>
+<span class="co">#&gt; 10 o                                 NM 14-12-03 T201 Content Log … 00:00:25:134</span>
+<span class="co">#&gt; 11 o                                 NM T401 14-11-21 Content Log … 00:12:35:959</span>
+<span class="co">#&gt; 12 sp                                MM T102 14-02-17 Content Log   00:23:59:473</span>
+<span class="co">#&gt; 13 sp                                NM T401 14-11-21 Content Log … 00:01:18:777</span></pre></div>
 </div>
-<div id="calculate-duration" class="section level1">
+<div id="ploting-the-results-of-a-summary-of-a-column" class="section level1">
 <h1 class="hasAnchor">
-<a href="#calculate-duration" class="anchor"></a>Calculate duration</h1>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="fu">calc_duration</span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_TO_MathPresent"</span>,
-          <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>)
-<span class="co">#&gt; # A tibble: 3 x 2</span>
-<span class="co">#&gt;   LogClass_TO_MathPresent.code01 sum_duration</span>
-<span class="co">#&gt;   &lt;chr&gt;                          &lt;chr&gt;       </span>
-<span class="co">#&gt; 1 m                              01:30:44:096</span>
-<span class="co">#&gt; 2 nm                             00:05:13:890</span>
-<span class="co">#&gt; 3 &lt;NA&gt;                           01:15:54:329</span>
+<a href="#ploting-the-results-of-a-summary-of-a-column" class="anchor"></a>Ploting the results of a summary of a column</h1>
+<p>{datavyu} can also help to plot the summary of a column. Here, we save the output from <code><a href="reference/summarize_column.html">summarize_column()</a></code> to an object (we call this <code>freq_summary</code>, but it can be named whatever we like).</p>
+<p>Then, we use this output in the function <code><a href="reference/plot_column_summary.html">plot_column_summary()</a></code>:</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="no">freq_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                                 <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>)
 
-<span class="fu">calc_duration</span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_TO_MathPresent"</span>,
-          <span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>, <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="co">#&gt; # A tibble: 3 x 2</span>
-<span class="co">#&gt;   LogClass_TO_MathPresent.code01 sum_duration</span>
-<span class="co">#&gt;   &lt;chr&gt;                          &lt;chr&gt;       </span>
-<span class="co">#&gt; 1 m                              01:30:44:096</span>
-<span class="co">#&gt; 2 nm                             00:05:13:890</span>
-<span class="co">#&gt; 3 &lt;NA&gt;                           01:15:54:329</span></pre></div>
-<div id="other-packages" class="section level2">
+<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">freq_summary</span>)</pre></div>
+<p>This also works by file—so long as the column is summarized by file:</p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="no">freq_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                                 <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+
+<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">freq_summary</span>)</pre></div>
+<p>Similarly, if the output is for the duration, rather than the frequency, the durations are plotted:</p>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="no">duration_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                                     <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                                     <span class="kw">what</span> <span class="kw">=</span> <span class="st">"duration"</span>)</pre></div>
+<p>Like for frequency, these can be ploted by file:</p>
+<div class="sourceCode" id="cb10"><pre class="r"><span class="no">duration_summary_by_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                                             <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                                             <span class="kw">what</span> <span class="kw">=</span> <span class="st">"duration"</span>,
+                                             <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+
+<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">duration_summary</span>)</pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="100%"></p>
+<div class="sourceCode" id="cb11"><pre class="r"><span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">duration_summary_by_file</span>)</pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-11-2.png" width="100%"></p>
+</div>
+<div id="using-the-pipe-operator" class="section level1">
+<h1 class="hasAnchor">
+<a href="#using-the-pipe-operator" class="anchor"></a>Using the pipe operator</h1>
+<p>Finally, output can be passed between functions with the pipe operator:</p>
+<div class="sourceCode" id="cb12"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_AS_ActivityFormat"</span>,
+                                     <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                                     <span class="kw">what</span> <span class="kw">=</span> <span class="st">"duration"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>()</pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%"></p>
+<div id="other-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-packages" class="anchor"></a>Other packages</h2>
-<p>We note that there is another R package that provides an interface to <strong>datavyu;</strong> that package is <a href="https://github.com/iamamutt/datavyu">{datavyur}</a>.</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">datavyur</span>)
-
-<span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyu_col_search</a></span>(<span class="kw">folder</span> <span class="kw">=</span> <span class="st">"example-data/datavyu_output_07-06-2020_14-46"</span>, <span class="kw">cnames</span> <span class="kw">=</span> <span class="st">"column"</span>)
-
-?<span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/multi_merge.html">multi_merge</a></span>()</pre></div>
-<p>At this time, we are using this package in an experimental sense, and recommend those looking for a more-developed package consider using {datavyur} instead of this package.</p>
+<a href="#other-package" class="anchor"></a>Other package</h2>
+<p>This package extensively uses <a href="https://github.com/iamamutt/datavyu">{datavyur}</a> for preparing the data for the summary statistic and plotting functions in this package. We do not intend to duplicate the functionality of that excellent package in ours; we focus instead on summarizing datavyu output and preparing the output for use in other analyses.</p>
 </div>
 </div>
 
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/tca2/datavyu/">https://​github.com/​tca2/​datavyu/​</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -303,7 +267,7 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>First Last <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Joshua Rosenberg <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2170-0447" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -312,6 +276,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=datavyu"><img src="https://www.r-pkg.org/badges/version/datavyu" alt="CRAN status"></a></li>
+<li><a href="https://travis-ci.com/tca2/datavyu"><img src="https://travis-ci.com/tca2/datavyu.svg?branch=master" alt="Travis build status"></a></li>
 </ul>
 </div>
 </div>
@@ -319,7 +284,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by First Last.</p>
+  <p>Developed by Joshua Rosenberg.</p>
 </div>
 
 <div class="pkgdown">

@@ -14,7 +14,13 @@ status](https://travis-ci.com/tca2/datavyu.svg?branch=master)](https://travis-ci
 <!-- badges: end -->
 
 The goal of {datavyu} is to to to facilitate the use of the open-source
-**datavyu** software for the analysis of qualitative audiovisual data
+**datavyu** software for the analysis of qualitative audiovisual data.
+This package extensively uses
+[{datavyur}](https://github.com/iamamutt/datavyu) for preparing the data
+for the summary statistic and plotting functions in this package. We do
+not intend to duplicate the functionality of that excellent package in
+ours; we focus instead on summarizing datavyu output and preparing the
+output for use in other analyses.
 
 ## Installation
 
@@ -41,24 +47,19 @@ software’s [Ruby API](https://datavyu.org/user-guide/api.html); note
 that while **datavyu** has a graphical user interface, it is accompanied
 by a number of Ruby scripts.
 
-1.  . Run the following Ruby script within the datavyu software by
-    selecting Script and then Run Script; select a directory with one or
-    more `.opf` files:
+#### 1\. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
 
 `csv2opf.rb`
 
 <!-- I ran this on the Empirical Analyses folder to generate a bunch of data -->
 
-2.  Open the directory that the Ruby script created; a number of CSV
-    files for each `.opf` file should now be created.
+#### 2\. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
 
-This is the directory pass to the datavyu functions below.
+This is the directory (folder) passed to the datavyu functions below.
 
-3.  Using the {datavyur} package (see the ‘other package’ setion below),
-    it is easy to explore the unique *columns* and *files* in the output
-    created.
+#### 3\. Using the {datavyur} package (see the ‘other package’ setion below), it is easy
 
-<!-- end list -->
+to explore the unique *columns* and *files* in the output created.
 
 ``` r
 # find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
@@ -75,14 +76,14 @@ f$file %>% unique()
 #> [3] "NM T401 14-11-21 Content Log v.2"
 ```
 
-# Summarizing a column
+## Summarizing a column
 
 {datavyu} can help to summarize a column. It defaults to summarizing the
 frequency of codes for a specified column.
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                directory = "ex-data/datavyu_output_07-06-2020_14-46")
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
 #>   log_class_as_activity_format_code01 n    percent
 #> 1                                   l 7 0.31818182
 #> 2                                  sp 7 0.31818182
@@ -99,8 +100,8 @@ arguent to `TRUE`.
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                by_file = TRUE)
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                 by_file = TRUE)
 #>                                file log_class_as_activity_format_code01 n
 #> 1      MM T102 14-02-17 Content Log                                  aw 1
 #> 2      MM T102 14-02-17 Content Log                                   l 3
@@ -137,9 +138,9 @@ argument, which defaults to `"frequency"`, but can be changed to
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                by_file = TRUE,
-                what = "duration")
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                 by_file = TRUE,
+                 what = "duration")
 #> # A tibble: 13 x 3
 #>    LogClass_AS_ActivityFormat.code01 file                           sum_duration
 #>  * <chr>                             <chr>                          <chr>       
@@ -158,7 +159,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 13 sp                                NM T401 14-11-21 Content Log … 00:01:18:777
 ```
 
-# Ploting the results of a summary of a column
+## Ploting the results of a summary of a column
 
 {datavyu} can also help to plot the summary of a column. Here, we save
 the output from `summarize_column()` to an object (we call this
@@ -173,6 +174,8 @@ freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
 plot_column_summary(freq_summary)
 ```
 
+<img src="man/figures/README-eval-1.png" width="100%" />
+
 This also works by file—so long as the column is summarized by file:
 
 ``` r
@@ -182,6 +185,8 @@ freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
 
 plot_column_summary(freq_summary)
 ```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 Similarly, if the output is for the duration, rather than the frequency,
 the durations are plotted:
@@ -203,32 +208,58 @@ duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityForma
 plot_column_summary(duration_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 ``` r
 plot_column_summary(duration_summary_by_file)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-2.png" width="100%" />
 
-# Using the pipe operator
+## Using the pipe operator
 
 Finally, output can be passed between functions with the pipe operator:
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                     what = "duration") %>% 
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                 what = "duration") %>% 
   plot_column_summary()
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
-## Other package
+## Features in-development
 
-This package extensively uses
-[{datavyur}](https://github.com/iamamutt/datavyu) for preparing the data
-for the summary statistic and plotting functions in this package. We do
-not intend to duplicate the functionality of that excellent package in
-ours; we focus instead on summarizing datavyu output and preparing the
-output for use in other analyses.
+  - Improving `summarize_column()` and `plot_column_summary()` with
+    further input and use
+
+  - Plotting code co-occurrences with `plot_cooccurence()`
+
+  - Summarizing an entire file (not just a single column in a file) with
+    `summarize_file()`
+
+  - Implementing generic functions (specifically: `plot()`,
+    `summarize()`, `print()`)
+
+  - Matching datavyu data to time series data in other, subsequent
+    analyses using `datavyur::temporal_align()`
+
+  - Addressing a number of
+    [issues](https://github.com/tca2/datavyu/issues)
+
+## Contributing
+
+Please note that the datavyu project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+## Acknowledgment
+
+This material is based upon work supported by the National Science
+Foundation under [Grant
+No. 1920796](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1920796&HistoricalAwards=false).
+Any opinions, findings, conclusions, or recommendations expressed in
+this material are those of the authors and do not reflect the views of
+the National Science Foundation.

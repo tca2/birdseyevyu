@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate the duration of a code for a datavyu column — calc_duration • datavyu</title>
+<title>Plot code duration for a datavu column — plot_column_summary • datavyu</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Calculate the duration of a code for a datavyu column — calc_duration" />
-<meta property="og:description" content="Calculate the duration of a code for a datavyu column" />
+<meta property="og:title" content="Plot code duration for a datavu column — plot_column_summary" />
+<meta property="og:description" content="Plot code duration for a datavu column" />
 
 
 
@@ -120,46 +120,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate the duration of a code for a datavyu column</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tca2/datavyu/blob/master/R/calc_duration.R'><code>R/calc_duration.R</code></a></small>
-    <div class="hidden name"><code>calc_duration.Rd</code></div>
+    <h1>Plot code duration for a datavu column</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tca2/datavyu/blob/master/R/plot-column-summary.R'><code>R/plot-column-summary.R</code></a></small>
+    <div class="hidden name"><code>plot_column_summary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculate the duration of a code for a datavyu column</p>
+    <p>Plot code duration for a datavu column</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calc_duration</span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_column_summary</span>(<span class='no'>datavyu_object</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>column</th>
-      <td><p>the column as a character string</p></td>
-    </tr>
-    <tr>
-      <th>code</th>
-      <td><p>the code as a character string</p></td>
-    </tr>
-    <tr>
-      <th>directory</th>
-      <td><p>the path to the directory as a character string</p></td>
-    </tr>
-    <tr>
-      <th>by_file</th>
-      <td><p>whether or not to calculate the frequencies by file (logical)</p></td>
+      <th>datavyu_object</th>
+      <td><p>a datavyu object created by <code><a href='summarize_column.html'>summarize_column()</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame generated with the janitor package</p>
+    <p>A ggplot2 plot</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='calc_frequencies.html'>calc_frequencies</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
-                 <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
-                 <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in calc_frequencies(column = "LogClass_AS_ActivityFormat", directory = "ex-data/datavyu_output_07-06-2020_14-46",     by_file = TRUE): could not find function "calc_frequencies"</span></div><div class='input'>
+    <pre class="examples"><div class='input'>
+<span class='no'>freq_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
+                                 <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble() %&gt;% janitor::clean_names(): could not find function "%&gt;%"</span></div><div class='input'>
+<span class='no'>freq_summary_by_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
+                                         <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                                         <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble() %&gt;% janitor::clean_names(): could not find function "%&gt;%"</span></div><div class='input'>
+<span class='fu'>plot_column_summary</span>(<span class='no'>freq_summary</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(freq_summary): could not find function "plot_column_summary"</span></div><div class='input'><span class='fu'>plot_column_summary</span>(<span class='no'>freq_summary_by_file</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(freq_summary_by_file): could not find function "plot_column_summary"</span></div><div class='input'>
+<span class='no'>duration_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
+                                     <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                                     <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"duration"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble(): could not find function "%&gt;%"</span></div><div class='input'>
+<span class='no'>duration_summary_by_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
+                                             <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
+                                             <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"duration"</span>,
+                                             <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble(): could not find function "%&gt;%"</span></div><div class='input'>
+<span class='fu'>plot_column_summary</span>(<span class='no'>duration_summary</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(duration_summary): could not find function "plot_column_summary"</span></div><div class='input'><span class='fu'>plot_column_summary</span>(<span class='no'>duration_summary_by_file</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(duration_summary_by_file): could not find function "plot_column_summary"</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -172,6 +172,11 @@ datavyur::temporal_align(folder = "ex-data/datavyu_output_07-06-2020_14-46", all
   
 Please note that the datavyu project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
+## pkgdown website
+
+Because this repository is private, the [{pkgdown}](https://pkgdown.r-lib.org/)-generated website for this package
+is available only in the `/docs` directory. Drag the `index.html` file in that directory into a browser to view this site.
+
 ## Acknowledgment
 
 This material is based upon work supported by the National Science Foundation under [Grant No. 1920796](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1920796&HistoricalAwards=false). Any opinions, findings, conclusions, or recommendations expressed in this material are those of the authors and do not reflect the views of the National Science Foundation.

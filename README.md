@@ -255,6 +255,13 @@ Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
 
+## pkgdown website
+
+Because this repository is private, the
+[{pkgdown}](https://pkgdown.r-lib.org/)-generated website for this
+package is available only in the `/docs` directory. Drag the
+`index.html` file in that directory into a browser to view this site.
+
 ## Acknowledgment
 
 This material is based upon work supported by the National Science

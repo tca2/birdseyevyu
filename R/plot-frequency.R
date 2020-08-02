@@ -18,8 +18,9 @@ plot_frequency <- function(datavyu_object) {
 
   if (attributes(datavyu_object)$by_file == FALSE) {
 
+    names(datavyu_object)[1] <- "var"
+
     datavyu_object %>%
-      dplyr::rename(var = 1) %>%
       ggplot2::ggplot(ggplot2::aes(x = reorder(var, n),
                           y = n)) +
       ggplot2::geom_col() +
@@ -42,8 +43,9 @@ plot_frequency <- function(datavyu_object) {
       stop("Cannot plot this many files; consider visualizing this data in a different way")
     }
 
+    names(datavyu_object)[2] <- "var"
+
     datavyu_object %>%
-      dplyr::rename(var = 2) %>%
       ggplot2::ggplot(ggplot2::aes(x = tidytext::reorder_within(var, n, file),
                           y = n)) +
       ggplot2::geom_col() +

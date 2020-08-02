@@ -10,7 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
 [![Travis build
-status](https://travis-ci.com/tca2/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
+status](https://travis-ci.com/tca2/datavyu.svg?branch=master)](https://travis-ci.com/tca2/datavyu)
 <!-- badges: end -->
 
 The goal of {datavyu} is to to to facilitate the use of the open-source

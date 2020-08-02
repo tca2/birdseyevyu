@@ -5,10 +5,9 @@
 #' @param directory the path to the directory as a character string
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @return A data frame generated with the janitor package
-#' @export
 #' @examples
 #' calc_frequencies(column = "LogClass_AS_ActivityFormat",
-#'                  directory = "example-data/datavyu_output_07-06-2020_14-46",
+#'                  directory = "ex-data/datavyu_output_07-06-2020_14-46",
 #'                  by_file = TRUE)
 #'
 

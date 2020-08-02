@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
+[![Codecov test
+coverage](https://codecov.io/gh/jrosen48/datavyu/branch/master/graph/badge.svg)](https://codecov.io/gh/jrosen48/datavyu?branch=master)
+[![Travis build
+status](https://travis-ci.com/jrosen48/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
 <!-- badges: end -->
 
 The goal of {datavyu} is to to to facilitate the use of the open-source
@@ -50,12 +54,14 @@ by a number of Ruby scripts.
 2.  Open the directory that the Ruby script created; a number of CSV
     files for each `.opf` file should now be created.
 
+This is the directory pass to the datavyu functions below.
+
 # Grab all of the files for one code:
 
 ``` r
-# find_unique_values("example-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
+# find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
 
-f <- datavyur::datavyu_col_search(folder = "example-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
+f <- datavyur::datavyu_col_search(folder = "ex-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
 
 f$column %>% unique()
 #> [1] "LogClass_AS_ActivityFormat"      "LogClass_AS_ParticipationFormat"
@@ -71,7 +77,7 @@ f$file %>% unique()
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                folder = "example-data/datavyu_output_07-06-2020_14-46")
+                directory = "ex-data/datavyu_output_07-06-2020_14-46")
 #>   LogClass_AS_ActivityFormat.code01 n    percent
 #> 1                                 l 7 0.31818182
 #> 2                                sp 7 0.31818182
@@ -83,7 +89,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 8                               l?? 1 0.04545455
 
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                folder = "example-data/datavyu_output_07-06-2020_14-46",
+                directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE)
 #>                                file LogClass_AS_ActivityFormat.code01 n
 #> 1      MM T102 14-02-17 Content Log                                aw 1
@@ -115,9 +121,9 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 13 0.1111111
 
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                folder = "example-data/datavyu_output_07-06-2020_14-46",
+                directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE,
-                summarize_what = "duration")
+                what = "duration")
 #> # A tibble: 13 x 3
 #> # Groups:   LogClass_AS_ActivityFormat.code01 [8]
 #>    LogClass_AS_ActivityFormat.code01 file                           sum_duration
@@ -141,12 +147,6 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 
 ``` r
 plot_frequencies
-#> function(objectobject) {
-#> 
-#>   object
-#> 
-#> }
-#> <environment: namespace:datavyu>
 ```
 
 ## Other package

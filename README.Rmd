@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
+[![Codecov test coverage](https://codecov.io/gh/jrosen48/datavyu/branch/master/graph/badge.svg)](https://codecov.io/gh/jrosen48/datavyu?branch=master)
+[![Travis build status](https://travis-ci.com/jrosen48/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
 <!-- badges: end -->
 
 The goal of {datavyu} is to to  to facilitate the use of the open-source **datavyu** software for the analysis of qualitative audiovisual data
@@ -60,9 +62,9 @@ This is the directory pass to the datavyu functions below.
 # Grab all of the files for one code:
 
 ```{r}
-# find_unique_values("example-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
+# find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
 
-f <- datavyur::datavyu_col_search(folder = "example-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
+f <- datavyur::datavyu_col_search(folder = "ex-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
 
 f$column %>% unique()
 f$file %>% unique()
@@ -72,21 +74,21 @@ f$file %>% unique()
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                folder = "example-data/datavyu_output_07-06-2020_14-46")
+                directory = "ex-data/datavyu_output_07-06-2020_14-46")
 
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                folder = "example-data/datavyu_output_07-06-2020_14-46",
+                directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE)
 
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                folder = "example-data/datavyu_output_07-06-2020_14-46",
+                directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE,
-                summarize_what = "duration")
+                what = "duration")
 ```
 
 # Plot the results of a summary of a column
 
-```{r}
+```{r, eval = FALSE}
 plot_frequencies
 ```
 

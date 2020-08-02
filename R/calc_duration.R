@@ -22,8 +22,8 @@ calc_duration <- function(column = NULL,
   }
 
   df_of_codes <- datavyur::import_column(column = column,
-                                         directory = directory) %>%
-    as_tibble()
+                                         folder = directory) %>%
+    tibble::as_tibble()
 
   index_for_onset <- stringr::str_detect(names(df_of_codes), "onset")
   names(df_of_codes)[index_for_onset] <- "onset"
@@ -42,10 +42,10 @@ calc_duration <- function(column = NULL,
   if (by_file == FALSE) {
 
     df_of_codes %>%
-      group_by(!!sym(code)) %>%
-      mutate(duration = if_else(offset > onset, offset - onset, onset - offset)) %>%
-      summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      mutate_at(vars(sum_duration), datavyur::ms2time)
+      dplyr::group_by(!!rlang::sym(code)) %>%
+      dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
+      dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
+      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time)
 
   } else {
 
@@ -57,11 +57,11 @@ calc_duration <- function(column = NULL,
 
     list_of_times %>%
       purrr::map_df(~., .id = "id") %>%
-      select(-id) %>% # why is there this and file? not sure
-      group_by(!!sym(code), file) %>%
-      mutate(duration = if_else(offset > onset, offset - onset, onset - offset)) %>%
-      summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      mutate_at(vars(sum_duration), datavyur::ms2time)
+      dplyr::select(-id) %>% # why is there this and file? not sure
+      dplyr::group_by(!!rlang::sym(code), file) %>%
+      dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
+      dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
+      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time)
 
   }
 }

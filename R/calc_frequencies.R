@@ -22,8 +22,8 @@ calc_frequencies <- function(column = NULL,
   }
 
   df_of_codes <- datavyur::import_column(column = column,
-                                         directory = directory) %>%
-    as_tibble()
+                                         folder = directory) %>%
+    tibble::as_tibble()
 
   # this is if folks do not provide a code name
   if (is.null(code)) {

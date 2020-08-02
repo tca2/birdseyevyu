@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
-[![Travis build status](https://travis-ci.com/jrosen48/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
+[![Travis build status](https://travis-ci.com/tca2/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
 <!-- badges: end -->
 
 The goal of {datavyu} is to to  to facilitate the use of the open-source **datavyu** software for the analysis of qualitative audiovisual data
@@ -30,12 +30,12 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jrosen48/datavyu")
+devtools::install_github("tca2/datavyu")
 ```
 
 The datavyu software must also be installed; see [here](https://datavyu.org/download.html)
 
-## Use
+## Preparing files for analysis within datavyu
 
 ```{r}
 library(dplyr)
@@ -58,7 +58,8 @@ devtools::load_all(".")
 
 This is the directory pass to the datavyu functions below.
 
-# Grab all of the files for one code:
+3. Using the {datavyur} package (see the 'other package' setion below), it is easy
+to explore the unique *columns* and *files* in the output created.
 
 ```{r}
 # find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
@@ -71,24 +72,88 @@ f$file %>% unique()
 
 # Summarizing a column
 
+{datavyu} can help to summarize a column. It defaults to summarizing 
+the frequency of codes for a specified column.
+
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+```
 
+We can also explore the frequencies *by file* by changing the `by_file` arguent to 
+`TRUE`.
+
+```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE)
+```
 
+To summarize durations (instead of frequencies) by changing the `what` argument,
+which defaults to `"frequency"`, but can be changed to `"duration"`:
+
+```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE,
                 what = "duration")
 ```
 
-# Plot the results of a summary of a column
+# Ploting the results of a summary of a column
+
+{datavyu} can also help to plot the summary of a column. Here, we save the output
+from `summarize_column()` to an object (we call this `freq_summary`, but it can 
+be named whatever we like). 
+
+Then, we use this output in the function `plot_column_summary()`:
 
 ```{r, eval = FALSE}
-plot_frequencies
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+
+plot_column_summary(freq_summary)
+```
+
+This also works by file---so long as the column is summarized by file:
+
+```{r, eval = FALSE}
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                 by_file = TRUE)
+
+plot_column_summary(freq_summary)
+```
+
+Similarly, if the output is for the duration, rather than the frequency, the durations are plotted:
+
+```{r}
+duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                     what = "duration")
+
+```
+
+Like for frequency, these can be ploted by file:
+
+```{r}
+duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                             directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                             what = "duration",
+                                             by_file = TRUE)
+
+plot_column_summary(duration_summary)
+plot_column_summary(duration_summary_by_file)
+```
+
+# Using the pipe operator
+
+Finally, output can be passed between functions with the pipe operator:
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                     what = "duration") %>% 
+  plot_column_summary()
 ```
 
 ## Other package

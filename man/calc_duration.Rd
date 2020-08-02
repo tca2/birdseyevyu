@@ -23,7 +23,7 @@ Calculate the duration of a code for a datavyu column
 }
 \examples{
 calc_frequencies(column = "LogClass_AS_ActivityFormat",
-                 directory = "example-data/datavyu_output_07-06-2020_14-46",
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                  by_file = TRUE)
 
 }

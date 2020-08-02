@@ -28,17 +28,26 @@ summarize_column <- function(column = NULL,
 
   if (what == "frequency") {
 
-    calc_frequencies(column = column,
-                     code = code,
-                     directory = directory,
-                     by_file = by_file)
+    freq_output <- calc_frequencies(column = column,
+                                    code = code,
+                                    directory = directory,
+                                    by_file = by_file)
+
+    attributes(freq_output)$type <- what
+    attributes(freq_output)$by_file <- by_file
+
+    freq_output
 
   } else if (what == "duration") {
 
-    calc_duration(column = column,
-                     code = code,
-                     directory = directory,
-                     by_file = by_file)
+    duration_output <- calc_duration(column = column,
+                  code = code,
+                  directory = directory,
+                  by_file = by_file)
 
+    attributes(duration_output)$type <- what
+    attributes(duration_output)$by_file <- by_file
+
+    duration_output
   }
 }

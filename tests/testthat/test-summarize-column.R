@@ -1,3 +1,5 @@
+context("checking-summarize-column")
+
 library(datavyu)
 
 out_frequency <- summarize_column(column = "LogClass_AS_ActivityFormat",
@@ -45,7 +47,6 @@ test_that("summarize-column-frequency-works-var2", {
                out_frequency_known_output$n)
 })
 
-
 test_that("summarize-column-frequency-works-var3", {
   expect_equal(out_frequency$percent,
                out_frequency_known_output$percent)
@@ -65,4 +66,3 @@ test_that("summarize-column-duration-works-var3", {
   expect_equal(out_duration$percent,
                out_duration_known_output$percent)
 })
-

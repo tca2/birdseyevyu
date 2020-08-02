@@ -45,7 +45,8 @@ calc_duration <- function(column = NULL,
       dplyr::group_by(!!rlang::sym(code)) %>%
       dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
       dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time)
+      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time) %>%
+      tibble::as_tibble()
 
   } else {
 
@@ -61,7 +62,8 @@ calc_duration <- function(column = NULL,
       dplyr::group_by(!!rlang::sym(code), file) %>%
       dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
       dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time)
+      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time) %>%
+      tibble::as_tibble()
 
   }
 }

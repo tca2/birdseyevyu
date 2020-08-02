@@ -23,7 +23,8 @@ calc_frequencies <- function(column = NULL,
 
   df_of_codes <- datavyur::import_column(column = column,
                                          folder = directory) %>%
-    tibble::as_tibble()
+    tibble::as_tibble() %>%
+    janitor::clean_names()
 
   # this is if folks do not provide a code name
   if (is.null(code)) {
@@ -37,7 +38,8 @@ calc_frequencies <- function(column = NULL,
 
     out <- df_of_codes %>%
       janitor::tabyl(all_of(code)) %>%
-      dplyr::arrange(dplyr::desc(n))
+      dplyr::arrange(dplyr::desc(n)) %>%
+      tibble::as_tibble()
 
     create_datavyu_class(out)
 
@@ -52,7 +54,8 @@ calc_frequencies <- function(column = NULL,
 
     out <- list_of_freqs %>%
       purrr::map_df(~., .id = "id") %>%
-      rename(file = id)
+      rename(file = id) %>%
+      tibble::as_tibble()
 
     create_datavyu_class(out)
 

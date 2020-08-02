@@ -9,7 +9,7 @@ summarize_column(
   code = NULL,
   directory = NULL,
   by_file = FALSE,
-  summarize_what = "frequency"
+  what = "frequency"
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ summarize_column(
 
 \item{by_file}{whether or not to calculate the frequencies by file (logical)}
 
-\item{summarize_what}{either "frequency" or "duration"}
+\item{what}{either "frequency" or "duration"}
 }
 \value{
 A data frame generated with the janitor package
@@ -31,14 +31,14 @@ Summarize a datavyu column
 }
 \examples{
 summarize_column(column = "LogClass_AS_ActivityFormat",
-               directory = "example-data/datavyu_output_07-06-2020_14-46")
+                 directory = "example-data/datavyu_output_07-06-2020_14-46")
 
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                directory = "example-data/datavyu_output_07-06-2020_14-46",
-                by_file = TRUE)
+                 directory = "example-data/datavyu_output_07-06-2020_14-46",
+                 by_file = TRUE)
 
 summarize_column(column = "LogClass_AS_ActivityFormat",
-               directory = "example-data/datavyu_output_07-06-2020_14-46",
-                by_file = TRUE,
-               summarize_what = "duration")
+                 directory = "example-data/datavyu_output_07-06-2020_14-46",
+                 by_file = TRUE,
+                 what = "duration")
 }

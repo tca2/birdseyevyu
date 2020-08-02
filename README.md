@@ -10,7 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
 [![Travis build
-status](https://travis-ci.com/jrosen48/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
+status](https://travis-ci.com/tca2/datavyu.svg?branch=master)](https://travis-ci.com/jrosen48/datavyu)
 <!-- badges: end -->
 
 The goal of {datavyu} is to to to facilitate the use of the open-source
@@ -23,13 +23,13 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jrosen48/datavyu")
+devtools::install_github("tca2/datavyu")
 ```
 
 The datavyu software must also be installed; see
 [here](https://datavyu.org/download.html)
 
-## Use
+## Preparing files for analysis within datavyu
 
 ``` r
 library(dplyr)
@@ -54,7 +54,11 @@ by a number of Ruby scripts.
 
 This is the directory pass to the datavyu functions below.
 
-# Grab all of the files for one code:
+3.  Using the {datavyur} package (see the ‘other package’ setion below),
+    it is easy to explore the unique *columns* and *files* in the output
+    created.
+
+<!-- end list -->
 
 ``` r
 # find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
@@ -73,36 +77,44 @@ f$file %>% unique()
 
 # Summarizing a column
 
+{datavyu} can help to summarize a column. It defaults to summarizing the
+frequency of codes for a specified column.
+
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
-#>   LogClass_AS_ActivityFormat.code01 n    percent
-#> 1                                 l 7 0.31818182
-#> 2                                sp 7 0.31818182
-#> 3                                 a 2 0.09090909
-#> 4                                 o 2 0.09090909
-#> 5                                aw 1 0.04545455
-#> 6                 class discussion? 1 0.04545455
-#> 7        class discussion? lecture? 1 0.04545455
-#> 8                               l?? 1 0.04545455
+#>   log_class_as_activity_format_code01 n    percent
+#> 1                                   l 7 0.31818182
+#> 2                                  sp 7 0.31818182
+#> 3                                   a 2 0.09090909
+#> 4                                   o 2 0.09090909
+#> 5                                  aw 1 0.04545455
+#> 6                   class discussion? 1 0.04545455
+#> 7          class discussion? lecture? 1 0.04545455
+#> 8                                 l?? 1 0.04545455
+```
 
+We can also explore the frequencies *by file* by changing the `by_file`
+arguent to `TRUE`.
+
+``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE)
-#>                                file LogClass_AS_ActivityFormat.code01 n
-#> 1      MM T102 14-02-17 Content Log                                aw 1
-#> 2      MM T102 14-02-17 Content Log                                 l 3
-#> 3      MM T102 14-02-17 Content Log                                sp 6
-#> 4  NM 14-12-03 T201 Content Log v.3                                 a 1
-#> 5  NM 14-12-03 T201 Content Log v.3                                 l 1
-#> 6  NM 14-12-03 T201 Content Log v.3                                 o 1
-#> 7  NM T401 14-11-21 Content Log v.2                                 a 1
-#> 8  NM T401 14-11-21 Content Log v.2                 class discussion? 1
-#> 9  NM T401 14-11-21 Content Log v.2        class discussion? lecture? 1
-#> 10 NM T401 14-11-21 Content Log v.2                                 l 3
-#> 11 NM T401 14-11-21 Content Log v.2                               l?? 1
-#> 12 NM T401 14-11-21 Content Log v.2                                 o 1
-#> 13 NM T401 14-11-21 Content Log v.2                                sp 1
+#>                                file log_class_as_activity_format_code01 n
+#> 1      MM T102 14-02-17 Content Log                                  aw 1
+#> 2      MM T102 14-02-17 Content Log                                   l 3
+#> 3      MM T102 14-02-17 Content Log                                  sp 6
+#> 4  NM 14-12-03 T201 Content Log v.3                                   a 1
+#> 5  NM 14-12-03 T201 Content Log v.3                                   l 1
+#> 6  NM 14-12-03 T201 Content Log v.3                                   o 1
+#> 7  NM T401 14-11-21 Content Log v.2                                   a 1
+#> 8  NM T401 14-11-21 Content Log v.2                   class discussion? 1
+#> 9  NM T401 14-11-21 Content Log v.2          class discussion? lecture? 1
+#> 10 NM T401 14-11-21 Content Log v.2                                   l 3
+#> 11 NM T401 14-11-21 Content Log v.2                                 l?? 1
+#> 12 NM T401 14-11-21 Content Log v.2                                   o 1
+#> 13 NM T401 14-11-21 Content Log v.2                                  sp 1
 #>      percent
 #> 1  0.1000000
 #> 2  0.3000000
@@ -117,15 +129,20 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 11 0.1111111
 #> 12 0.1111111
 #> 13 0.1111111
+```
 
+To summarize durations (instead of frequencies) by changing the `what`
+argument, which defaults to `"frequency"`, but can be changed to
+`"duration"`:
+
+``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                 by_file = TRUE,
                 what = "duration")
 #> # A tibble: 13 x 3
-#> # Groups:   LogClass_AS_ActivityFormat.code01 [8]
 #>    LogClass_AS_ActivityFormat.code01 file                           sum_duration
-#>    <chr>                             <chr>                          <chr>       
+#>  * <chr>                             <chr>                          <chr>       
 #>  1 a                                 NM 14-12-03 T201 Content Log … 00:04:53:373
 #>  2 a                                 NM T401 14-11-21 Content Log … 00:22:22:932
 #>  3 aw                                MM T102 14-02-17 Content Log   00:10:08:256
@@ -141,11 +158,71 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 13 sp                                NM T401 14-11-21 Content Log … 00:01:18:777
 ```
 
-# Plot the results of a summary of a column
+# Ploting the results of a summary of a column
+
+{datavyu} can also help to plot the summary of a column. Here, we save
+the output from `summarize_column()` to an object (we call this
+`freq_summary`, but it can be named whatever we like).
+
+Then, we use this output in the function `plot_column_summary()`:
 
 ``` r
-plot_frequencies
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+
+plot_column_summary(freq_summary)
 ```
+
+This also works by file—so long as the column is summarized by file:
+
+``` r
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                 by_file = TRUE)
+
+plot_column_summary(freq_summary)
+```
+
+Similarly, if the output is for the duration, rather than the frequency,
+the durations are plotted:
+
+``` r
+duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                     what = "duration")
+```
+
+Like for frequency, these can be ploted by file:
+
+``` r
+duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                                             directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                             what = "duration",
+                                             by_file = TRUE)
+
+plot_column_summary(duration_summary)
+```
+
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+
+``` r
+plot_column_summary(duration_summary_by_file)
+```
+
+<img src="man/figures/README-unnamed-chunk-11-2.png" width="100%" />
+
+# Using the pipe operator
+
+Finally, output can be passed between functions with the pipe operator:
+
+``` r
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                     what = "duration") %>% 
+  plot_column_summary()
+```
+
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ## Other package
 

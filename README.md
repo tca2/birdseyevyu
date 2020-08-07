@@ -216,6 +216,14 @@ plot_column_summary(duration_summary_by_file)
 
 <img src="man/figures/README-unnamed-chunk-10-2.png" width="100%" />
 
+It is also possible to summarize across all of the data, or another variable (in-development):
+
+``` r
+plot_column_summary(duration_summary, summarize_across = "all")
+```
+
+!< Will plot the means and standard errors of the means for each level of each code.>
+
 ## Using the pipe operator
 
 Finally, output can be passed between functions with the pipe operator:

@@ -229,6 +229,20 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
+## Time series preparation and plot (in-development)
+
+``` r
+prep_column_for_time_series() %>%
+  plot_time_series()
+```
+
+<img src="ts-plot.png" width="100%" />
+
+This function will be able to:
+
+- Plot multiple columns
+- Plot the data at different time scales (e.g., minutes, seconds, milliseconds)
+
 ## Features in-development
 
   - Improving `summarize_column()` and `plot_column_summary()` with

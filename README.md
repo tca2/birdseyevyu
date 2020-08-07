@@ -57,7 +57,7 @@ by a number of Ruby scripts.
 
 This is the directory (folder) passed to the datavyu functions below.
 
-#### 3\. Using the {datavyur} package (see the ‘other package’ setion below), it is easy
+#### 3\. Using the {datavyur} package (see the ‘other package’ section below), it is easy
 
 to explore the unique *columns* and *files* in the output created.
 
@@ -132,7 +132,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 13 0.1111111
 ```
 
-To summarize durations (instead of frequencies) by changing the `what`
+Summarize duration (instead of frequencies) by changing the `what`
 argument, which defaults to `"frequency"`, but can be changed to
 `"duration"`:
 

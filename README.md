@@ -222,7 +222,7 @@ It is also possible to summarize across all of the data, or another variable (in
 plot_column_summary(duration_summary, summarize_across = "all")
 ```
 
-!< Will plot the means and standard errors of the means for each level of each code.>
+<!-- Will plot the means and standard errors of the means for each level of each code. -->
 
 ## Using the pipe operator
 

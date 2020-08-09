@@ -17,7 +17,7 @@ Plot code frequency for a datavu column
 }
 \examples{
 prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
-                                         file = "MM T102 14-02-17 Content Log",
+                                         specified_file = "MM T102 14-02-17 Content Log",
                                          directory = "ex-data/datavyu_output_07-06-2020_14-46")
 
 plot_time_series(prepared_time_series)

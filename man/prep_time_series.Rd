@@ -4,7 +4,13 @@
 \alias{prep_time_series}
 \title{Plot code frequency for a datavu column}
 \usage{
-prep_time_series(column, specified_file, directory, code = NULL, round = "s")
+prep_time_series(
+  column,
+  specified_file = NULL,
+  directory,
+  code = NULL,
+  units = "s"
+)
 }
 \arguments{
 \item{column}{the column as a character string}
@@ -14,6 +20,8 @@ prep_time_series(column, specified_file, directory, code = NULL, round = "s")
 \item{directory}{the path to the directory as a character string; can be set with options(directory = "")}
 
 \item{code}{the code as a character string; defaults to code01}
+
+\item{units}{the units the data will be prepared in; either "m" (minutes), "s" (default; seconds), or "ms" (milli-seconds)}
 }
 \value{
 a data frame

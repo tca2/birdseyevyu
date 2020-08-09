@@ -201,10 +201,21 @@ prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
 prepared_time_series
 ```
 
-The `round` argument deafults to "s", but can be changed to "m" (to round the data to minutes) 
+The `units` argument defaults to "s", but can be changed to "m" (to round the data to minutes) 
 or "ms" (to not round the data and to retain the units as milliseconds).
 
-This time series data can then be plotted:
+We can see how using milliseconds increases the number of data points:
+
+```{r}
+prepared_time_series_ms <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                         units = "ms")
+
+prepared_time_series_ms
+```
+
+This time series data can then be plotted (using the data with the units as seconds):
 
 ```{r}
 plot_time_series(prepared_time_series)

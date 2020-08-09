@@ -1,6 +1,7 @@
 #' Plot code frequency for a datavu column
 #'
 #' @param specified_file the file name; see find_unique_files() to determine their names
+#' @param units the units the data will be prepared in; either "m" (minutes), "s" (default; seconds), or "ms" (milli-seconds)
 #' @inheritParams summarize_column
 #' @importFrom magrittr "%>%"
 #' @return a data frame
@@ -8,7 +9,7 @@
 #' @examples
 #'
 
-prep_time_series <- function(column, specified_file = NULL, directory, code = NULL, round = "s") {
+prep_time_series <- function(column, specified_file = NULL, directory, code = NULL, units = "s") {
 
   # argument check
   if (is.null(column)) {
@@ -38,15 +39,15 @@ prep_time_series <- function(column, specified_file = NULL, directory, code = NU
       dplyr::select(all_of(code), dplyr::contains("onset"), dplyr::contains("offset")) %>%
       purrr::set_names(c("code", "onset", "offset"))
 
-    if (round == "s") {
+    if (units == "s") {
       d <- df_of_codes %>%
-        dplyr::mutate(onset = round(onset / 1000), # allow manual specification of rounding
+        dplyr::mutate(onset = round(onset / 1000), # allow manual specification of unitsing
                offset = round(offset / 1000))
-    } else if (round == "m") {
+    } else if (units == "m") {
       d <- df_of_codes %>%
-        dplyr::mutate(onset = round(onset / (1000 * 60)), # allow manual specification of rounding
+        dplyr::mutate(onset = round(onset / (1000 * 60)), # allow manual specification of unitsing
                offset = round(offset / (1000 * 60)))
-    } else if (round == "ms") {
+    } else if (units == "ms") {
       d <- df_of_codes
     }
 
@@ -64,7 +65,7 @@ prep_time_series <- function(column, specified_file = NULL, directory, code = NU
 
   }
 
-  attributes(ddd)$round <- round
+  attributes(ddd)$units <- units
 
   ddd
 }

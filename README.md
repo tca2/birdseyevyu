@@ -298,17 +298,43 @@ prepared_time_series
 #> # … with 4,839 more rows
 ```
 
-The `round` argument deafults to “s”, but can be changed to “m” (to
+The `units` argument defaults to “s”, but can be changed to “m” (to
 round the data to minutes) or “ms” (to not round the data and to retain
 the units as milliseconds).
 
-This time series data can then be plotted:
+We can see how using milliseconds increases the number of data points:
+
+``` r
+prepared_time_series_ms <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                         units = "ms")
+
+prepared_time_series_ms
+#> # A tibble: 4,825,743 x 2
+#>        ts code 
+#>  *  <int> <chr>
+#>  1 235026 aw   
+#>  2 235027 aw   
+#>  3 235028 aw   
+#>  4 235029 aw   
+#>  5 235030 aw   
+#>  6 235031 aw   
+#>  7 235032 aw   
+#>  8 235033 aw   
+#>  9 235034 aw   
+#> 10 235035 aw   
+#> # … with 4,825,733 more rows
+```
+
+This time series data can then be plotted (using the data with the units
+as seconds):
 
 ``` r
 plot_time_series(prepared_time_series)
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
 
 Like for other functions, if the data is calculated file, it will be
 plotted by file (in-progress):

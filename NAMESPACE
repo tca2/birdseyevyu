@@ -3,5 +3,8 @@
 S3method(plot,datavyu)
 S3method(print,datavyu)
 S3method(summary,datavyu)
+export(find_unique_columns)
+export(find_unique_files)
 export(plot_time_series)
+export(prep_time_series)
 export(summarize_column)

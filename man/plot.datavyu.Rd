@@ -4,7 +4,7 @@
 \alias{plot.datavyu}
 \title{Plot datavyu output}
 \usage{
-\method{plot}{datavyu}(object, ...)
+\method{plot}{datavyu}(datavyu_object)
 }
 \arguments{
 \item{datavyu_object}{a datavyu object created by \code{summarize_column()}}

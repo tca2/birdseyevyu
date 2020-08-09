@@ -36,5 +36,7 @@ plot_column_summary <- function(datavyu_object) {
   } else if (attributes(datavyu_object)$type == "duration") {
 
     plot_duration(datavyu_object)
+
   }
+
 }

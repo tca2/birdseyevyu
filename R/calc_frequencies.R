@@ -5,11 +5,6 @@
 #' @param directory the path to the directory as a character string
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @return A data frame generated with the janitor package
-#' @examples
-#' calc_frequencies(column = "LogClass_AS_ActivityFormat",
-#'                  directory = "ex-data/datavyu_output_07-06-2020_14-46",
-#'                  by_file = TRUE)
-#'
 
 calc_frequencies <- function(column = NULL,
                              code = NULL, # defaults to code01
@@ -26,7 +21,7 @@ calc_frequencies <- function(column = NULL,
     tibble::as_tibble() %>%
     janitor::clean_names()
 
-  # this is if folks do not provide a code name
+  # this is if a code name is not provided
   if (is.null(code)) {
     code <- names(df_of_codes)[stringr::str_detect(names(df_of_codes), "code01")]
     if (length(code) < 1) {

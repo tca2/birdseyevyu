@@ -106,11 +106,8 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
                  summary = "duration")
 ```
 
-Note that because the output is a tibble, it can be computed on, e.g., using the 
-`stringr::str_sub()` function to remove codes with question marks in them:
-
 ```{r}
-summarize_column(column = "LogClass_AS_ActivityFormat",
+x <- summarize_column(column = "LogClass_AS_ActivityFormat",
                  summary = "duration")
 ```
 
@@ -197,11 +194,10 @@ prep_time_series() %>%
 
 - Plotting code co-occurrences with `plot_cooccurence()`
 - Summarizing an entire file (not just a single column in a file) with `summarize_file()`
-- Implementing generic functions (specifically: `plot()`, `summarize()`, `print()`)
 - Addressing a number of [issues](https://github.com/tca2/datavyu/issues), including some that relate to the {datavyur} package
 
 ## Contributing
-  
+
 Please note that the datavyu project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ## pkgdown website

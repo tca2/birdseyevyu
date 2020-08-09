@@ -86,15 +86,17 @@ frequency of codes for a specified column.
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
-#>   log_class_as_activity_format_code01 n    percent
-#> 1                                   l 7 0.31818182
-#> 2                                  sp 7 0.31818182
-#> 3                                   a 2 0.09090909
-#> 4                                   o 2 0.09090909
-#> 5                                  aw 1 0.04545455
-#> 6                   class discussion? 1 0.04545455
-#> 7          class discussion? lecture? 1 0.04545455
-#> 8                                 l?? 1 0.04545455
+#> # A tibble: 8 x 3
+#>   log_class_as_activity_format_code01     n percent
+#> * <chr>                               <dbl>   <dbl>
+#> 1 l                                       7  0.318 
+#> 2 sp                                      7  0.318 
+#> 3 a                                       2  0.0909
+#> 4 o                                       2  0.0909
+#> 5 aw                                      1  0.0455
+#> 6 class discussion?                       1  0.0455
+#> 7 class discussion? lecture?              1  0.0455
+#> 8 l??                                     1  0.0455
 ```
 
 We can also explore the frequencies *by file* by changing the `by_file`
@@ -111,34 +113,22 @@ options(directory = "ex-data/datavyu_output_07-06-2020_14-46")
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
                  by_file = TRUE)
-#>                                file log_class_as_activity_format_code01 n
-#> 1      MM T102 14-02-17 Content Log                                  aw 1
-#> 2      MM T102 14-02-17 Content Log                                   l 3
-#> 3      MM T102 14-02-17 Content Log                                  sp 6
-#> 4  NM 14-12-03 T201 Content Log v.3                                   a 1
-#> 5  NM 14-12-03 T201 Content Log v.3                                   l 1
-#> 6  NM 14-12-03 T201 Content Log v.3                                   o 1
-#> 7  NM T401 14-11-21 Content Log v.2                                   a 1
-#> 8  NM T401 14-11-21 Content Log v.2                   class discussion? 1
-#> 9  NM T401 14-11-21 Content Log v.2          class discussion? lecture? 1
-#> 10 NM T401 14-11-21 Content Log v.2                                   l 3
-#> 11 NM T401 14-11-21 Content Log v.2                                 l?? 1
-#> 12 NM T401 14-11-21 Content Log v.2                                   o 1
-#> 13 NM T401 14-11-21 Content Log v.2                                  sp 1
-#>      percent
-#> 1  0.1000000
-#> 2  0.3000000
-#> 3  0.6000000
-#> 4  0.3333333
-#> 5  0.3333333
-#> 6  0.3333333
-#> 7  0.1111111
-#> 8  0.1111111
-#> 9  0.1111111
-#> 10 0.3333333
-#> 11 0.1111111
-#> 12 0.1111111
-#> 13 0.1111111
+#> # A tibble: 13 x 4
+#>    file                           log_class_as_activity_format_co…     n percent
+#>  * <chr>                          <chr>                            <dbl>   <dbl>
+#>  1 MM T102 14-02-17 Content Log   aw                                   1   0.1  
+#>  2 MM T102 14-02-17 Content Log   l                                    3   0.3  
+#>  3 MM T102 14-02-17 Content Log   sp                                   6   0.6  
+#>  4 NM 14-12-03 T201 Content Log … a                                    1   0.333
+#>  5 NM 14-12-03 T201 Content Log … l                                    1   0.333
+#>  6 NM 14-12-03 T201 Content Log … o                                    1   0.333
+#>  7 NM T401 14-11-21 Content Log … a                                    1   0.111
+#>  8 NM T401 14-11-21 Content Log … class discussion?                    1   0.111
+#>  9 NM T401 14-11-21 Content Log … class discussion? lecture?           1   0.111
+#> 10 NM T401 14-11-21 Content Log … l                                    3   0.333
+#> 11 NM T401 14-11-21 Content Log … l??                                  1   0.111
+#> 12 NM T401 14-11-21 Content Log … o                                    1   0.111
+#> 13 NM T401 14-11-21 Content Log … sp                                   1   0.111
 ```
 
 To summarize durations (instead of frequencies) by changing the

@@ -34,9 +34,7 @@ calc_frequencies <- function(column = NULL,
     out <- df_of_codes %>%
       janitor::tabyl(all_of(code)) %>%
       dplyr::arrange(dplyr::desc(n)) %>%
-      tibble::as_tibble()
-
-    create_datavyu_class(out)
+      as_tibble()
 
   } else {
 
@@ -51,8 +49,6 @@ calc_frequencies <- function(column = NULL,
       purrr::map_df(~., .id = "id") %>%
       rename(file = id) %>%
       tibble::as_tibble()
-
-    create_datavyu_class(out)
 
   }
 }

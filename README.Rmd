@@ -194,9 +194,25 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 ## Time series preparation and plot (in-development)
 
 ```{r, eval = FALSE}
-prep_time_series() %>%
-  plot_time_series()
+prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specfiied_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+
+prepared_time_series
 ```
+
+The `round` argument deafults to "s", but can be changed to "m" (to round the data to minutes) 
+or "ms" (to not round the data and to retain the units as milliseconds).
+
+This time series data can then be plottted:
+
+```{r}
+plot_time_series(prepared_time_series)
+```
+
+Like for other functions, if the data is calculated file, it will be plotted by file:
+
+
 
 ## Features in-development
 

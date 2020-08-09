@@ -15,7 +15,7 @@ summarize_column(
 \arguments{
 \item{column}{the column as a character string}
 
-\item{code}{the code as a character string}
+\item{code}{the code as a character string; defaults to code01}
 
 \item{directory}{the path to the directory as a character string}
 

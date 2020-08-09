@@ -1,26 +1,22 @@
 ---
-output: github_document
+title: "intro-to-datavyu"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{intro-to-datavyu}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%",
-  message = FALSE
+  comment = "#>"
 )
 ```
 
-# datavyu
-
-<!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/datavyu)](https://CRAN.R-project.org/package=datavyu)
-[![Travis build status](https://travis-ci.com/tca2/datavyu.svg?branch=master)](https://travis-ci.com/tca2/datavyu)
-<!-- badges: end -->
+```{r setup}
+library(datavyu)
+```
 
 The goal of {datavyu} is to to  to facilitate the use of the open-source **datavyu** software for the analysis of qualitative audiovisual data. This package extensively uses [{datavyur}](https://github.com/iamamutt/datavyu) for preparing the data for the summary statistic and plotting functions in this package. We do not intend to duplicate the functionality of that excellent package in ours; we focus instead on summarizing datavyu output and preparing the output for use in other analyses.
 
@@ -64,19 +60,10 @@ to explore the unique *columns* and *files* in the output created.
 ```{r}
 # find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
 
-f <- datavyur::datavyu_col_search(folder = "ex-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
+f <- datavyur::datavyu_col_search(folder = "ex-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
 
-unique(f$column)
-unique(f$file)
-```
-
-We'll be typing that folder file path a number of times; you can set an option 
-that will mean that the folder file path you set will be used *by default*, though
-you can over-ride it any time you like.
-
-```{r}
-options(folder = "ex-data/datavyu_output_07-06-2020_14-46")
+f$column %>% unique()
+f$file %>% unique()
 ```
 
 ## Summarizing a column
@@ -133,14 +120,6 @@ freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
 plot_column_summary(freq_summary)
 ```
 
-It is also possible to summarize across all of the data, or another variable (in-development):
-
-``` r
-plot_column_summary(duration_summary, summarize_across = "all")
-```
-
-Will plot the means and standard errors of the means for each level of each code.
-
 Similarly, if the output is for the duration, rather than the frequency, the durations are plotted:
 
 ```{r}
@@ -148,7 +127,6 @@ duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
                                      directory = "ex-data/datavyu_output_07-06-2020_14-46",
                                      what = "duration")
 
-plot_column_summary(duration_summary)
 ```
 
 Like for frequency, these can be ploted by file:
@@ -159,6 +137,7 @@ duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityForma
                                              what = "duration",
                                              by_file = TRUE)
 
+plot_column_summary(duration_summary)
 plot_column_summary(duration_summary_by_file)
 ```
 
@@ -172,35 +151,3 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
                  what = "duration") %>% 
   plot_column_summary()
 ```
-
-## Time series preparation and plot (in-development)
-
-```{r}
-prep_time_series() %>%
-  plot_time_series()
-```
-
-## Features in-development
-
-- Improving `summarize_column()` and `plot_column_summary()` with further input and use
-- Plotting code co-occurrences with `plot_cooccurence()`
-- Summarizing an entire file (not just a single column in a file) with `summarize_file()`
-- Implementing generic functions (specifically: `plot()`, `summarize()`, `print()`)
-- Matching datavyu data to time series data in other, subsequent analyses using `datavyur::temporal_align()`
-```{r, eval = FALSE, echo = FALSE}
-datavyur::temporal_align(folder = "ex-data/datavyu_output_07-06-2020_14-46", all.cols = "LogClass_AS_ActivityFormat")
-```
-- Addressing a number of [issues](https://github.com/tca2/datavyu/issues)
-
-## Contributing
-  
-Please note that the datavyu project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
-
-## pkgdown website
-
-Because this repository is private, the [{pkgdown}](https://pkgdown.r-lib.org/)-generated website for this package
-is available only in the `/docs` directory. Drag the `index.html` file in that directory into a browser to view this site.
-
-## Acknowledgment
-
-This material is based upon work supported by the National Science Foundation under [Grant No. 1920796](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1920796&HistoricalAwards=false). Any opinions, findings, conclusions, or recommendations expressed in this material are those of the authors and do not reflect the views of the National Science Foundation.

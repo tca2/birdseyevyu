@@ -1,7 +1,7 @@
 #' Calculate code frequencies for a datavu column
 #'
 #' @param column the column as a character string
-#' @param code the code as a character string
+#' @param code the code as a character string; defaults to code01
 #' @param directory the path to the directory as a character string
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @return A data frame generated with the janitor package
@@ -12,7 +12,7 @@
 #'
 
 calc_frequencies <- function(column = NULL,
-                             code = NULL,
+                             code = NULL, # defaults to code01
                              directory = NULL,
                              by_file = FALSE) {
 

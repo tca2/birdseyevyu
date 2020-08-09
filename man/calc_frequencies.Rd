@@ -9,7 +9,7 @@ calc_frequencies(column = NULL, code = NULL, directory = NULL, by_file = FALSE)
 \arguments{
 \item{column}{the column as a character string}
 
-\item{code}{the code as a character string}
+\item{code}{the code as a character string; defaults to code01}
 
 \item{directory}{the path to the directory as a character string}
 

@@ -1,7 +1,7 @@
 #' Summarize a datavyu column
 #'
 #' @param column the column as a character string
-#' @param code the code as a character string
+#' @param code the code as a character string; defaults to code01
 #' @param directory the path to the directory as a character string
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @param what either "frequency" or "duration"

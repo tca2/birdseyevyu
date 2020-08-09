@@ -16,17 +16,17 @@ plot_time_series <- function(datavyu_ts_object) {
   round <- attributes(datavyu_ts_object)$round
 
   datavyu_ts_object %>%
-    ggplot(aes(x = ts, y = 1, color = code)) +
-    geom_point() +
-    ylab(NULL) +
-    xlab("Time (m)") +
-    theme(axis.title.y=element_blank(),
-          axis.text.y=element_blank(),
-          axis.ticks.y=element_blank()) +
-    scale_y_discrete(breaks = NULL) +
-    scale_color_brewer("", type = "qual") +
-    labs(subtitle = stringr::str_c("Units: ", round)) +
-    theme(text = element_text(family = "Times", size = 14)) +
-    scale_x_time()
+    ggplot2::ggplot(ggplot2::aes(x = ts, y = 1, color = code)) +
+    ggplot2::geom_point() +
+    ggplot2::ylab(NULL) +
+    ggplot2::xlab("Time (m)") +
+    ggplot2::theme(axis.title.y=ggplot2::element_blank(),
+          axis.text.y=ggplot2::element_blank(),
+          axis.ticks.y=ggplot2::element_blank()) +
+    ggplot2::scale_y_discrete(breaks = NULL) +
+    ggplot2::scale_color_brewer("", type = "qual") +
+    ggplot2::labs(subtitle = stringr::str_c("Units: ", round)) +
+    ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 14)) +
+    ggplot2::scale_x_time()
 
 }

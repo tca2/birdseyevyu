@@ -105,7 +105,7 @@ computed on:
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
                  directory = "ex-data/datavyu_output_07-06-2020_14-46") %>% 
-  filter(!str_detect(log_class_as_activity_format_code01, "[?]")) # note that names are cleaned upon being processed
+  dplyr::filter(!stringr::str_detect(log_class_as_activity_format_code01, "[?]")) # note that names are cleaned upon being processed
 #> # A tibble: 5 x 3
 #>   log_class_as_activity_format_code01     n percent
 #>   <chr>                               <dbl>   <dbl>
@@ -219,8 +219,8 @@ This also works by file—so long as the column is summarized by file:
 freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
                                  by_file = TRUE, summary = "duration")
 
-freq_summary <- filter(freq_summary,
-                       !str_detect(log_class_as_activity_format_code01, "[?]"))
+freq_summary <- dplyr::filter(freq_summary,
+                              !stringr::str_detect(log_class_as_activity_format_code01, "[?]"))
 
 plot_column_summary(freq_summary)
 ```
@@ -277,9 +277,41 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 ## Time series preparation and plot (in-development)
 
 ``` r
-prep_time_series() %>%
-  plot_time_series()
+prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+
+prepared_time_series
+#> # A tibble: 4,849 x 2
+#>       ts code 
+#>  * <dbl> <chr>
+#>  1   235 aw   
+#>  2   236 aw   
+#>  3   237 aw   
+#>  4   238 aw   
+#>  5   239 aw   
+#>  6   240 aw   
+#>  7   241 aw   
+#>  8   242 aw   
+#>  9   243 aw   
+#> 10   244 aw   
+#> # … with 4,839 more rows
 ```
+
+The `round` argument deafults to “s”, but can be changed to “m” (to
+round the data to minutes) or “ms” (to not round the data and to retain
+the units as milliseconds).
+
+This time series data can then be plotted:
+
+``` r
+plot_time_series(prepared_time_series)
+```
+
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
+
+Like for other functions, if the data is calculated file, it will be
+plotted by file (in-progress):
 
 ## Features in-development
 

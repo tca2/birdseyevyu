@@ -33,35 +33,34 @@ prep_time_series <- function(column, specified_file = NULL, directory, code = NU
     df_of_codes <- df_of_codes %>%
       dplyr::filter(file == specified_file)
 
-
-    # need to fix all of the object names below
+    # need to fix all of the object names below - for a single file
     df_of_codes <- df_of_codes %>%
-      select(all_of(code), contains("onset"), contains("offset")) %>%
-      set_names(c("code", "onset", "offset"))
+      dplyr::select(all_of(code), dplyr::contains("onset"), dplyr::contains("offset")) %>%
+      purrr::set_names(c("code", "onset", "offset"))
 
     if (round == "s") {
       d <- df_of_codes %>%
-        mutate(onset = round(onset / 1000), # allow manual specification of rounding
+        dplyr::mutate(onset = round(onset / 1000), # allow manual specification of rounding
                offset = round(offset / 1000))
     } else if (round == "m") {
       d <- df_of_codes %>%
-        mutate(onset = round(onset / (1000 * 60)), # allow manual specification of rounding
+        dplyr::mutate(onset = round(onset / (1000 * 60)), # allow manual specification of rounding
                offset = round(offset / (1000 * 60)))
     } else if (round == "ms") {
       d <- df_of_codes
     }
 
-    dd <- map2(d$onset, d$offset, time_seq)
+    dd <- purrr::map2(d$onset, d$offset, time_seq)
 
-    dd <- tibble(ts = unlist(dd))
+    dd <- tibble::tibble(ts = unlist(dd))
 
     d <- d %>%
-      pivot_longer(cols = c("onset", "offset")) %>%
-      rename(ts = value)
+      tidyr::pivot_longer(cols = c("onset", "offset")) %>%
+      dplyr::rename(ts = value)
 
-    ddd <- left_join(dd, d, by = "ts") %>%
-      fill(code) %>%
-      select(-name)
+    ddd <- dplyr::left_join(dd, d, by = "ts") %>%
+      tidyr::fill(code) %>%
+      dplyr::select(-name)
 
   }
 

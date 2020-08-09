@@ -32,13 +32,19 @@ prep_time_series <- function(column, code = NULL, directory, by_file = FALSE) {
     }
   }
 
-  return(df_of_codes)
+  df_of_codes %>%
+    select(code, contains("onset"), contains("offset")) %>%
+    set_names(c("code", "onset", "offset"))
 
 }
 
-# plot_time_series(column = "LogClass_AS_ActivityFormat",
-#                  directory = "ex-data/datavyu_output_07-06-2020_14-46") %>%
-#   dplyr::select(3:4) %>%
-#   dplyr::mutate_all(datavyur::ms2time)
-
-
+# prep_time_series(column = "LogClass_AS_ActivityFormat",
+#                       directory = "ex-data/datavyu_output_07-06-2020_14-46") %>% View()
+#   pivot_longer(cols = c(2, 3)) %>%
+#   rename(time = value) %>%
+#   select(-name) %>%
+#   mutate(key = rep(1:(nrow(.)/2), each = 2))
+#
+# tsibble(d, index = time, key = key) %>%
+#   mutate(time = time / 1000) %>%
+#   fill_gaps()

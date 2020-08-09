@@ -99,6 +99,23 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 8 l??                                     1  0.0455
 ```
 
+Because `summary_column()` returns a tibble/data.frame, it can be
+computed on:
+
+``` r
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46") %>% 
+  filter(!str_detect(log_class_as_activity_format_code01, "[?]")) # note that names are cleaned upon being processed
+#> # A tibble: 5 x 3
+#>   log_class_as_activity_format_code01     n percent
+#>   <chr>                               <dbl>   <dbl>
+#> 1 l                                       7  0.318 
+#> 2 sp                                      7  0.318 
+#> 3 a                                       2  0.0909
+#> 4 o                                       2  0.0909
+#> 5 aw                                      1  0.0455
+```
+
 We can also explore the frequencies *by file* by changing the `by_file`
 argument to `TRUE`.
 
@@ -151,24 +168,9 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 8 class discussion? lecture?          00:04:20:950  0.0274
 ```
 
-Note that because the output is a tibble, it can be computed on, e.g.,
-using the `stringr::str_sub()` function to remove codes with question
-marks in them:
-
 ``` r
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 summary = "duration")
-#> # A tibble: 8 x 3
-#>   log_class_as_activity_format_code01 duration     percent
-#> * <chr>                               <chr>          <dbl>
-#> 1 l                                   00:52:00:316  0.327 
-#> 2 a                                   00:27:16:305  0.172 
-#> 3 sp                                  00:25:18:250  0.159 
-#> 4 class discussion?                   00:20:39:356  0.130 
-#> 5 o                                   00:13:01:093  0.0820
-#> 6 aw                                  00:10:08:256  0.0638
-#> 7 l??                                 00:06:06:588  0.0385
-#> 8 class discussion? lecture?          00:04:20:950  0.0274
+x <- summarize_column(column = "LogClass_AS_ActivityFormat",
+                      summary = "duration")
 ```
 
 Columns can also be summarized by file:
@@ -223,7 +225,7 @@ freq_summary <- filter(freq_summary,
 plot_column_summary(freq_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 It is also possible to summarize across all of the data, or another
 variable (in-development):
@@ -245,7 +247,7 @@ duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
 plot_column_summary(duration_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 Like for frequency, these can be ploted by file:
 
@@ -257,7 +259,7 @@ duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityForma
 plot_column_summary(duration_summary_by_file)
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
 
 ## Using the pipe operator
 
@@ -270,7 +272,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
   plot_column_summary()
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
 
 ## Time series preparation and plot (in-development)
 
@@ -284,8 +286,6 @@ prep_time_series() %>%
   - Plotting code co-occurrences with `plot_cooccurence()`
   - Summarizing an entire file (not just a single column in a file) with
     `summarize_file()`
-  - Implementing generic functions (specifically: `plot()`,
-    `summarize()`, `print()`)
   - Addressing a number of
     [issues](https://github.com/tca2/datavyu/issues), including some
     that relate to the {datavyur} package

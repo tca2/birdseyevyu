@@ -82,6 +82,14 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
+Because `summary_column()` returns a tibble/data.frame, it can be computed on:
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46") %>% 
+  filter(!str_detect(log_class_as_activity_format_code01, "[?]")) # note that names are cleaned upon being processed
+```
+
 We can also explore the frequencies *by file* by changing the `by_file` argument to 
 `TRUE`.
 
@@ -108,7 +116,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 
 ```{r}
 x <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                 summary = "duration")
+                      summary = "duration")
 ```
 
 Columns can also be summarized by file:

@@ -4,27 +4,22 @@
 \alias{plot_time_series}
 \title{Plot code frequency for a datavu column}
 \usage{
-plot_time_series(column, code = NULL, directory, by_file = FALSE)
+plot_time_series(datavyu_ts_object)
 }
 \arguments{
-\item{column}{the column as a character string}
-
-\item{code}{the code as a character string; defaults to code01}
-
-\item{directory}{the path to the directory as a character string}
-
-\item{by_file}{whether or not to calculate the frequencies by file (logical)}
-
-\item{what}{either "frequency" or "duration"}
+\item{data_ts_object}{the output from prep_time_series()}
 }
 \value{
-A data frame generated with the janitor package
+A ggplot2 plot
 }
 \description{
 Plot code frequency for a datavu column
 }
 \examples{
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "example-data/datavyu_output_07-06-2020_14-46")
+prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+
+plot_time_series(prepared_time_series)
 
 }

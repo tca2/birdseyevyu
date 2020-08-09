@@ -4,27 +4,23 @@
 \alias{prep_time_series}
 \title{Plot code frequency for a datavu column}
 \usage{
-prep_time_series(column, code = NULL, directory, by_file = FALSE)
+prep_time_series(column, specified_file, directory, code = NULL, round = "s")
 }
 \arguments{
 \item{column}{the column as a character string}
 
+\item{specified_file}{the file name; see find_unique_files() to determine their names}
+
+\item{directory}{the path to the directory as a character string; can be set with options(directory = "")}
+
 \item{code}{the code as a character string; defaults to code01}
-
-\item{directory}{the path to the directory as a character string}
-
-\item{by_file}{whether or not to calculate the frequencies by file (logical)}
-
-\item{what}{either "frequency" or "duration"}
 }
 \value{
-A data frame generated with the janitor package
+a data frame
 }
 \description{
 Plot code frequency for a datavu column
 }
 \examples{
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "example-data/datavyu_output_07-06-2020_14-46")
 
 }

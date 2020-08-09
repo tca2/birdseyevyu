@@ -1,18 +1,14 @@
 #' Plot code frequency for a datavu column
 #'
-#' @param column the column as a character string
-#' @param code the code as a character string; defaults to code01
-#' @param directory the path to the directory as a character string
-#' @param by_file whether or not to calculate the frequencies by file (logical)
-#' @param what either "frequency" or "duration"
-#' @return A data frame generated with the janitor package
+#' @param specified_file the file name; see find_unique_files() to determine their names
+#' @inheritParams summarize_column
+#' @importFrom magrittr "%>%"
+#' @return a data frame
 #' @export
 #' @examples
-#' summarize_column(column = "LogClass_AS_ActivityFormat",
-#'                  directory = "example-data/datavyu_output_07-06-2020_14-46")
 #'
 
-prep_time_series <- function(column, code = NULL, directory, by_file = FALSE) {
+prep_time_series <- function(column, specified_file, directory, code = NULL, round = "s") {
 
   # argument check
   if (is.null(column)) {
@@ -24,6 +20,9 @@ prep_time_series <- function(column, code = NULL, directory, by_file = FALSE) {
     tibble::as_tibble() %>%
     janitor::clean_names()
 
+  df_of_codes <- df_of_codes %>%
+    dplyr::filter(file == specified_file)
+
   # this is if folks do not provide a code name
   if (is.null(code)) {
     code <- names(df_of_codes)[stringr::str_detect(names(df_of_codes), "code01")]
@@ -32,19 +31,37 @@ prep_time_series <- function(column, code = NULL, directory, by_file = FALSE) {
     }
   }
 
-  df_of_codes %>%
-    select(code, contains("onset"), contains("offset")) %>%
+  # need to fix all of the object names below
+  df_of_codes <- df_of_codes %>%
+    select(all_of(code), contains("onset"), contains("offset")) %>%
     set_names(c("code", "onset", "offset"))
+
+  if (round == "s") {
+    d <- df_of_codes %>%
+      mutate(onset = round(onset / 1000), # allow manual specification of rounding
+             offset = round(offset / 1000))
+  } else if (round == "m") {
+    d <- df_of_codes %>%
+      mutate(onset = round(onset / (1000 * 60)), # allow manual specification of rounding
+             offset = round(offset / (1000 * 60)))
+  } else if (round == "ms") {
+    d <- df_of_codes
+  }
+
+  dd <- map2(d$onset, d$offset, time_seq)
+
+  dd <- tibble(ts = unlist(dd))
+
+  d <- d %>%
+    pivot_longer(cols = c("onset", "offset")) %>%
+    rename(ts = value)
+
+  ddd <- left_join(dd, d, by = "ts") %>%
+    fill(code)
+
+  attributes(ddd)$round <- round
+
+  ddd
 
 }
 
-# prep_time_series(column = "LogClass_AS_ActivityFormat",
-#                       directory = "ex-data/datavyu_output_07-06-2020_14-46") %>% View()
-#   pivot_longer(cols = c(2, 3)) %>%
-#   rename(time = value) %>%
-#   select(-name) %>%
-#   mutate(key = rep(1:(nrow(.)/2), each = 2))
-#
-# tsibble(d, index = time, key = key) %>%
-#   mutate(time = time / 1000) %>%
-#   fill_gaps()

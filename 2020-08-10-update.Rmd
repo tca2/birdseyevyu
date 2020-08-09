@@ -1,0 +1,23 @@
+---
+title: "datavyu R package update"
+author: "Joshua Rosenberg, Mekenzie Meadows, and the Human Analysis Team"
+institute: "T(CA)$^2$"
+date: "2020/08/10"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: center, middle
+
+# What we've been doing
+
+---
+
+# Hello World
+
+sadfasd

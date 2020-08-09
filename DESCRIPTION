@@ -1,5 +1,5 @@
 Package: datavyu
-Title: Summarize and Plot datavyu Output
+Title: Prepare and Create Output from datavyu Coding Files
 Version: 0.1.0
 Authors@R: 
     person(given = "Joshua",
@@ -10,7 +10,9 @@ Authors@R:
 Description: datavyu is designed to make it easier to summarize and plot output from the qualitative audiovisual data coding software datavyu. Relying on the {datavyu} R package to process the data, this package focuses on summarizing the frequency and duration of codes and plotting their output.
 License: GPL-3
 Imports:
-    dplyr
+    tidyverse,
+    datavyur,
+    lubridate
 Suggests: 
     testthat,
     knitr,

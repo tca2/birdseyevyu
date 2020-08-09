@@ -58,25 +58,18 @@ devtools::load_all(".")
 
 This is the directory (folder) passed to the datavyu functions below.
 
-#### 3. Using the {datavyur} package (see the 'other package' setion below), it is easy
-to explore the unique *columns* and *files* in the output created.
+## Exploring the columns and files
+
+Using {datavyu}, you can find the unique columns across all of the files in a directory:
 
 ```{r}
-# find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
-
-f <- datavyur::datavyu_col_search(folder = "ex-data/datavyu_output_07-06-2020_14-46") %>% 
-  as_tibble()
-
-unique(f$column)
-unique(f$file)
+find_unique_columns("ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
-We'll be typing that folder file path a number of times; you can set an option 
-that will mean that the folder file path you set will be used *by default*, though
-you can over-ride it any time you like.
+You can also find unique files
 
 ```{r}
-options(folder = "ex-data/datavyu_output_07-06-2020_14-46")
+find_unique_files("ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
 ## Summarizing a column
@@ -89,23 +82,44 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
-We can also explore the frequencies *by file* by changing the `by_file` arguent to 
+We can also explore the frequencies *by file* by changing the `by_file` argument to 
 `TRUE`.
+
+We'll be typing that folder file path a number of times; you can set an option 
+that will mean that the folder file path you set will be used *by default*, though
+you can over-ride it any time you like.
+
+```{r}
+options(directory = "ex-data/datavyu_output_07-06-2020_14-46")
+```
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                  by_file = TRUE)
 ```
 
-To summarize durations (instead of frequencies) by changing the `what` argument,
+To summarize durations (instead of frequencies) by changing the `summary` argument,
 which defaults to `"frequency"`, but can be changed to `"duration"`:
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                 summary = "duration")
+```
+
+Note that because the output is a tibble, it can be computed on, e.g., using the 
+`stringr::str_sub()` function to remove codes with question marks in them:
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 summary = "duration")
+```
+
+Columns can also be summarized by file:
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
                  by_file = TRUE,
-                 what = "duration")
+                 summary = "duration")
 ```
 
 ## Ploting the results of a summary of a column
@@ -117,8 +131,7 @@ be named whatever we like).
 Then, we use this output in the function `plot_column_summary()`:
 
 ```{r, eval}
-freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat")
 
 plot_column_summary(freq_summary)
 ```
@@ -127,15 +140,17 @@ This also works by file---so long as the column is summarized by file:
 
 ```{r}
 freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                 by_file = TRUE)
+                                 by_file = TRUE, summary = "duration")
+
+freq_summary <- filter(freq_summary,
+                       !str_detect(log_class_as_activity_format_code01, "[?]"))
 
 plot_column_summary(freq_summary)
 ```
 
 It is also possible to summarize across all of the data, or another variable (in-development):
 
-``` r
+```{r, eval = FALSE}
 plot_column_summary(duration_summary, summarize_across = "all")
 ```
 
@@ -145,8 +160,7 @@ Similarly, if the output is for the duration, rather than the frequency, the dur
 
 ```{r}
 duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                     what = "duration")
+                                     summary = "duration")
 
 plot_column_summary(duration_summary)
 ```
@@ -155,8 +169,7 @@ Like for frequency, these can be ploted by file:
 
 ```{r}
 duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                             directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                             what = "duration",
+                                             summary = "duration",
                                              by_file = TRUE)
 
 plot_column_summary(duration_summary_by_file)
@@ -168,29 +181,24 @@ Finally, output can be passed between functions with the pipe operator:
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                 what = "duration") %>% 
+                 summary = "duration",
+                 by_file = TRUE) %>% 
   plot_column_summary()
 ```
 
 ## Time series preparation and plot (in-development)
 
-```{r}
+```{r, eval = FALSE}
 prep_time_series() %>%
   plot_time_series()
 ```
 
 ## Features in-development
 
-- Improving `summarize_column()` and `plot_column_summary()` with further input and use
 - Plotting code co-occurrences with `plot_cooccurence()`
 - Summarizing an entire file (not just a single column in a file) with `summarize_file()`
 - Implementing generic functions (specifically: `plot()`, `summarize()`, `print()`)
-- Matching datavyu data to time series data in other, subsequent analyses using `datavyur::temporal_align()`
-```{r, eval = FALSE, echo = FALSE}
-datavyur::temporal_align(folder = "ex-data/datavyu_output_07-06-2020_14-46", all.cols = "LogClass_AS_ActivityFormat")
-```
-- Addressing a number of [issues](https://github.com/tca2/datavyu/issues)
+- Addressing a number of [issues](https://github.com/tca2/datavyu/issues), including some that relate to the {datavyur} package
 
 ## Contributing
   

@@ -41,8 +41,8 @@ calc_duration <- function(column = NULL,
       dplyr::group_by(!!rlang::sym(code)) %>%
       dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
       dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      mutate(percent = sum_duration / sum(sum_duration)) %>%
-      arrange(desc(sum_duration)) %>%
+      dplyr::mutate(percent = sum_duration / sum(sum_duration)) %>%
+      dplyr::arrange(desc(sum_duration)) %>%
       dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time) %>%
       dplyr::rename(duration = sum_duration) %>%
       tibble::as_tibble()
@@ -50,8 +50,8 @@ calc_duration <- function(column = NULL,
   } else {
 
     list_of_times <- df_of_codes %>%
-      group_by(file) %>%
-      group_split()
+      dplyr::group_by(file) %>%
+      dplyr::group_split()
 
     names(list_of_times) <- unique(df_of_codes$file)
 
@@ -61,8 +61,8 @@ calc_duration <- function(column = NULL,
       dplyr::group_by(file, !!rlang::sym(code)) %>%
       dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
       dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      arrange(file, desc(sum_duration)) %>%
-      mutate(percent = sum_duration / sum(sum_duration)) %>%
+      dplyr::arrange(file, desc(sum_duration)) %>%
+      dplyr::mutate(percent = sum_duration / sum(sum_duration)) %>%
       dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time) %>%
       dplyr::rename(duration = sum_duration) %>%
       tibble::as_tibble()

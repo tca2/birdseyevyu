@@ -12,12 +12,270 @@ output:
       countIncrementalSlides: false
 ---
 
-class: center, middle
+```{r setup, include=FALSE}
+library(dplyr)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE,
+                      fig.width = 7, fig.height = 4, fig.align = "center", dpi = 300)
+```
 
-# What we've been doing
+# Outline
+
+1. Background
+1. Summarizing a column
+1. Plotting a column summary
+1. Preparing and plotting time series data
+1. Next steps & discussion
 
 ---
 
-# Hello World
+class: center, middle
 
-sadfasd
+# Background
+
+---
+
+# A look at datavyu (the qualitative audiovisual coding software)
+
+![datavyu look](/media/annotated-datavyu-desktop.png)
+
+---
+
+A short (2 min.) video: https://datavyu.org/user-guide/guide.html
+
+---
+
+# A look at datavyu data
+
+![screenshot of datavyu files 1](media/ss-1.png)
+
+---
+
+# A look at datavyu data
+
+![screenshot of datavyu files 2](media/ss-2.png)
+
+See more in this vignette on how to make this data:
+
+---
+
+# Big tasks/ideas guiding this update
+
+1. Summarizing a column
+1. Plotting a column summary
+1. Preparing and plotting time series data
+
+---
+
+# But first: Exploring the columns and files
+
+First, let's load the package.
+
+```{r}
+# devtools::install_github("tca2/datavyu")
+library(datavyu)
+```
+
+Using {datavyu}, you can find the unique columns across all of the files in a directory.
+
+```{r}
+find_unique_columns("ex-data/datavyu_output_07-06-2020_14-46")
+```
+
+---
+
+# But first: Exploring the columns and files
+
+You can also find unique files
+
+```{r}
+find_unique_files("ex-data/datavyu_output_07-06-2020_14-46")
+```
+
+---
+
+class: center, middle
+
+# Big task #1: Summarizing a column
+
+---
+
+# Summarizing a column
+
+{datavyu} can help to summarize a column. It defaults to summarizing 
+the frequency of codes for a specified column.
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+```
+
+---
+
+We'll be typing that folder file path a number of times. 
+
+You can set an option that will mean that the folder file path you set will be used *by default*, though
+you can over-ride it any time you like.
+
+```{r}
+options(directory = "ex-data/datavyu_output_07-06-2020_14-46")
+```
+
+---
+
+We can also explore the frequencies *by file* by changing the `by_file` argument to 
+`TRUE`.
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 by_file = TRUE) %>% 
+  knitr::kable()
+```
+
+---
+
+To summarize durations (instead of frequencies) by changing the `summary` argument,
+which defaults to `"frequency"`, but can be changed to `"duration"`:
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 summary = "duration")
+```
+
+---
+
+Columns of durations can also be summarized by file:
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 by_file = TRUE,
+                 summary = "duration") %>% 
+  knitr::kable()
+```
+
+---
+
+class: center, middle
+
+# Big task #2: Plotting a column summary
+
+---
+
+## Plotting the results of a summary of a column
+
+{datavyu} can also help to plot the summary of a column:
+
+```{r, fig.height=3.75}
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat")
+
+plot_column_summary(freq_summary)
+```
+
+---
+
+This also works by file---so long as the column is summarized by file:
+
+```{r}
+freq_summary <- 
+  summarize_column(column = "LogClass_AS_ActivityFormat",
+                   by_file = TRUE, summary = "duration")
+
+plot_column_summary(freq_summary)
+```
+
+---
+
+Similarly, if the output is for the duration, rather than the frequency, the durations are plotted:
+
+```{r}
+duration_summary <- 
+  summarize_column(column = "LogClass_AS_ActivityFormat",
+                   summary = "duration")
+
+plot_column_summary(duration_summary)
+```
+
+---
+
+Like for frequency, these can be plotted by file:
+
+```{r}
+duration_summary_by_file <- 
+  summarize_column(column = "LogClass_AS_ActivityFormat",
+                   summary = "duration",
+                   by_file = TRUE)
+
+plot_column_summary(duration_summary_by_file)
+```
+
+---
+
+Output can be passed between functions with the pipe operator:
+
+```{r}
+library(dplyr)
+
+summarize_column(column = "LogClass_AS_ActivityFormat",
+                 summary = "duration",
+                 by_file = TRUE) %>% 
+  plot_column_summary()
+```
+
+---
+
+class: center, middle
+
+# Big task #3: Preparing and plotting time series data
+
+---
+
+# Time series preparation and plot
+
+```{r}
+prepared_time_series <- 
+  prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+```
+
+---
+
+The `units` argument defaults to "s", but can be changed to "m" (to round the data to minutes) 
+or "ms" (to not round the data and to retain the units as milliseconds).
+
+We can see how using milliseconds increases the number of data points:
+
+```{r}
+prepared_time_series_ms <- 
+  prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                            specified_file = "MM T102 14-02-17 Content Log",
+                                            directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                            units = "ms") # takes around .8s to run
+
+prepared_time_series_ms
+```
+
+---
+
+This time series data can then be plotted (using the data with the units as seconds):
+
+```{r}
+plot_time_series(prepared_time_series)
+```
+
+---
+
+class: center, middle
+
+# Next steps and discussion
+
+---
+
+# Next steps
+
+- plot_column_summary(duration_summary, summarize_across = "all")
+- improving time series plotting 
+- addressing many issues
+
+---
+
+# Feedback

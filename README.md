@@ -168,11 +168,6 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 8 class discussion? lecture?          00:04:20:950  0.0274
 ```
 
-``` r
-x <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                      summary = "duration")
-```
-
 Columns can also be summarized by file:
 
 ``` r
@@ -225,7 +220,7 @@ freq_summary <- dplyr::filter(freq_summary,
 plot_column_summary(freq_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 It is also possible to summarize across all of the data, or another
 variable (in-development):
@@ -247,7 +242,7 @@ duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
 plot_column_summary(duration_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
 Like for frequency, these can be ploted by file:
 
@@ -259,7 +254,7 @@ duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityForma
 plot_column_summary(duration_summary_by_file)
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 ## Using the pipe operator
 
@@ -272,7 +267,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
   plot_column_summary()
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
 
 ## Time series preparation and plot (in-development)
 
@@ -334,7 +329,7 @@ as seconds):
 plot_time_series(prepared_time_series)
 ```
 
-<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
 
 Like for other functions, if the data is calculated file, it will be
 plotted by file (in-progress):

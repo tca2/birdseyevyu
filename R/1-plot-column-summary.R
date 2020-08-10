@@ -2,6 +2,7 @@
 #'
 #' @param datavyu_object a datavyu object created by `summarize_column()`
 #' @return A ggplot2 plot
+#' @export
 #' @examples
 #'
 #' freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",

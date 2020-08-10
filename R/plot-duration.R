@@ -32,7 +32,7 @@ plot_duration <- function(datavyu_object) {
     # plotting
     datavyu_object %>%
       dplyr::rename(var = 1) %>%
-      mutate(duration = as.numeric(duration),
+      dplyr::mutate(duration = as.numeric(duration),
              sum_duration_minutes = duration / 60) %>%
       ggplot2::ggplot(ggplot2::aes(x = reorder(var, sum_duration_minutes),
                           y = sum_duration_minutes)) +
@@ -61,7 +61,7 @@ plot_duration <- function(datavyu_object) {
     # plotting
     datavyu_object %>%
       dplyr::rename(var = 2) %>% # this is to grab the code
-      mutate(duration = as.numeric(duration),
+      dplyr::mutate(duration = as.numeric(duration),
              sum_duration_minutes = duration / 60) %>%
       ggplot2::ggplot(ggplot2::aes(x = reorder(var, sum_duration_minutes),
                           y = sum_duration_minutes)) +

@@ -17,7 +17,7 @@ find_unique_columns <- function(directory = NULL) {
   }
 
   datavyur::datavyu_col_search(folder = directory) %>%
-    pull(column) %>%
+    dplyr::pull(column) %>%
     unique()
 
 }

@@ -17,7 +17,7 @@ find_unique_files <- function(directory = NULL) {
   }
 
   datavyur::datavyu_col_search(folder = directory) %>%
-    pull(file) %>%
+    dplyr::pull(file) %>%
     unique()
 
 }

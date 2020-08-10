@@ -2,7 +2,11 @@
 
 export(find_unique_columns)
 export(find_unique_files)
+export(plot_column_summary)
 export(plot_time_series)
 export(prep_time_series)
 export(summarize_column)
+import(ggplot2)
+import(tibble)
+importFrom(dplyr,"%>%")
 importFrom(magrittr,"%>%")

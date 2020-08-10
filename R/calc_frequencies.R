@@ -39,15 +39,15 @@ calc_frequencies <- function(column = NULL,
   } else {
 
     list_of_freqs <- df_of_codes %>%
-      group_by(file) %>%
-      group_split() %>%
+      dplyr::group_by(file) %>%
+      dplyr::group_split() %>%
       purrr::map(janitor::tabyl, all_of(code))
 
     names(list_of_freqs) <- unique(df_of_codes$file)
 
     out <- list_of_freqs %>%
       purrr::map_df(~., .id = "id") %>%
-      rename(file = id) %>%
+      dplyr::rename(file = id) %>%
       tibble::as_tibble()
 
   }

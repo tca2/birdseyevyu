@@ -35,29 +35,6 @@ devtools::install_github("tca2/datavyu")
 
 The datavyu software must also be installed; see [here](https://datavyu.org/download.html)
 
-## Preparing files for analysis within datavyu
-
-```{r}
-library(dplyr)
-library(datavyur)
-```
-
-```{r, echo = FALSE}
-devtools::load_all(".")
-```
-
-*note*: The use of this package requires the use of the **datavyu** software's [Ruby API](https://datavyu.org/user-guide/api.html); note that while **datavyu** has a graphical user interface, it is accompanied by a number of Ruby scripts.
-
-#### 1. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
-
-`csv2opf.rb`
-
-<!-- I ran this on the Empirical Analyses folder to generate a bunch of data -->
-
-#### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
-
-This is the directory (folder) passed to the datavyu functions below.
-
 ## Exploring the columns and files
 
 Using {datavyu}, you can find the unique columns across all of the files in a directory:
@@ -82,13 +59,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
-Because `summary_column()` returns a tibble/data.frame, it can be computed on:
-
-```{r}
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46") %>% 
-  dplyr::filter(!stringr::str_detect(log_class_as_activity_format_code01, "[?]")) # note that names are cleaned upon being processed
-```
+---
 
 We can also explore the frequencies *by file* by changing the `by_file` argument to 
 `TRUE`.
@@ -114,12 +85,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
                  summary = "duration")
 ```
 
-```{r}
-x <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                      summary = "duration")
-```
-
-Columns can also be summarized by file:
+Columns of durations can also be summarized by file:
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
@@ -146,9 +112,6 @@ This also works by file---so long as the column is summarized by file:
 ```{r}
 freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
                                  by_file = TRUE, summary = "duration")
-
-freq_summary <- dplyr::filter(freq_summary,
-                              !stringr::str_detect(log_class_as_activity_format_code01, "[?]"))
 
 plot_column_summary(freq_summary)
 ```

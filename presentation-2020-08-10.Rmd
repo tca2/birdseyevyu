@@ -48,7 +48,9 @@ class: center, middle
 
 ---
 
-A short (2 min.) video: https://datavyu.org/user-guide/guide.html
+class: center, middle
+
+### A short (2 min.) video: https://datavyu.org/user-guide/guide.html
 
 ---
 
@@ -294,12 +296,16 @@ class: center, middle
 - Improving time series plotting 
 - Addressing many issues: https://github.com/tca2/datavyu/issues
 - Currying along other variables (e.g., teacher ID)
-- Reliability plots and statistics 
+- Reliability plots and statistics
 
 ---
 
-# Feedback and Discussion
+class: middle, center
+
+## We welcome your feedback and advice
 
 https://github.com/tca2/datavyu
 
-We welcome your feedback!
+
+
+*This presentation was created with [{xaringan}](https://github.com/yihui/xaringan)*

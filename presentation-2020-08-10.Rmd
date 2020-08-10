@@ -15,7 +15,8 @@ output:
 ```{r setup, include=FALSE}
 library(dplyr)
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE,
-                      fig.width = 7, fig.height = 4, fig.align = "center", dpi = 300)
+                      fig.width = 7, fig.height = 4, fig.align = "center", dpi = 300,
+                      collapse = TRUE)
 ```
 
 # Outline
@@ -148,7 +149,8 @@ We can also explore the frequencies *by file* by changing the `by_file` argument
 
 ```{r, sum-cal-by-file}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 by_file = TRUE)
+                 by_file = TRUE) %>% 
+  dplyr::select(-file)
 ```
 
 ---
@@ -168,7 +170,8 @@ Columns of durations can also be summarized by file:
 ```{r, sum-col-duration-by-file}
 summarize_column(column = "LogClass_AS_ActivityFormat",
                  summary = "duration",
-                 by_file = TRUE)
+                 by_file = TRUE) %>% 
+    dplyr::select(-file)
 ```
 
 ---

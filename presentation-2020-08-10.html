@@ -33,7 +33,15 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 
-# Background
+# 1. Background
+
+---
+
+# What we've been doing
+
+- Learning about using datavyu
+- Learning about an already-existing R package, [{datavyur}](https://github.com/iamamutt/datavyu)
+- Developing a new R package focused on preparing datavyu output for subsequent analyses and summarizing and plotting the prepared data ([{datavyu}](https://github.com/tca2/datavyu))
 
 ---
 
@@ -47,37 +55,39 @@ A short (2 min.) video: https://datavyu.org/user-guide/guide.html
 
 ---
 
-# A look at datavyu data
+# A look at exported datavyu data
 
 ![screenshot of datavyu files 1](media/ss-1.png)
 
 ---
 
-# A look at datavyu data
-
 ![screenshot of datavyu files 2](media/ss-2.png)
 
-See more in this vignette on how to make this data:
+See more in this vignette on how to make this data: https://github.com/tca2/datavyu/blob/master/vignettes/preparing-data.Rmd
 
 ---
 
-# Big tasks/ideas guiding this update
+# How can it be easier to use datavyu output?
 
-1. Summarizing a column
-1. Plotting a column summary
-1. Preparing and plotting time series data
+![screenshot of a single CSV file](media/ss-3.png)
 
 ---
 
-# But first: Exploring the columns and files
+# Exploring the columns and files in the data
 
 First, let's load the package.
 
 
 ```r
-# devtools::install_github("tca2/datavyu")
+devtools::install_github("tca2/datavyu") # only have to do once 
+```
+
+
+```r
 library(datavyu)
 ```
+
+---
 
 Using {datavyu}, you can find the unique columns across all of the files in a directory.
 
@@ -86,15 +96,18 @@ Using {datavyu}, you can find the unique columns across all of the files in a di
 find_unique_columns("ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
-```
-## [1] "LogClass_AS_ActivityFormat"      "LogClass_AS_ParticipationFormat" "LogClass_IG"                    
-## [4] "LogClass_TO_MathPresent"         "LogClass_IS"                     "LogNotes"                       
-## [7] "LogClass_TaskUsed"
-```
+
+|columns                         |
+|:-------------------------------|
+|LogClass_AS_ActivityFormat      |
+|LogClass_AS_ParticipationFormat |
+|LogClass_IG                     |
+|LogClass_TO_MathPresent         |
+|LogClass_IS                     |
+|LogNotes                        |
+|LogClass_TaskUsed               |
 
 ---
-
-# But first: Exploring the columns and files
 
 You can also find unique files
 
@@ -103,15 +116,18 @@ You can also find unique files
 find_unique_files("ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
-```
-## [1] "MM T102 14-02-17 Content Log"     "NM 14-12-03 T201 Content Log v.3" "NM T401 14-11-21 Content Log v.2"
-```
+
+|files                            |
+|:--------------------------------|
+|MM T102 14-02-17 Content Log     |
+|NM 14-12-03 T201 Content Log v.3 |
+|NM T401 14-11-21 Content Log v.2 |
 
 ---
 
 class: center, middle
 
-# Big task #1: Summarizing a column
+# 2. Big task #1: Summarizing a column
 
 ---
 
@@ -142,6 +158,8 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 
 ---
 
+# Setting an option
+
 We'll be typing that folder file path a number of times. 
 
 You can set an option that will mean that the folder file path you set will be used *by default*, though
@@ -160,27 +178,27 @@ We can also explore the frequencies *by file* by changing the `by_file` argument
 
 ```r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 by_file = TRUE) %&gt;% 
-  knitr::kable()
+                 by_file = TRUE)
 ```
 
-
-
-|file                             |log_class_as_activity_format_code01 |  n|   percent|
-|:--------------------------------|:-----------------------------------|--:|---------:|
-|MM T102 14-02-17 Content Log     |aw                                  |  1| 0.1000000|
-|MM T102 14-02-17 Content Log     |l                                   |  3| 0.3000000|
-|MM T102 14-02-17 Content Log     |sp                                  |  6| 0.6000000|
-|NM 14-12-03 T201 Content Log v.3 |a                                   |  1| 0.3333333|
-|NM 14-12-03 T201 Content Log v.3 |l                                   |  1| 0.3333333|
-|NM 14-12-03 T201 Content Log v.3 |o                                   |  1| 0.3333333|
-|NM T401 14-11-21 Content Log v.2 |a                                   |  1| 0.1111111|
-|NM T401 14-11-21 Content Log v.2 |class discussion?                   |  1| 0.1111111|
-|NM T401 14-11-21 Content Log v.2 |class discussion? lecture?          |  1| 0.1111111|
-|NM T401 14-11-21 Content Log v.2 |l                                   |  3| 0.3333333|
-|NM T401 14-11-21 Content Log v.2 |l??                                 |  1| 0.1111111|
-|NM T401 14-11-21 Content Log v.2 |o                                   |  1| 0.1111111|
-|NM T401 14-11-21 Content Log v.2 |sp                                  |  1| 0.1111111|
+```
+## # A tibble: 13 x 4
+##    file                             log_class_as_activity_format_code01     n percent
+##  * &lt;chr&gt;                            &lt;chr&gt;                               &lt;dbl&gt;   &lt;dbl&gt;
+##  1 MM T102 14-02-17 Content Log     aw                                      1   0.1  
+##  2 MM T102 14-02-17 Content Log     l                                       3   0.3  
+##  3 MM T102 14-02-17 Content Log     sp                                      6   0.6  
+##  4 NM 14-12-03 T201 Content Log v.3 a                                       1   0.333
+##  5 NM 14-12-03 T201 Content Log v.3 l                                       1   0.333
+##  6 NM 14-12-03 T201 Content Log v.3 o                                       1   0.333
+##  7 NM T401 14-11-21 Content Log v.2 a                                       1   0.111
+##  8 NM T401 14-11-21 Content Log v.2 class discussion?                       1   0.111
+##  9 NM T401 14-11-21 Content Log v.2 class discussion? lecture?              1   0.111
+## 10 NM T401 14-11-21 Content Log v.2 l                                       3   0.333
+## 11 NM T401 14-11-21 Content Log v.2 l??                                     1   0.111
+## 12 NM T401 14-11-21 Content Log v.2 o                                       1   0.111
+## 13 NM T401 14-11-21 Content Log v.2 sp                                      1   0.111
+```
 
 ---
 
@@ -214,34 +232,34 @@ Columns of durations can also be summarized by file:
 
 ```r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 by_file = TRUE,
-                 summary = "duration") %&gt;% 
-  knitr::kable()
+                 summary = "duration",
+                 by_file = TRUE)
 ```
 
-
-
-|file                             |log_class_as_activity_format_code01 |duration     |   percent|
-|:--------------------------------|:-----------------------------------|:------------|---------:|
-|MM T102 14-02-17 Content Log     |l                                   |00:46:17:990 | 0.5756634|
-|MM T102 14-02-17 Content Log     |sp                                  |00:23:59:473 | 0.2982919|
-|MM T102 14-02-17 Content Log     |aw                                  |00:10:08:256 | 0.1260446|
-|NM 14-12-03 T201 Content Log v.3 |a                                   |00:04:53:373 | 0.8984400|
-|NM 14-12-03 T201 Content Log v.3 |o                                   |00:00:25:134 | 0.0769716|
-|NM 14-12-03 T201 Content Log v.3 |l                                   |00:00:08:029 | 0.0245884|
-|NM T401 14-11-21 Content Log v.2 |a                                   |00:22:22:932 | 0.3066854|
-|NM T401 14-11-21 Content Log v.2 |class discussion?                   |00:20:39:356 | 0.2830317|
-|NM T401 14-11-21 Content Log v.2 |o                                   |00:12:35:959 | 0.1726384|
-|NM T401 14-11-21 Content Log v.2 |l??                                 |00:06:06:588 | 0.0837177|
-|NM T401 14-11-21 Content Log v.2 |l                                   |00:05:34:297 | 0.0763434|
-|NM T401 14-11-21 Content Log v.2 |class discussion? lecture?          |00:04:20:950 | 0.0595931|
-|NM T401 14-11-21 Content Log v.2 |sp                                  |00:01:18:777 | 0.0179903|
+```
+## # A tibble: 13 x 4
+##    file                             log_class_as_activity_format_code01 duration     percent
+##  * &lt;chr&gt;                            &lt;chr&gt;                               &lt;chr&gt;          &lt;dbl&gt;
+##  1 MM T102 14-02-17 Content Log     l                                   00:46:17:990  0.576 
+##  2 MM T102 14-02-17 Content Log     sp                                  00:23:59:473  0.298 
+##  3 MM T102 14-02-17 Content Log     aw                                  00:10:08:256  0.126 
+##  4 NM 14-12-03 T201 Content Log v.3 a                                   00:04:53:373  0.898 
+##  5 NM 14-12-03 T201 Content Log v.3 o                                   00:00:25:134  0.0770
+##  6 NM 14-12-03 T201 Content Log v.3 l                                   00:00:08:029  0.0246
+##  7 NM T401 14-11-21 Content Log v.2 a                                   00:22:22:932  0.307 
+##  8 NM T401 14-11-21 Content Log v.2 class discussion?                   00:20:39:356  0.283 
+##  9 NM T401 14-11-21 Content Log v.2 o                                   00:12:35:959  0.173 
+## 10 NM T401 14-11-21 Content Log v.2 l??                                 00:06:06:588  0.0837
+## 11 NM T401 14-11-21 Content Log v.2 l                                   00:05:34:297  0.0763
+## 12 NM T401 14-11-21 Content Log v.2 class discussion? lecture?          00:04:20:950  0.0596
+## 13 NM T401 14-11-21 Content Log v.2 sp                                  00:01:18:777  0.0180
+```
 
 ---
 
 class: center, middle
 
-# Big task #2: Plotting a column summary
+# 3. Big task #2: Plotting a column summary
 
 ---
 
@@ -256,22 +274,23 @@ freq_summary &lt;- summarize_column(column = "LogClass_AS_ActivityFormat")
 plot_column_summary(freq_summary)
 ```
 
-&lt;img src="presentation-2020-08-10_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="presentation-2020-08-10_files/figure-html/plot-sum-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-This also works by file---so long as the column is summarized by file:
+This also works by file-so long as the column is summarized by file:
 
 
 ```r
 freq_summary &lt;- 
   summarize_column(column = "LogClass_AS_ActivityFormat",
-                   by_file = TRUE, summary = "duration")
+                   summary = "duration",
+                   by_file = TRUE)
 
 plot_column_summary(freq_summary)
 ```
 
-&lt;img src="presentation-2020-08-10_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="presentation-2020-08-10_files/figure-html/plot-sum-by-file-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -286,7 +305,7 @@ duration_summary &lt;-
 plot_column_summary(duration_summary)
 ```
 
-&lt;img src="presentation-2020-08-10_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="presentation-2020-08-10_files/figure-html/plot-col-dur-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -302,7 +321,7 @@ duration_summary_by_file &lt;-
 plot_column_summary(duration_summary_by_file)
 ```
 
-&lt;img src="presentation-2020-08-10_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="presentation-2020-08-10_files/figure-html/plot-col-dur-by-file-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -318,13 +337,13 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
   plot_column_summary()
 ```
 
-&lt;img src="presentation-2020-08-10_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="presentation-2020-08-10_files/figure-html/piping-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 class: center, middle
 
-# Big task #3: Preparing and plotting time series data
+# 4. Big task #3: Preparing and plotting time series data
 
 ---
 
@@ -334,8 +353,26 @@ class: center, middle
 ```r
 prepared_time_series &lt;- 
   prep_time_series(column = "LogClass_AS_ActivityFormat",
-                                         specified_file = "MM T102 14-02-17 Content Log",
-                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+                   specified_file = "MM T102 14-02-17 Content Log")
+
+prepared_time_series
+```
+
+```
+## # A tibble: 4,849 x 2
+##       ts code 
+##  * &lt;dbl&gt; &lt;chr&gt;
+##  1   235 aw   
+##  2   236 aw   
+##  3   237 aw   
+##  4   238 aw   
+##  5   239 aw   
+##  6   240 aw   
+##  7   241 aw   
+##  8   242 aw   
+##  9   243 aw   
+## 10   244 aw   
+## # … with 4,839 more rows
 ```
 
 ---
@@ -349,9 +386,8 @@ We can see how using milliseconds increases the number of data points:
 ```r
 prepared_time_series_ms &lt;- 
   prep_time_series(column = "LogClass_AS_ActivityFormat",
-                                            specified_file = "MM T102 14-02-17 Content Log",
-                                            directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                            units = "ms") # takes around .8s to run
+                   specified_file = "MM T102 14-02-17 Content Log",
+                   units = "ms") # takes around .8s to run
 
 prepared_time_series_ms
 ```
@@ -382,25 +418,31 @@ This time series data can then be plotted (using the data with the units as seco
 plot_time_series(prepared_time_series)
 ```
 
-&lt;img src="presentation-2020-08-10_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="presentation-2020-08-10_files/figure-html/plot-ts-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 class: center, middle
 
-# Next steps and discussion
+# 5. Next steps and discussion
 
 ---
 
 # Next steps
 
-- plot_column_summary(duration_summary, summarize_across = "all")
-- improving time series plotting 
-- addressing many issues
+- Improving time series preparation to work by file
+- Improving time series plotting 
+- Addressing many issues: https://github.com/tca2/datavyu/issues
+- Currying along other variables (e.g., teacher ID)
+- Reliability plots and statistics 
 
 ---
 
-# Feedback
+# Feedback and Discussion
+
+https://github.com/tca2/datavyu
+
+We welcome your feedback!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

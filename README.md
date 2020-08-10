@@ -32,30 +32,12 @@ You can install the development version from
 devtools::install_github("tca2/datavyu")
 ```
 
-The datavyu software must also be installed; see
-[here](https://datavyu.org/download.html)
-
-## Preparing files for analysis within datavyu
-
 ``` r
-library(dplyr)
-library(datavyur)
+library(datavyu)
 ```
 
-*note*: The use of this package requires the use of the **datavyu**
-software’s [Ruby API](https://datavyu.org/user-guide/api.html); note
-that while **datavyu** has a graphical user interface, it is accompanied
-by a number of Ruby scripts.
-
-#### 1\. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
-
-`csv2opf.rb`
-
-<!-- I ran this on the Empirical Analyses folder to generate a bunch of data -->
-
-#### 2\. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
-
-This is the directory (folder) passed to the datavyu functions below.
+The datavyu software must also be installed; see
+[here](https://datavyu.org/download.html)
 
 ## Exploring the columns and files
 
@@ -99,22 +81,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 8 l??                                     1  0.0455
 ```
 
-Because `summary_column()` returns a tibble/data.frame, it can be
-computed on:
-
-``` r
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46") %>% 
-  dplyr::filter(!stringr::str_detect(log_class_as_activity_format_code01, "[?]")) # note that names are cleaned upon being processed
-#> # A tibble: 5 x 3
-#>   log_class_as_activity_format_code01     n percent
-#>   <chr>                               <dbl>   <dbl>
-#> 1 l                                       7  0.318 
-#> 2 sp                                      7  0.318 
-#> 3 a                                       2  0.0909
-#> 4 o                                       2  0.0909
-#> 5 aw                                      1  0.0455
-```
+-----
 
 We can also explore the frequencies *by file* by changing the `by_file`
 argument to `TRUE`.
@@ -168,7 +135,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 8 class discussion? lecture?          00:04:20:950  0.0274
 ```
 
-Columns can also be summarized by file:
+Columns of durations can also be summarized by file:
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
@@ -214,13 +181,10 @@ This also works by file—so long as the column is summarized by file:
 freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
                                  by_file = TRUE, summary = "duration")
 
-freq_summary <- dplyr::filter(freq_summary,
-                              !stringr::str_detect(log_class_as_activity_format_code01, "[?]"))
-
 plot_column_summary(freq_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 It is also possible to summarize across all of the data, or another
 variable (in-development):
@@ -242,7 +206,7 @@ duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
 plot_column_summary(duration_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 Like for frequency, these can be ploted by file:
 
@@ -254,7 +218,7 @@ duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityForma
 plot_column_summary(duration_summary_by_file)
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ## Using the pipe operator
 
@@ -267,7 +231,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
   plot_column_summary()
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
 ## Time series preparation and plot (in-development)
 
@@ -329,7 +293,7 @@ as seconds):
 plot_time_series(prepared_time_series)
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
 
 Like for other functions, if the data is calculated file, it will be
 plotted by file (in-progress):

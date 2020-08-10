@@ -7,7 +7,7 @@
 prep_time_series(
   column,
   specified_file = NULL,
-  directory,
+  directory = NULL,
   code = NULL,
   units = "s"
 )

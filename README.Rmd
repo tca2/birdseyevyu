@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
   out.width = "100%",
   message = FALSE
 )
+
+devtools::load_all(".")
 ```
 
 # datavyu
@@ -31,6 +33,10 @@ You can install the development version from [GitHub](https://github.com/) with:
 ``` r
 # install.packages("devtools")
 devtools::install_github("tca2/datavyu")
+```
+
+```{r, eval = FALSE}
+library(datavyu)
 ```
 
 The datavyu software must also be installed; see [here](https://datavyu.org/download.html)

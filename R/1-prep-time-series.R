@@ -9,7 +9,16 @@
 #' @examples
 #'
 
-prep_time_series <- function(column, specified_file = NULL, directory, code = NULL, units = "s") {
+prep_time_series <- function(column, specified_file = NULL, directory = NULL, code = NULL, units = "s") {
+
+  # finding directory option
+  if (is.null(directory)) {
+    if (is.null(directory)) {
+      directory <- getOption("directory")
+    } else {
+      stop("No directory specified or set via options(directory = ''; please specify one")
+    }
+  }
 
   # argument check
   if (is.null(column)) {

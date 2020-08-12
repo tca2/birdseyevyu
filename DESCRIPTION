@@ -7,6 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jrosenb8@utk.edu",
            comment = c(ORCID = "0000-0003-2170-0447"))
+     person(given = "Mekenzie",
+           family = "Meadows",
+           role = "cre",
+           email = "mekenziemeadows@gmail.com")
 Description: datavyu is designed to make it easier to summarize and plot output from the qualitative audiovisual data coding software datavyu. Relying on the {datavyu} R package to process the data, this package focuses on summarizing the frequency and duration of codes and plotting their output.
 License: GPL-3
 Imports:
@@ -19,6 +23,6 @@ Suggests:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 URL: https://github.com/tca2/datavyu

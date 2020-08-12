@@ -162,7 +162,7 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 ## Ploting the results of a summary of a column
 
 {datavyu} can also help to plot the summary of a column. Here, we save
-the output from `summarize_column()` to an object (we call this
+the output from `summarize_column()` to an object (we will call this
 `freq_summary`, but it can be named whatever we like).
 
 Then, we use this output in the function `plot_column_summary()`:

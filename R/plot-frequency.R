@@ -24,6 +24,7 @@ plot_frequency <- function(datavyu_object) {
       ggplot2::ggplot(ggplot2::aes(x = reorder(var, n),
                           y = n)) +
       ggplot2::geom_col() +
+      ggplot2::xlab(NULL) +
       ggplot2::coord_flip()
 
   } else if (attributes(datavyu_object)$by_file == TRUE) {
@@ -46,12 +47,12 @@ plot_frequency <- function(datavyu_object) {
     names(datavyu_object)[2] <- "var"
 
     datavyu_object %>%
-      ggplot2::ggplot(ggplot2::aes(x = tidytext::reorder_within(var, n, file),
+      ggplot2::ggplot(ggplot2::aes(x = reorder(var, n),
                           y = n)) +
       ggplot2::geom_col() +
       ggplot2::coord_flip() +
       ggplot2::facet_wrap("file") +
-      tidytext::scale_x_reordered()
+      ggplot2::xlab(NULL)
 
   }
 }

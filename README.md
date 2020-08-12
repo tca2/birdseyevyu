@@ -32,46 +32,34 @@ You can install the development version from
 devtools::install_github("tca2/datavyu")
 ```
 
+``` r
+library(datavyu)
+```
+
 The datavyu software must also be installed; see
 [here](https://datavyu.org/download.html)
 
-## Preparing files for analysis within datavyu
-
-``` r
-library(dplyr)
-library(datavyur)
-```
-
-*note*: The use of this package requires the use of the **datavyu**
-software’s [Ruby API](https://datavyu.org/user-guide/api.html); note
-that while **datavyu** has a graphical user interface, it is accompanied
-by a number of Ruby scripts.
-
-#### 1\. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
-
-`csv2opf.rb`
-
-<!-- I ran this on the Empirical Analyses folder to generate a bunch of data -->
-
-#### 2\. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
-
-This is the directory (folder) passed to the datavyu functions below.
-
+<<<<<<< HEAD
 #### 3\. Using the {datavyur} package (see the ‘other package’ section below), it is easy
+=======
+## Exploring the columns and files
+>>>>>>> 3a259f884e1ffd0d5b331a2675615e34ec085695
 
-to explore the unique *columns* and *files* in the output created.
+Using {datavyu}, you can find the unique columns across all of the files
+in a directory:
 
 ``` r
-# find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
-
-f <- datavyur::datavyu_col_search(folder = "ex-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
-
-f$column %>% unique()
+find_unique_columns("ex-data/datavyu_output_07-06-2020_14-46")
 #> [1] "LogClass_AS_ActivityFormat"      "LogClass_AS_ParticipationFormat"
 #> [3] "LogClass_IG"                     "LogClass_TO_MathPresent"        
 #> [5] "LogClass_IS"                     "LogNotes"                       
 #> [7] "LogClass_TaskUsed"
-f$file %>% unique()
+```
+
+You can also find unique files
+
+``` r
+find_unique_files("ex-data/datavyu_output_07-06-2020_14-46")
 #> [1] "MM T102 14-02-17 Content Log"     "NM 14-12-03 T201 Content Log v.3"
 #> [3] "NM T401 14-11-21 Content Log v.2"
 ```
@@ -84,79 +72,101 @@ frequency of codes for a specified column.
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
-#>   log_class_as_activity_format_code01 n    percent
-#> 1                                   l 7 0.31818182
-#> 2                                  sp 7 0.31818182
-#> 3                                   a 2 0.09090909
-#> 4                                   o 2 0.09090909
-#> 5                                  aw 1 0.04545455
-#> 6                   class discussion? 1 0.04545455
-#> 7          class discussion? lecture? 1 0.04545455
-#> 8                                 l?? 1 0.04545455
+#> # A tibble: 8 x 3
+#>   log_class_as_activity_format_code01     n percent
+#> * <chr>                               <dbl>   <dbl>
+#> 1 l                                       7  0.318 
+#> 2 sp                                      7  0.318 
+#> 3 a                                       2  0.0909
+#> 4 o                                       2  0.0909
+#> 5 aw                                      1  0.0455
+#> 6 class discussion?                       1  0.0455
+#> 7 class discussion? lecture?              1  0.0455
+#> 8 l??                                     1  0.0455
 ```
 
+-----
+
 We can also explore the frequencies *by file* by changing the `by_file`
-arguent to `TRUE`.
+argument to `TRUE`.
+
+We’ll be typing that folder file path a number of times; you can set an
+option that will mean that the folder file path you set will be used *by
+default*, though you can over-ride it any time you like.
+
+``` r
+options(directory = "ex-data/datavyu_output_07-06-2020_14-46")
+```
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                  by_file = TRUE)
-#>                                file log_class_as_activity_format_code01 n
-#> 1      MM T102 14-02-17 Content Log                                  aw 1
-#> 2      MM T102 14-02-17 Content Log                                   l 3
-#> 3      MM T102 14-02-17 Content Log                                  sp 6
-#> 4  NM 14-12-03 T201 Content Log v.3                                   a 1
-#> 5  NM 14-12-03 T201 Content Log v.3                                   l 1
-#> 6  NM 14-12-03 T201 Content Log v.3                                   o 1
-#> 7  NM T401 14-11-21 Content Log v.2                                   a 1
-#> 8  NM T401 14-11-21 Content Log v.2                   class discussion? 1
-#> 9  NM T401 14-11-21 Content Log v.2          class discussion? lecture? 1
-#> 10 NM T401 14-11-21 Content Log v.2                                   l 3
-#> 11 NM T401 14-11-21 Content Log v.2                                 l?? 1
-#> 12 NM T401 14-11-21 Content Log v.2                                   o 1
-#> 13 NM T401 14-11-21 Content Log v.2                                  sp 1
-#>      percent
-#> 1  0.1000000
-#> 2  0.3000000
-#> 3  0.6000000
-#> 4  0.3333333
-#> 5  0.3333333
-#> 6  0.3333333
-#> 7  0.1111111
-#> 8  0.1111111
-#> 9  0.1111111
-#> 10 0.3333333
-#> 11 0.1111111
-#> 12 0.1111111
-#> 13 0.1111111
+#> # A tibble: 13 x 4
+#>    file                           log_class_as_activity_format_co…     n percent
+#>  * <chr>                          <chr>                            <dbl>   <dbl>
+#>  1 MM T102 14-02-17 Content Log   aw                                   1   0.1  
+#>  2 MM T102 14-02-17 Content Log   l                                    3   0.3  
+#>  3 MM T102 14-02-17 Content Log   sp                                   6   0.6  
+#>  4 NM 14-12-03 T201 Content Log … a                                    1   0.333
+#>  5 NM 14-12-03 T201 Content Log … l                                    1   0.333
+#>  6 NM 14-12-03 T201 Content Log … o                                    1   0.333
+#>  7 NM T401 14-11-21 Content Log … a                                    1   0.111
+#>  8 NM T401 14-11-21 Content Log … class discussion?                    1   0.111
+#>  9 NM T401 14-11-21 Content Log … class discussion? lecture?           1   0.111
+#> 10 NM T401 14-11-21 Content Log … l                                    3   0.333
+#> 11 NM T401 14-11-21 Content Log … l??                                  1   0.111
+#> 12 NM T401 14-11-21 Content Log … o                                    1   0.111
+#> 13 NM T401 14-11-21 Content Log … sp                                   1   0.111
 ```
 
+<<<<<<< HEAD
 Summarize duration (instead of frequencies) by changing the `what`
 argument, which defaults to `"frequency"`, but can be changed to
 `"duration"`:
+=======
+To summarize durations (instead of frequencies) by changing the
+`summary` argument, which defaults to `"frequency"`, but can be changed
+to `"duration"`:
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                 summary = "duration")
+#> # A tibble: 8 x 3
+#>   log_class_as_activity_format_code01 duration     percent
+#> * <chr>                               <chr>          <dbl>
+#> 1 l                                   00:52:00:316  0.327 
+#> 2 a                                   00:27:16:305  0.172 
+#> 3 sp                                  00:25:18:250  0.159 
+#> 4 class discussion?                   00:20:39:356  0.130 
+#> 5 o                                   00:13:01:093  0.0820
+#> 6 aw                                  00:10:08:256  0.0638
+#> 7 l??                                 00:06:06:588  0.0385
+#> 8 class discussion? lecture?          00:04:20:950  0.0274
+```
+
+Columns of durations can also be summarized by file:
+>>>>>>> 3a259f884e1ffd0d5b331a2675615e34ec085695
+
+``` r
+summarize_column(column = "LogClass_AS_ActivityFormat",
                  by_file = TRUE,
-                 what = "duration")
-#> # A tibble: 13 x 3
-#>    LogClass_AS_ActivityFormat.code01 file                           sum_duration
-#>  * <chr>                             <chr>                          <chr>       
-#>  1 a                                 NM 14-12-03 T201 Content Log … 00:04:53:373
-#>  2 a                                 NM T401 14-11-21 Content Log … 00:22:22:932
-#>  3 aw                                MM T102 14-02-17 Content Log   00:10:08:256
-#>  4 class discussion?                 NM T401 14-11-21 Content Log … 00:20:39:356
-#>  5 class discussion? lecture?        NM T401 14-11-21 Content Log … 00:04:20:950
-#>  6 l                                 MM T102 14-02-17 Content Log   00:46:17:990
-#>  7 l                                 NM 14-12-03 T201 Content Log … 00:00:08:029
-#>  8 l                                 NM T401 14-11-21 Content Log … 00:05:34:297
-#>  9 l??                               NM T401 14-11-21 Content Log … 00:06:06:588
-#> 10 o                                 NM 14-12-03 T201 Content Log … 00:00:25:134
-#> 11 o                                 NM T401 14-11-21 Content Log … 00:12:35:959
-#> 12 sp                                MM T102 14-02-17 Content Log   00:23:59:473
-#> 13 sp                                NM T401 14-11-21 Content Log … 00:01:18:777
+                 summary = "duration")
+#> # A tibble: 13 x 4
+#>    file                       log_class_as_activity_format_… duration    percent
+#>  * <chr>                      <chr>                          <chr>         <dbl>
+#>  1 MM T102 14-02-17 Content … l                              00:46:17:9…  0.576 
+#>  2 MM T102 14-02-17 Content … sp                             00:23:59:4…  0.298 
+#>  3 MM T102 14-02-17 Content … aw                             00:10:08:2…  0.126 
+#>  4 NM 14-12-03 T201 Content … a                              00:04:53:3…  0.898 
+#>  5 NM 14-12-03 T201 Content … o                              00:00:25:1…  0.0770
+#>  6 NM 14-12-03 T201 Content … l                              00:00:08:0…  0.0246
+#>  7 NM T401 14-11-21 Content … a                              00:22:22:9…  0.307 
+#>  8 NM T401 14-11-21 Content … class discussion?              00:20:39:3…  0.283 
+#>  9 NM T401 14-11-21 Content … o                              00:12:35:9…  0.173 
+#> 10 NM T401 14-11-21 Content … l??                            00:06:06:5…  0.0837
+#> 11 NM T401 14-11-21 Content … l                              00:05:34:2…  0.0763
+#> 12 NM T401 14-11-21 Content … class discussion? lecture?     00:04:20:9…  0.0596
+#> 13 NM T401 14-11-21 Content … sp                             00:01:18:7…  0.0180
 ```
 
 ## Ploting the results of a summary of a column
@@ -168,8 +178,7 @@ the output from `summarize_column()` to an object (we will call this
 Then, we use this output in the function `plot_column_summary()`:
 
 ``` r
-freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat")
 
 plot_column_summary(freq_summary)
 ```
@@ -180,41 +189,46 @@ This also works by file—so long as the column is summarized by file:
 
 ``` r
 freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                 by_file = TRUE)
+                                 by_file = TRUE, summary = "duration")
 
 plot_column_summary(freq_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+
+It is also possible to summarize across all of the data, or another
+variable (in-development):
+
+``` r
+plot_column_summary(duration_summary, summarize_across = "all")
+```
+
+Will plot the means and standard errors of the means for each level of
+each code.
 
 Similarly, if the output is for the duration, rather than the frequency,
 the durations are plotted:
 
 ``` r
 duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                     what = "duration")
+                                     summary = "duration")
+
+plot_column_summary(duration_summary)
 ```
+
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 Like for frequency, these can be ploted by file:
 
 ``` r
 duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                             directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                             what = "duration",
+                                             summary = "duration",
                                              by_file = TRUE)
 
-plot_column_summary(duration_summary)
-```
-
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
-
-``` r
 plot_column_summary(duration_summary_by_file)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ## Using the pipe operator
 
@@ -222,31 +236,86 @@ Finally, output can be passed between functions with the pipe operator:
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                 what = "duration") %>% 
+                 summary = "duration",
+                 by_file = TRUE) %>% 
   plot_column_summary()
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+
+## Time series preparation and plot (in-development)
+
+``` r
+prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+
+prepared_time_series
+#> # A tibble: 4,849 x 2
+#>       ts code 
+#>  * <dbl> <chr>
+#>  1   235 aw   
+#>  2   236 aw   
+#>  3   237 aw   
+#>  4   238 aw   
+#>  5   239 aw   
+#>  6   240 aw   
+#>  7   241 aw   
+#>  8   242 aw   
+#>  9   243 aw   
+#> 10   244 aw   
+#> # … with 4,839 more rows
+```
+
+The `units` argument defaults to “s”, but can be changed to “m” (to
+round the data to minutes) or “ms” (to not round the data and to retain
+the units as milliseconds).
+
+We can see how using milliseconds increases the number of data points:
+
+``` r
+prepared_time_series_ms <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                         units = "ms")
+
+prepared_time_series_ms
+#> # A tibble: 4,825,743 x 2
+#>        ts code 
+#>  *  <int> <chr>
+#>  1 235026 aw   
+#>  2 235027 aw   
+#>  3 235028 aw   
+#>  4 235029 aw   
+#>  5 235030 aw   
+#>  6 235031 aw   
+#>  7 235032 aw   
+#>  8 235033 aw   
+#>  9 235034 aw   
+#> 10 235035 aw   
+#> # … with 4,825,733 more rows
+```
+
+This time series data can then be plotted (using the data with the units
+as seconds):
+
+``` r
+plot_time_series(prepared_time_series)
+```
+
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+
+Like for other functions, if the data is calculated file, it will be
+plotted by file (in-progress):
 
 ## Features in-development
 
-  - Improving `summarize_column()` and `plot_column_summary()` with
-    further input and use
-
   - Plotting code co-occurrences with `plot_cooccurence()`
-
   - Summarizing an entire file (not just a single column in a file) with
     `summarize_file()`
-
-  - Implementing generic functions (specifically: `plot()`,
-    `summarize()`, `print()`)
-
-  - Matching datavyu data to time series data in other, subsequent
-    analyses using `datavyur::temporal_align()`
-
   - Addressing a number of
-    [issues](https://github.com/tca2/datavyu/issues)
+    [issues](https://github.com/tca2/datavyu/issues), including some
+    that relate to the {datavyur} package
 
 ## Contributing
 

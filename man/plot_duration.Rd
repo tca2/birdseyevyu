@@ -18,11 +18,11 @@ Plot code duration for a datavu column
 \examples{
 duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
                                      directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                     what = "duration")
+                                     summary = "duration")
 
 duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
                                              directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                             what = "duration",
+                                             summary = "duration",
                                              by_file = TRUE)
 
 plot_duration(freq_summary)

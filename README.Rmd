@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
   out.width = "100%",
   message = FALSE
 )
+
+devtools::load_all(".")
 ```
 
 # datavyu
@@ -33,41 +35,24 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tca2/datavyu")
 ```
 
+```{r, eval = FALSE}
+library(datavyu)
+```
+
 The datavyu software must also be installed; see [here](https://datavyu.org/download.html)
 
-## Preparing files for analysis within datavyu
+## Exploring the columns and files
+
+Using {datavyu}, you can find the unique columns across all of the files in a directory:
 
 ```{r}
-library(dplyr)
-library(datavyur)
+find_unique_columns("ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
-```{r, echo = FALSE}
-devtools::load_all(".")
-```
-
-*note*: The use of this package requires the use of the **datavyu** software's [Ruby API](https://datavyu.org/user-guide/api.html); note that while **datavyu** has a graphical user interface, it is accompanied by a number of Ruby scripts.
-
-#### 1. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
-
-`csv2opf.rb`
-
-<!-- I ran this on the Empirical Analyses folder to generate a bunch of data -->
-
-#### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
-
-This is the directory (folder) passed to the datavyu functions below.
-
-#### 3. Using the {datavyur} package (see the 'other package' setion below), it is easy
-to explore the unique *columns* and *files* in the output created.
+You can also find unique files
 
 ```{r}
-# find_unique_values("ex-data/datavyu_output_07-06-2020_14-46", what = "codes")[1]
-
-f <- datavyur::datavyu_col_search(folder = "ex-data/datavyu_output_07-06-2020_14-46") %>% as_tibble()
-
-f$column %>% unique()
-f$file %>% unique()
+find_unique_files("ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
 ## Summarizing a column
@@ -80,23 +65,38 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
 ```
 
-We can also explore the frequencies *by file* by changing the `by_file` arguent to 
+---
+
+We can also explore the frequencies *by file* by changing the `by_file` argument to 
 `TRUE`.
+
+We'll be typing that folder file path a number of times; you can set an option 
+that will mean that the folder file path you set will be used *by default*, though
+you can over-ride it any time you like.
+
+```{r}
+options(directory = "ex-data/datavyu_output_07-06-2020_14-46")
+```
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
                  by_file = TRUE)
 ```
 
-To summarize durations (instead of frequencies) by changing the `what` argument,
+To summarize durations (instead of frequencies) by changing the `summary` argument,
 which defaults to `"frequency"`, but can be changed to `"duration"`:
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                 summary = "duration")
+```
+
+Columns of durations can also be summarized by file:
+
+```{r}
+summarize_column(column = "LogClass_AS_ActivityFormat",
                  by_file = TRUE,
-                 what = "duration")
+                 summary = "duration")
 ```
 
 ## Ploting the results of a summary of a column
@@ -108,8 +108,7 @@ be named whatever we like).
 Then, we use this output in the function `plot_column_summary()`:
 
 ```{r, eval}
-freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat")
 
 plot_column_summary(freq_summary)
 ```
@@ -118,30 +117,35 @@ This also works by file---so long as the column is summarized by file:
 
 ```{r}
 freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                 by_file = TRUE)
+                                 by_file = TRUE, summary = "duration")
 
 plot_column_summary(freq_summary)
 ```
+
+It is also possible to summarize across all of the data, or another variable (in-development):
+
+```{r, eval = FALSE}
+plot_column_summary(duration_summary, summarize_across = "all")
+```
+
+Will plot the means and standard errors of the means for each level of each code.
 
 Similarly, if the output is for the duration, rather than the frequency, the durations are plotted:
 
 ```{r}
 duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                     what = "duration")
+                                     summary = "duration")
 
+plot_column_summary(duration_summary)
 ```
 
 Like for frequency, these can be ploted by file:
 
 ```{r}
 duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                             directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                             what = "duration",
+                                             summary = "duration",
                                              by_file = TRUE)
 
-plot_column_summary(duration_summary)
 plot_column_summary(duration_summary_by_file)
 ```
 
@@ -151,25 +155,51 @@ Finally, output can be passed between functions with the pipe operator:
 
 ```{r}
 summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                 what = "duration") %>% 
+                 summary = "duration",
+                 by_file = TRUE) %>% 
   plot_column_summary()
 ```
 
+## Time series preparation and plot (in-development)
+
+```{r}
+prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+
+prepared_time_series
+```
+
+The `units` argument defaults to "s", but can be changed to "m" (to round the data to minutes) 
+or "ms" (to not round the data and to retain the units as milliseconds).
+
+We can see how using milliseconds increases the number of data points:
+
+```{r}
+prepared_time_series_ms <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                         specified_file = "MM T102 14-02-17 Content Log",
+                                         directory = "ex-data/datavyu_output_07-06-2020_14-46",
+                                         units = "ms")
+
+prepared_time_series_ms
+```
+
+This time series data can then be plotted (using the data with the units as seconds):
+
+```{r}
+plot_time_series(prepared_time_series)
+```
+
+Like for other functions, if the data is calculated file, it will be plotted by file (in-progress):
+
 ## Features in-development
 
-- Improving `summarize_column()` and `plot_column_summary()` with further input and use
 - Plotting code co-occurrences with `plot_cooccurence()`
 - Summarizing an entire file (not just a single column in a file) with `summarize_file()`
-- Implementing generic functions (specifically: `plot()`, `summarize()`, `print()`)
-- Matching datavyu data to time series data in other, subsequent analyses using `datavyur::temporal_align()`
-```{r, eval = FALSE, echo = FALSE}
-datavyur::temporal_align(folder = "ex-data/datavyu_output_07-06-2020_14-46", all.cols = "LogClass_AS_ActivityFormat")
-```
-- Addressing a number of [issues](https://github.com/tca2/datavyu/issues)
+- Addressing a number of [issues](https://github.com/tca2/datavyu/issues), including some that relate to the {datavyur} package
 
 ## Contributing
-  
+
 Please note that the datavyu project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ## pkgdown website

@@ -9,7 +9,7 @@ calc_frequencies(column = NULL, code = NULL, directory = NULL, by_file = FALSE)
 \arguments{
 \item{column}{the column as a character string}
 
-\item{code}{the code as a character string}
+\item{code}{the code as a character string; defaults to code01}
 
 \item{directory}{the path to the directory as a character string}
 
@@ -20,10 +20,4 @@ A data frame generated with the janitor package
 }
 \description{
 Calculate code frequencies for a datavu column
-}
-\examples{
-calc_frequencies(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                 by_file = TRUE)
-
 }

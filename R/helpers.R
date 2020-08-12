@@ -1,3 +1,3 @@
-create_datavyu_class <- function(x) {
-  structure(x, class = c("tibble", "data.frame", "datavyu"))
+time_seq <- function(onset, offset) {
+  seq(from = onset, to = offset)
 }

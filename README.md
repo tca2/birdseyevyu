@@ -17,12 +17,15 @@ The goal of {datavyu} is to to to facilitate the use of the open-source
 **datavyu** software for the analysis of qualitative audiovisual data.
 This package extensively uses
 [{datavyur}](https://github.com/iamamutt/datavyu) for preparing the data
-for the summary statistic and plotting functions in this package. We do
-not intend to duplicate the functionality of that excellent package in
-ours; we focus instead on summarizing datavyu output and preparing the
-output for use in other analyses.
+for summary statistics and plotting functions in this package. We do not
+intend to duplicate the functionality of that excellent package; instead
+we focus on summarizing datavyu output and preparing the output for use
+in other analyses.
 
 ## Installation
+
+First, install the datavyu software; see
+[here](https://datavyu.org/download.html)
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -35,9 +38,6 @@ devtools::install_github("tca2/datavyu")
 ``` r
 library(datavyu)
 ```
-
-The datavyu software must also be installed; see
-[here](https://datavyu.org/download.html)
 
 ## Exploring the columns and files
 
@@ -86,13 +86,15 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 We can also explore the frequencies *by file* by changing the `by_file`
 argument to `TRUE`.
 
-We’ll be typing that folder file path a number of times; you can set an
-option that will mean that the folder file path you set will be used *by
-default*, though you can over-ride it any time you like.
+We’ll be typing that folder file path a number of times. You can set an
+option that let the folder file path you set be used *by default*,
+though you can over-ride it any time you like.
 
 ``` r
 options(directory = "ex-data/datavyu_output_07-06-2020_14-46")
 ```
+
+Then, use this default by changing the the `by_file` argument to `TRUE`:
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
@@ -115,9 +117,10 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 #> 13 NM T401 14-11-21 Content Log … sp                                   1   0.111
 ```
 
-To summarize durations (instead of frequencies) by changing the
-`summary` argument, which defaults to `"frequency"`, but can be changed
-to `"duration"`:
+-----
+
+To summarize durations (instead of frequencies) change the `summary`
+argument(defaults as `"frequency"`) to `"duration"`:
 
 ``` r
 summarize_column(column = "LogClass_AS_ActivityFormat",
@@ -235,6 +238,11 @@ summarize_column(column = "LogClass_AS_ActivityFormat",
 
 ## Time series preparation and plot (in-development)
 
+To visualize frequency of a certain coded datavyu column accounting for
+the duration of the video, we can use the function `plot_time_series()`.
+First we must prepare the data via saving the `prep_time_series()`
+function as an object (here we use `prepared_time_series`):
+
 ``` r
 prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
                                          specified_file = "MM T102 14-02-17 Content Log",
@@ -257,9 +265,9 @@ prepared_time_series
 #> # … with 4,839 more rows
 ```
 
-The `units` argument defaults to “s”, but can be changed to “m” (to
-round the data to minutes) or “ms” (to not round the data and to retain
-the units as milliseconds).
+The `units` argument defaults to “s” (seconds), but can be changed to
+“m” (rounds the data to minutes) or “ms” (retains datavyu’s default
+units, milliseconds).
 
 We can see how using milliseconds increases the number of data points:
 
@@ -286,8 +294,10 @@ prepared_time_series_ms
 #> # … with 4,825,733 more rows
 ```
 
-This time series data can then be plotted (using the data with the units
-as seconds):
+Your `prepared_time_series_ms` object can now be plotted usinf the
+`plot_time_series()` function. Here is an example of how time series
+data can be represented, utilizing the functions defaulted unit value of
+seconds:
 
 ``` r
 plot_time_series(prepared_time_series)

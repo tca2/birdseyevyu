@@ -2,7 +2,7 @@
 title: "Calculating Interrater Agreement"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{calculating-interrater-agreement}
+  %\VignetteIndexEntry{Calculating Interrater Agreement}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 First, load the {datavyu} and {datavyur} packages and the {tidyverse} suite of packages:
 
-```{r setup}
+```{r setup, message=F}
 library(datavyu)
 library(datavyur) # (install via `devtools::install_github("iamamutt/datavyu/datavyur")`)
 library(tidyverse) # install via install.packages("tidyverse")
@@ -117,7 +117,7 @@ prepared_time_series_tm
 prepared_time_series_hh
 ```
 
-We'll do a ["full" join](https://dplyr.tidyverse.org/reference/join.html), retaining all time stamps for both files. First, we must rename one (or both) of the two `code` columns. Having done this, we can easily compare the two once joined:
+We'll do a ["full" join](https://dplyr.tidyverse.org/reference/join.html), re] taining all time stamps for both files. First, we must rename one (or both) of the two `code` columns. Having done this, we can easily compare the two once joined:
 
 ```{r}
 prepared_time_series_tm <- rename(prepared_time_series_tm, code_tm = code)

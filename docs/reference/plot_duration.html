@@ -95,6 +95,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/calculating-interrater-agreement.html">Calculating Interrater Agreement</a>
+    </li>
+    <li>
+      <a href="../articles/intro-to-datavyu.html">intro-to-datavyu</a>
+    </li>
+    <li>
+      <a href="../articles/preparing-data.html">preparing-data</a>
+    </li>
+    <li>
       <a href="../articles/using-datavyur-with-datavyu.html">using-datavyur-with-datavyu</a>
     </li>
   </ul>
@@ -144,16 +153,6 @@
 
     <p>A ggplot2 plot</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>duration_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
-                                     <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
-                                     <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"duration"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble(): could not find function "%&gt;%"</span></div><div class='input'>
-<span class='no'>duration_summary_by_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
-                                             <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
-                                             <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"duration"</span>,
-                                             <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble(): could not find function "%&gt;%"</span></div><div class='input'>
-<span class='fu'>plot_duration</span>(<span class='no'>freq_summary</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_duration(freq_summary): could not find function "plot_duration"</span></div><div class='input'><span class='fu'>plot_duration</span>(<span class='no'>freq_summary_by_file</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_duration(freq_summary_by_file): could not find function "plot_duration"</span></div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

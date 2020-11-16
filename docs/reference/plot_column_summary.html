@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot code duration for a datavu column — plot_column_summary • datavyu</title>
+<title>Plot code duration for a datavyu column — plot_column_summary • datavyu</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Plot code duration for a datavu column — plot_column_summary" />
-<meta property="og:description" content="Plot code duration for a datavu column" />
+<meta property="og:title" content="Plot code duration for a datavyu column — plot_column_summary" />
+<meta property="og:description" content="Plot code duration for a datavyu column" />
 
 
 
@@ -95,6 +95,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/calculating-interrater-agreement.html">Calculating Interrater Agreement</a>
+    </li>
+    <li>
+      <a href="../articles/intro-to-datavyu.html">intro-to-datavyu</a>
+    </li>
+    <li>
+      <a href="../articles/preparing-data.html">preparing-data</a>
+    </li>
+    <li>
       <a href="../articles/using-datavyur-with-datavyu.html">using-datavyur-with-datavyu</a>
     </li>
   </ul>
@@ -120,13 +129,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot code duration for a datavu column</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tca2/datavyu/blob/master/R/plot-column-summary.R'><code>R/plot-column-summary.R</code></a></small>
+    <h1>Plot code duration for a datavyu column</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tca2/datavyu/blob/master/R/1-plot-column-summary.R'><code>R/1-plot-column-summary.R</code></a></small>
     <div class="hidden name"><code>plot_column_summary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plot code duration for a datavu column</p>
+    <p>Plot code duration for a datavyu column</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_column_summary</span>(<span class='no'>datavyu_object</span>)</pre>
@@ -145,22 +154,25 @@
     <p>A ggplot2 plot</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>freq_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
-                                 <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble() %&gt;% janitor::clean_names(): could not find function "%&gt;%"</span></div><div class='input'>
-<span class='no'>freq_summary_by_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
-                                         <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
-                                         <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble() %&gt;% janitor::clean_names(): could not find function "%&gt;%"</span></div><div class='input'>
-<span class='fu'>plot_column_summary</span>(<span class='no'>freq_summary</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(freq_summary): could not find function "plot_column_summary"</span></div><div class='input'><span class='fu'>plot_column_summary</span>(<span class='no'>freq_summary_by_file</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(freq_summary_by_file): could not find function "plot_column_summary"</span></div><div class='input'>
-<span class='no'>duration_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
-                                     <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
-                                     <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"duration"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble(): could not find function "%&gt;%"</span></div><div class='input'>
-<span class='no'>duration_summary_by_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"LogClass_AS_ActivityFormat"</span>,
-                                             <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_07-06-2020_14-46"</span>,
-                                             <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"duration"</span>,
-                                             <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in datavyur::import_column(column = column, folder = directory) %&gt;%     tibble::as_tibble(): could not find function "%&gt;%"</span></div><div class='input'>
-<span class='fu'>plot_column_summary</span>(<span class='no'>duration_summary</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(duration_summary): could not find function "plot_column_summary"</span></div><div class='input'><span class='fu'>plot_column_summary</span>(<span class='no'>duration_summary_by_file</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot_column_summary(duration_summary_by_file): could not find function "plot_column_summary"</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>freq_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"childhands"</span>, <span class='kw'>code</span> <span class='kw'>=</span> <span class='st'>"childhands.hand"</span>, <span class='kw'>directory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"datavyu_output_11-16-2020_13-26"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"datavyu"</span>))
+
+<span class='no'>freq_summary_by_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"childhands"</span>, <span class='kw'>code</span> <span class='kw'>=</span> <span class='st'>"childhands.hand"</span>, <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_11-16-2020_13-26"</span>,
+                                         <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>plot_column_summary</span>(<span class='no'>freq_summary</span>)
+<span class='fu'>plot_column_summary</span>(<span class='no'>freq_summary_by_file</span>)
+
+<span class='no'>duration_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"childhands"</span>, <span class='kw'>code</span> <span class='kw'>=</span> <span class='st'>"childhands.hand"</span>, <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_11-16-2020_13-26"</span>,
+                                     <span class='kw'>summary</span> <span class='kw'>=</span> <span class='st'>"duration"</span>)
+
+<span class='no'>duration_summary_by_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='summarize_column.html'>summarize_column</a></span>(<span class='kw'>column</span> <span class='kw'>=</span> <span class='st'>"childhands"</span>, <span class='kw'>code</span> <span class='kw'>=</span> <span class='st'>"childhands.hand"</span>, <span class='kw'>directory</span> <span class='kw'>=</span> <span class='st'>"ex-data/datavyu_output_11-16-2020_13-26"</span>,
+                                             <span class='kw'>summary</span> <span class='kw'>=</span> <span class='st'>"duration"</span>,
+                                             <span class='kw'>by_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>plot_column_summary</span>(<span class='no'>duration_summary</span>)
+<span class='fu'>plot_column_summary</span>(<span class='no'>duration_summary_by_file</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

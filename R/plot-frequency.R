@@ -2,17 +2,6 @@
 #'
 #' @param datavyu_object a datavyu object created by `summarize_column()`
 #' @return A ggplot2 plot
-#' @examples
-#'
-#' freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-#'                                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
-#'
-#' freq_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
-#'                                          directory = "ex-data/datavyu_output_07-06-2020_14-46",
-#'                                          by_file = TRUE)
-#'
-#' plot_frequency(freq_summary)
-#' plot_frequency(freq_summary_by_file)
 
 plot_frequency <- function(datavyu_object) {
 

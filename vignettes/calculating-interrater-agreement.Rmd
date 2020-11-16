@@ -11,7 +11,8 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  dpi = 250
+  dpi = 250,
+  fig.width = 8, fig.height = 8
 )
 ```
 
@@ -25,32 +26,22 @@ library(datavyur) # (install via `devtools::install_github("iamamutt/datavyu/dat
 library(tidyverse) # install via install.packages("tidyverse")
 library(irr) # install via install.packages("irr")
 library(patchwork) # install via install.packages("patchwork")
+library(here) # install.packages("here")
 ```
+
+## Preparing the data in datavyu (the software---not the package!)
 
 Next, let's prepare the files we wish to analyze. To do so, we have to export them from the datavyu software, as follows:
 
-## 1. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
+1. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
 
 `csv2opf.rb`
 
-#### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
+## 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
 
 This is the directory (folder) passed to the datavyu functions below.
 
-The [{here} package](https://here.r-lib.org/) is used to specify file paths:
-
-```{r}
-library(here)
-
-summary_of_files <- datavyu_col_search(here("irr-data", "datavyu_output_11-16-2020_14-13"))
-
-summary_of_files
-
-summary_of_files %>% 
-  distinct(column, codes)
-```
-
-To save on typing, the directory can be set for an entire R session via the following:
+The [{here} package](https://here.r-lib.org/) can be used to flexibly (across computers/operating systems) specify file paths: To save on typing, the directory can be set for an entire R session via the following:
 
 ```{r}
 options(directory = here("irr-data", "datavyu_output_11-16-2020_14-13"))
@@ -58,7 +49,14 @@ options(directory = here("irr-data", "datavyu_output_11-16-2020_14-13"))
 
 # Summarizing a column
 
-Frequency of codes; note that the code is the code listed appended to the column name after a period:
+Frequency of codes; note that the code is the code listed appended to the column name after a period.
+
+Note that you may wish to look at the names of the files, columns, and codes; the following function can be used to do that:
+
+```{r}
+datavyu_col_search(here("irr-data", "datavyu_output_11-16-2020_14-13"))
+```
+
 
 ```{r}
 summarize_column(column = "LogClass_IS",
@@ -69,7 +67,8 @@ Frequency of codes by file:
 
 ```{r}
 summarize_column(column = "LogClass_IS",
-                 code = "LogClass_IS.i")
+                 code = "LogClass_IS.i",
+                 by_file = TRUE)
 ```
 
 Plot of duration (note that `summary = "duration"` can be added to any of the above) by file:
@@ -108,6 +107,7 @@ plot_time_series(prepared_time_series_tm) +
   plot_time_series(prepared_time_series_hh) +
   plot_layout(ncol = 1)
 ```
+
 ## Agreement statistics
 
 First, looking at data:

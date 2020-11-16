@@ -1,6 +1,6 @@
 #' Plot code frequency for a datavu column
 #'
-#' @param specified_file the file name; see find_unique_files() to determine their names
+#' @param specified_file the file name; use datavyur::datavyu_col_search() to determine their names
 #' @param units the units the data will be prepared in; either "m" (minutes), "s" (default; seconds), or "ms" (milli-seconds)
 #' @inheritParams summarize_column
 #' @importFrom magrittr "%>%"
@@ -9,7 +9,11 @@
 #' @examples
 #'
 
-prep_time_series <- function(column, specified_file = NULL, directory = NULL, code = NULL, units = "s") {
+prep_time_series <- function(column,
+                             code,
+                             specified_file = NULL,
+                             directory = NULL,
+                             units = "s") {
 
   # finding directory option
   if (is.null(directory)) {
@@ -28,15 +32,7 @@ prep_time_series <- function(column, specified_file = NULL, directory = NULL, co
   df_of_codes <- datavyur::import_column(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
-    janitor::clean_names()
-
-  # this is if folks do not provide a code name
-  if (is.null(code)) {
-    code <- names(df_of_codes)[stringr::str_detect(names(df_of_codes), "code01")]
-    if (length(code) < 1) {
-      stop("Please specify a code name to tabulate via the `code_name` argument")
-    }
-  }
+    dplyr::select(1:4, all_of(code))
 
   # all of this is for a single file
   if (!is.null(specified_file)) {
@@ -51,11 +47,11 @@ prep_time_series <- function(column, specified_file = NULL, directory = NULL, co
     if (units == "s") {
       d <- df_of_codes %>%
         dplyr::mutate(onset = round(onset / 1000), # allow manual specification of unitsing
-               offset = round(offset / 1000))
+                      offset = round(offset / 1000))
     } else if (units == "m") {
       d <- df_of_codes %>%
         dplyr::mutate(onset = round(onset / (1000 * 60)), # allow manual specification of unitsing
-               offset = round(offset / (1000 * 60)))
+                      offset = round(offset / (1000 * 60)))
     } else if (units == "ms") {
       d <- df_of_codes
     }

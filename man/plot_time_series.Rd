@@ -16,10 +16,8 @@ A ggplot2 plot
 Plot code frequency for a datavu column
 }
 \examples{
-prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
-                                         specified_file = "MM T102 14-02-17 Content Log",
-                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
-
+\dontrun{
+prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand", specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
 plot_time_series(prepared_time_series)
-
+}
 }

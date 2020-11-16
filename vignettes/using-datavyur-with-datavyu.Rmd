@@ -20,7 +20,3 @@ library(datavyur)
 
 # vignette(topic = "tutorial", package = "datavyur")
 ```
-
-```{r}
-
-```

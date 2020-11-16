@@ -1,0 +1,141 @@
+---
+title: "Calculating Interrater Agreement"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{calculating-interrater-agreement}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Loading, setting up
+
+First, load the {datavyu} and {datavyur} packages and the {tidyverse} suite of packages:
+
+```{r setup}
+library(datavyu)
+library(datavyur) # (install via `devtools::install_github("iamamutt/datavyu/datavyur")`)
+library(tidyverse) # install via install.packages("tidyverse")
+library(irr) # install via install.packages("irr")
+library(patchwork) # install via install.packages("patchwork")
+```
+
+Next, let's prepare the files we wish to analyze. To do so, we have to export them from the datavyu software, as follows:
+
+## 1. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
+
+`csv2opf.rb`
+
+#### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
+
+This is the directory (folder) passed to the datavyu functions below.
+
+The [{here} package](https://here.r-lib.org/) is used to specify file paths:
+
+```{r}
+library(here)
+
+summary_of_files <- datavyu_col_search(here("irr-data", "datavyu_output_11-16-2020_14-13"))
+
+summary_of_files
+
+summary_of_files %>% 
+  distinct(column, codes)
+```
+
+To save on typing, the directory can be set for an entire R session via the following:
+
+```{r}
+options(directory = here("irr-data", "datavyu_output_11-16-2020_14-13"))
+```
+
+# Summarizing a column
+
+Frequency of codes; note that the code is the code listed appended to the column name after a period:
+
+```{r}
+summarize_column(column = "LogClass_IS",
+                 code = "LogClass_IS.i")
+```
+
+Frequency of codes by file:
+
+```{r}
+summarize_column(column = "LogClass_IS",
+                 code = "LogClass_IS.i")
+```
+
+Plot of duration (note that `summary = "duration"` can be added to any of the above) by file:
+
+```{r}
+freq_summary <- summarize_column(column = "LogClass_IS",
+                                 code = "LogClass_IS.i",
+                                 by_file = TRUE,
+                                 summary = "duration")
+
+plot_column_summary(freq_summary)
+```
+
+# Inter-rater agreement
+
+## Plots
+
+```{r}
+prepared_time_series_tm <- prep_time_series(column = "LogClass_IS",
+                                            code = "LogClass_IS.i",
+                                            specified_file = "TM 14-12-03 T201 Content Log")
+
+plot_time_series(prepared_time_series_tm)
+
+prepared_time_series_hh <- prep_time_series(column = "LogClass_IS",
+                                            code = "LogClass_IS.i",
+                                            specified_file = "HH T201 14-12-03 Content Log")
+
+plot_time_series(prepared_time_series_hh)
+
+```
+These could be composed together using the patchwork library:
+
+```{r}
+plot_time_series(prepared_time_series_tm) +
+  plot_time_series(prepared_time_series_hh) +
+  plot_layout(ncol = 1)
+```
+## Agreement statistics
+
+First, looking at data:
+
+```{r}
+prepared_time_series_tm
+prepared_time_series_hh
+```
+
+We'll do a ["full" join](https://dplyr.tidyverse.org/reference/join.html), retaining all time stamps for both files. First, we must rename one (or both) of the two `code` columns. Having done this, we can easily compare the two once joined:
+
+```{r}
+prepared_time_series_tm <- rename(prepared_time_series_tm, code_tm = code)
+prepared_time_series_hh <- rename(prepared_time_series_hh, code_hh = code)
+
+joined_data <- prepared_time_series_tm %>% 
+  full_join(prepared_time_series_hh, by = "ts")
+
+joined_data
+```
+
+We can calculate agreement using the {irr} package, passing only the 2nd and 3rd columns (with the codes) to the function `agree()` (from the {irr} function):
+
+```{r}
+agree(joined_data[, 2:3])
+```
+
+We can do the same for Cohen's Kappa using the `kappa2` statistic:
+
+```{r}
+kappa2(joined_data[, 2:3])
+```

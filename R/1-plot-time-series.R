@@ -4,12 +4,10 @@
 #' @return A ggplot2 plot
 #' @export
 #' @examples
-#' prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
-#'                                          specified_file = "MM T102 14-02-17 Content Log",
-#'                                          directory = "ex-data/datavyu_output_07-06-2020_14-46")
-#'
+#' \dontrun{
+#' prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand", specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
 #' plot_time_series(prepared_time_series)
-#'
+#' }
 
 plot_time_series <- function(datavyu_ts_object) {
 
@@ -20,9 +18,9 @@ plot_time_series <- function(datavyu_ts_object) {
     ggplot2::geom_point() +
     ggplot2::ylab(NULL) +
     ggplot2::xlab("Time (m)") +
-    ggplot2::theme(axis.title.y=ggplot2::element_blank(),
-          axis.text.y=ggplot2::element_blank(),
-          axis.ticks.y=ggplot2::element_blank()) +
+    ggplot2::theme(axis.title.y = ggplot2::element_blank(),
+          axis.text.y = ggplot2::element_blank(),
+          axis.ticks.y = ggplot2::element_blank()) +
     ggplot2::scale_y_discrete(breaks = NULL) +
     ggplot2::scale_color_brewer("", type = "qual") +
     ggplot2::labs(subtitle = stringr::str_c("Units: ", round)) +

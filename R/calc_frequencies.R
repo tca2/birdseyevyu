@@ -1,13 +1,13 @@
 #' Calculate code frequencies for a datavu column
 #'
 #' @param column the column as a character string
-#' @param code the code as a character string; defaults to code01
+#' @param code the code as a character string
 #' @param directory the path to the directory as a character string
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @return A data frame generated with the janitor package
 
-calc_frequencies <- function(column = NULL,
-                             code = NULL, # defaults to code01
+calc_frequencies <- function(column,
+                             code,
                              directory = NULL,
                              by_file = FALSE) {
 
@@ -19,15 +19,7 @@ calc_frequencies <- function(column = NULL,
   df_of_codes <- datavyur::import_column(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
-    janitor::clean_names()
-
-  # this is if a code name is not provided
-  if (is.null(code)) {
-    code <- names(df_of_codes)[stringr::str_detect(names(df_of_codes), "code01")]
-    if (length(code) < 1) {
-      stop("Please specify a code name to tabulate via the `code_name` argument")
-    }
-  }
+    dplyr::select(1:4, all_of(code))
 
   if (by_file == FALSE) {
 
@@ -51,4 +43,7 @@ calc_frequencies <- function(column = NULL,
       tibble::as_tibble()
 
   }
+
+  out
+
 }

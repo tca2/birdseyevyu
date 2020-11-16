@@ -19,7 +19,7 @@ calc_duration <- function(column = NULL,
   df_of_codes <- datavyur::import_column(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
-    janitor::clean_names()
+    dplyr::select(1:4, all_of(code))
 
   # this is if a code name is not provided
   if (is.null(code)) {
@@ -37,7 +37,7 @@ calc_duration <- function(column = NULL,
 
   if (by_file == FALSE) {
 
-    df_of_codes %>%
+    out <- df_of_codes %>%
       dplyr::group_by(!!rlang::sym(code)) %>%
       dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
       dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
@@ -55,7 +55,7 @@ calc_duration <- function(column = NULL,
 
     names(list_of_times) <- unique(df_of_codes$file)
 
-    list_of_times %>%
+    out <- list_of_times %>%
       purrr::map_df(~., .id = "id") %>%
       dplyr::select(-id) %>% # why is there this and file? not sure
       dplyr::group_by(file, !!rlang::sym(code)) %>%
@@ -68,4 +68,6 @@ calc_duration <- function(column = NULL,
       tibble::as_tibble()
 
   }
+
+  out
 }

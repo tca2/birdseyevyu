@@ -39,25 +39,103 @@ devtools::install_github("tca2/datavyu")
 library(datavyu)
 ```
 
+## Preparing data for analysis
+
+Please see the [preparing data](preparing-data.html) vignette to use the
+datavyu software to prepare the native `.opf` files for analysis here.
+
 ## Exploring the columns and files
 
-Using {datavyu}, you can find the unique columns across all of the files
-in a directory:
+Using {datavyur} (not this package, but one that this package -
+{datavyu} - relies on), you can find information on all of the files
+(and their columns and codes) in a given directory:
 
 ``` r
-find_unique_columns("ex-data/datavyu_output_07-06-2020_14-46")
-#> [1] "LogClass_AS_ActivityFormat"      "LogClass_AS_ParticipationFormat"
-#> [3] "LogClass_IG"                     "LogClass_TO_MathPresent"        
-#> [5] "LogClass_IS"                     "LogNotes"                       
-#> [7] "LogClass_TaskUsed"
+library(datavyur)
+
+summary_of_files <- datavyur::datavyu_col_search("ex-data/datavyu_output_11-16-2020_13-26")
+
+summary_of_files
+#>     file      column   codes   classes
+#> 1  dyad1  childhands    hand character
+#> 2  dyad1 parenthands    hand character
+#> 3  dyad2  childhands    hand character
+#> 4  dyad2 parenthands    hand character
+#> 5  dyad3  childhands    hand character
+#> 6  dyad1  childhands    look   integer
+#> 7  dyad1 parenthands    look   integer
+#> 8  dyad2  childhands    look   integer
+#> 9  dyad2 parenthands    look   integer
+#> 10 dyad3  childhands    look   integer
+#> 11 dyad3 parenthands    look   integer
+#> 12 dyad1  childhands  offset   integer
+#> 13 dyad1 parenthands  offset   integer
+#> 14 dyad2  childhands  offset   integer
+#> 15 dyad2 parenthands  offset   integer
+#> 16 dyad3  childhands  offset   integer
+#> 17 dyad3 parenthands  offset   integer
+#> 18 dyad1  childhands   onset   integer
+#> 19 dyad1 parenthands   onset   integer
+#> 20 dyad2  childhands   onset   integer
+#> 21 dyad2 parenthands   onset   integer
+#> 22 dyad3  childhands   onset   integer
+#> 23 dyad3 parenthands   onset   integer
+#> 24 dyad1  childhands ordinal   integer
+#> 25 dyad1 parenthands ordinal   integer
+#> 26 dyad2  childhands ordinal   integer
+#> 27 dyad2 parenthands ordinal   integer
+#> 28 dyad3  childhands ordinal   integer
+#> 29 dyad3 parenthands ordinal   integer
+#>                                                                                     local
+#> 1   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
+#> 2  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
+#> 3   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
+#> 4  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
+#> 5   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
+#> 6   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
+#> 7  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
+#> 8   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
+#> 9  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
+#> 10  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
+#> 11 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
+#> 12  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
+#> 13 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
+#> 14  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
+#> 15 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
+#> 16  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
+#> 17 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
+#> 18  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
+#> 19 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
+#> 20  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
+#> 21 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
+#> 22  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
+#> 23 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
+#> 24  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
+#> 25 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
+#> 26  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
+#> 27 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
+#> 28  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
+#> 29 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
 ```
 
-You can also find unique files
+We can easily find *distinct* files and columns using {dplyr} function
+`distinct()`:
 
 ``` r
-find_unique_files("ex-data/datavyu_output_07-06-2020_14-46")
-#> [1] "MM T102 14-02-17 Content Log"     "NM 14-12-03 T201 Content Log v.3"
-#> [3] "NM T401 14-11-21 Content Log v.2"
+library(dplyr)
+
+summary_of_files %>% 
+  distinct(file)
+#>    file
+#> 1 dyad1
+#> 2 dyad2
+#> 3 dyad3
+
+summary_of_files %>% 
+  distinct(column)
+#>        column
+#> 1  childhands
+#> 2 parenthands
 ```
 
 ## Summarizing a column
@@ -65,20 +143,23 @@ find_unique_files("ex-data/datavyu_output_07-06-2020_14-46")
 {datavyu} can help to summarize a column. It defaults to summarizing the
 frequency of codes for a specified column.
 
+Note that, by default, the code name combines the column and code names;
+so, the `hand` code in the above summary would be combined with its
+column `childhands` (or `parenthands`) to be specified as
+`childhands_hand` or `parenthands_hand`:
+
 ``` r
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
-#> # A tibble: 8 x 3
-#>   log_class_as_activity_format_code01     n percent
-#> * <chr>                               <dbl>   <dbl>
-#> 1 l                                       7  0.318 
-#> 2 sp                                      7  0.318 
-#> 3 a                                       2  0.0909
-#> 4 o                                       2  0.0909
-#> 5 aw                                      1  0.0455
-#> 6 class discussion?                       1  0.0455
-#> 7 class discussion? lecture?              1  0.0455
-#> 8 l??                                     1  0.0455
+summarize_column(column = "childhands",
+                 code = "childhands_hand",
+                 directory = "ex-data/datavyu_output_11-16-2020_13-26")
+#> # A tibble: 5 x 3
+#>   childhands_hand     n percent
+#> * <chr>           <dbl>   <dbl>
+#> 1 "both"             25  0.291 
+#> 2 "left"             22  0.256 
+#> 3 "right"            21  0.244 
+#> 4 ""                 17  0.198 
+#> 5 "l"                 1  0.0116
 ```
 
 -----
@@ -91,30 +172,29 @@ option that let the folder file path you set be used *by default*,
 though you can over-ride it any time you like.
 
 ``` r
-options(directory = "ex-data/datavyu_output_07-06-2020_14-46")
+options(directory = "ex-data/datavyu_output_11-16-2020_13-26")
 ```
 
 Then, use this default by changing the the `by_file` argument to `TRUE`:
 
 ``` r
-summarize_column(column = "LogClass_AS_ActivityFormat",
+summarize_column(column = "childhands",
+                 code = "childhands_hand",
                  by_file = TRUE)
-#> # A tibble: 13 x 4
-#>    file                           log_class_as_activity_format_co…     n percent
-#>  * <chr>                          <chr>                            <dbl>   <dbl>
-#>  1 MM T102 14-02-17 Content Log   aw                                   1   0.1  
-#>  2 MM T102 14-02-17 Content Log   l                                    3   0.3  
-#>  3 MM T102 14-02-17 Content Log   sp                                   6   0.6  
-#>  4 NM 14-12-03 T201 Content Log … a                                    1   0.333
-#>  5 NM 14-12-03 T201 Content Log … l                                    1   0.333
-#>  6 NM 14-12-03 T201 Content Log … o                                    1   0.333
-#>  7 NM T401 14-11-21 Content Log … a                                    1   0.111
-#>  8 NM T401 14-11-21 Content Log … class discussion?                    1   0.111
-#>  9 NM T401 14-11-21 Content Log … class discussion? lecture?           1   0.111
-#> 10 NM T401 14-11-21 Content Log … l                                    3   0.333
-#> 11 NM T401 14-11-21 Content Log … l??                                  1   0.111
-#> 12 NM T401 14-11-21 Content Log … o                                    1   0.111
-#> 13 NM T401 14-11-21 Content Log … sp                                   1   0.111
+#> # A tibble: 11 x 4
+#>    file  childhands_hand     n percent
+#>  * <chr> <chr>           <dbl>   <dbl>
+#>  1 dyad1 ""                  9   0.18 
+#>  2 dyad1 "both"             15   0.3  
+#>  3 dyad1 "left"             16   0.32 
+#>  4 dyad1 "right"            10   0.2  
+#>  5 dyad2 ""                  8   0.242
+#>  6 dyad2 "both"             10   0.303
+#>  7 dyad2 "left"              5   0.152
+#>  8 dyad2 "right"            10   0.303
+#>  9 dyad3 "l"                 1   0.333
+#> 10 dyad3 "left"              1   0.333
+#> 11 dyad3 "right"             1   0.333
 ```
 
 -----
@@ -123,43 +203,40 @@ To summarize durations (instead of frequencies) change the `summary`
 argument(defaults as `"frequency"`) to `"duration"`:
 
 ``` r
-summarize_column(column = "LogClass_AS_ActivityFormat",
+summarize_column(column = "childhands",
+                 code = "childhands_hand",
                  summary = "duration")
-#> # A tibble: 8 x 3
-#>   log_class_as_activity_format_code01 duration     percent
-#> * <chr>                               <chr>          <dbl>
-#> 1 l                                   00:52:00:316  0.327 
-#> 2 a                                   00:27:16:305  0.172 
-#> 3 sp                                  00:25:18:250  0.159 
-#> 4 class discussion?                   00:20:39:356  0.130 
-#> 5 o                                   00:13:01:093  0.0820
-#> 6 aw                                  00:10:08:256  0.0638
-#> 7 l??                                 00:06:06:588  0.0385
-#> 8 class discussion? lecture?          00:04:20:950  0.0274
+#> # A tibble: 5 x 3
+#>   childhands_hand duration     percent
+#> * <chr>           <chr>          <dbl>
+#> 1 "right"         00:22:20:078  0.311 
+#> 2 "left"          00:21:24:616  0.298 
+#> 3 ""              00:14:14:433  0.199 
+#> 4 "both"          00:12:25:497  0.173 
+#> 5 "l"             00:01:19:214  0.0184
 ```
 
 Columns of durations can also be summarized by file:
 
 ``` r
-summarize_column(column = "LogClass_AS_ActivityFormat",
+summarize_column(column = "childhands",
+                 code = "childhands_hand",
                  by_file = TRUE,
                  summary = "duration")
-#> # A tibble: 13 x 4
-#>    file                       log_class_as_activity_format_… duration    percent
-#>  * <chr>                      <chr>                          <chr>         <dbl>
-#>  1 MM T102 14-02-17 Content … l                              00:46:17:9…  0.576 
-#>  2 MM T102 14-02-17 Content … sp                             00:23:59:4…  0.298 
-#>  3 MM T102 14-02-17 Content … aw                             00:10:08:2…  0.126 
-#>  4 NM 14-12-03 T201 Content … a                              00:04:53:3…  0.898 
-#>  5 NM 14-12-03 T201 Content … o                              00:00:25:1…  0.0770
-#>  6 NM 14-12-03 T201 Content … l                              00:00:08:0…  0.0246
-#>  7 NM T401 14-11-21 Content … a                              00:22:22:9…  0.307 
-#>  8 NM T401 14-11-21 Content … class discussion?              00:20:39:3…  0.283 
-#>  9 NM T401 14-11-21 Content … o                              00:12:35:9…  0.173 
-#> 10 NM T401 14-11-21 Content … l??                            00:06:06:5…  0.0837
-#> 11 NM T401 14-11-21 Content … l                              00:05:34:2…  0.0763
-#> 12 NM T401 14-11-21 Content … class discussion? lecture?     00:04:20:9…  0.0596
-#> 13 NM T401 14-11-21 Content … sp                             00:01:18:7…  0.0180
+#> # A tibble: 11 x 4
+#>    file  childhands_hand duration     percent
+#>  * <chr> <chr>           <chr>          <dbl>
+#>  1 dyad1 "left"          00:14:39:030  0.496 
+#>  2 dyad1 "both"          00:05:44:939  0.195 
+#>  3 dyad1 ""              00:04:36:021  0.156 
+#>  4 dyad1 "right"         00:04:31:998  0.153 
+#>  5 dyad2 "right"         00:10:10:331  0.355 
+#>  6 dyad2 ""              00:09:38:412  0.336 
+#>  7 dyad2 "both"          00:06:40:558  0.233 
+#>  8 dyad2 "left"          00:02:11:428  0.0764
+#>  9 dyad3 "right"         00:07:37:749  0.564 
+#> 10 dyad3 "left"          00:04:34:158  0.338 
+#> 11 dyad3 "l"             00:01:19:214  0.0977
 ```
 
 ## Ploting the results of a summary of a column
@@ -171,7 +248,7 @@ the output from `summarize_column()` to an object (we call this
 Then, we use this output in the function `plot_column_summary()`:
 
 ``` r
-freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat")
+freq_summary <- summarize_column(column = "childhands", code = "childhands_hand")
 
 plot_column_summary(freq_summary)
 ```
@@ -181,7 +258,7 @@ plot_column_summary(freq_summary)
 This also works by file—so long as the column is summarized by file:
 
 ``` r
-freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+freq_summary <- summarize_column(column = "childhands", code = "childhands_hand",
                                  by_file = TRUE, summary = "duration")
 
 plot_column_summary(freq_summary)
@@ -189,80 +266,75 @@ plot_column_summary(freq_summary)
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
-It is also possible to summarize across all of the data, or another
-variable (in-development):
-
-``` r
-plot_column_summary(duration_summary, summarize_across = "all")
-```
-
-Will plot the means and standard errors of the means for each level of
-each code.
-
 Similarly, if the output is for the duration, rather than the frequency,
 the durations are plotted:
 
 ``` r
-duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
+duration_summary <- summarize_column(column = "childhands", code = "childhands_hand",
                                      summary = "duration")
 
 plot_column_summary(duration_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 Like for frequency, these can be ploted by file:
 
 ``` r
-duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
+duration_summary_by_file <- summarize_column(column = "childhands", 
+                                             code = "childhands_hand",
                                              summary = "duration",
                                              by_file = TRUE)
 
 plot_column_summary(duration_summary_by_file)
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ## Using the pipe operator
 
 Finally, output can be passed between functions with the pipe operator:
 
 ``` r
-summarize_column(column = "LogClass_AS_ActivityFormat",
+summarize_column(column = "childhands", 
+                 code = "childhands_hand",
                  summary = "duration",
                  by_file = TRUE) %>% 
   plot_column_summary()
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ## Time series preparation and plot (in-development)
 
 To visualize frequency of a certain coded datavyu column accounting for
 the duration of the video, we can use the function `plot_time_series()`.
 First we must prepare the data via saving the `prep_time_series()`
-function as an object (here we use `prepared_time_series`):
+function as an object (here we use `prepared_time_series`).
+
+Note that the available files can be found using
+`datavyur::datavyu_col_search()` (described above):
 
 ``` r
-prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
-                                         specified_file = "MM T102 14-02-17 Content Log",
-                                         directory = "ex-data/datavyu_output_07-06-2020_14-46")
+prepared_time_series <- prep_time_series(column = "childhands",
+                                         code = "childhands_hand",
+                                         specified_file = "dyad1")
 
 prepared_time_series
-#> # A tibble: 4,849 x 2
+#> # A tibble: 1,823 x 2
 #>       ts code 
 #>  * <dbl> <chr>
-#>  1   235 aw   
-#>  2   236 aw   
-#>  3   237 aw   
-#>  4   238 aw   
-#>  5   239 aw   
-#>  6   240 aw   
-#>  7   241 aw   
-#>  8   242 aw   
-#>  9   243 aw   
-#> 10   244 aw   
-#> # … with 4,839 more rows
+#>  1    29 left 
+#>  2    30 left 
+#>  3    31 left 
+#>  4    32 left 
+#>  5    33 left 
+#>  6    34 left 
+#>  7    35 left 
+#>  8    36 left 
+#>  9    37 left 
+#> 10    38 left 
+#> # … with 1,813 more rows
 ```
 
 The `units` argument defaults to “s” (seconds), but can be changed to
@@ -272,26 +344,26 @@ units, milliseconds).
 We can see how using milliseconds increases the number of data points:
 
 ``` r
-prepared_time_series_ms <- prep_time_series(column = "LogClass_AS_ActivityFormat",
-                                         specified_file = "MM T102 14-02-17 Content Log",
-                                         directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                         units = "ms")
+prepared_time_series_ms <- prep_time_series(column = "childhands",
+                                            code = "childhands_hand",
+                                            specified_file = "dyad1",
+                                            units = "ms")
 
 prepared_time_series_ms
-#> # A tibble: 4,825,743 x 2
-#>        ts code 
-#>  *  <int> <chr>
-#>  1 235026 aw   
-#>  2 235027 aw   
-#>  3 235028 aw   
-#>  4 235029 aw   
-#>  5 235030 aw   
-#>  6 235031 aw   
-#>  7 235032 aw   
-#>  8 235033 aw   
-#>  9 235034 aw   
-#> 10 235035 aw   
-#> # … with 4,825,733 more rows
+#> # A tibble: 1,772,038 x 2
+#>       ts code 
+#>  * <int> <chr>
+#>  1 28846 left 
+#>  2 28847 left 
+#>  3 28848 left 
+#>  4 28849 left 
+#>  5 28850 left 
+#>  6 28851 left 
+#>  7 28852 left 
+#>  8 28853 left 
+#>  9 28854 left 
+#> 10 28855 left 
+#> # … with 1,772,028 more rows
 ```
 
 Your `prepared_time_series_ms` object can now be plotted usinf the
@@ -303,13 +375,12 @@ seconds:
 plot_time_series(prepared_time_series)
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
-
-Like for other functions, if the data is calculated file, it will be
-plotted by file (in-progress):
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
 
 ## Features in-development
 
+  - interrater
+  - by file `prep_time_series()`
   - Plotting code co-occurrences with `plot_cooccurence()`
   - Summarizing an entire file (not just a single column in a file) with
     `summarize_file()`

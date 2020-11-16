@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 *.csv
+inst/doc
+
+irr-data/

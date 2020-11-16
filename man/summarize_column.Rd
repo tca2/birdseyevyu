@@ -5,8 +5,8 @@
 \title{Summarize a datavyu column}
 \usage{
 summarize_column(
-  column = NULL,
-  code = NULL,
+  column,
+  code,
   directory = NULL,
   by_file = FALSE,
   summary = "frequency"
@@ -15,7 +15,7 @@ summarize_column(
 \arguments{
 \item{column}{the column as a character string}
 
-\item{code}{the code as a character string; defaults to code01}
+\item{code}{the code as a character string}
 
 \item{directory}{the path to the directory as a character string; can be set with options(directory = "")}
 
@@ -30,15 +30,14 @@ A data frame generated with the janitor package
 Summarize a datavyu column
 }
 \examples{
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
+\dontrun{
+summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26")
 
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
                  by_file = TRUE)
 
-summarize_column(column = "LogClass_AS_ActivityFormat",
-                 directory = "ex-data/datavyu_output_07-06-2020_14-46",
+summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
                  by_file = TRUE,
                  summary = "duration")
+}
 }

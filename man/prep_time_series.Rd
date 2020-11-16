@@ -6,20 +6,20 @@
 \usage{
 prep_time_series(
   column,
+  code,
   specified_file = NULL,
   directory = NULL,
-  code = NULL,
   units = "s"
 )
 }
 \arguments{
 \item{column}{the column as a character string}
 
-\item{specified_file}{the file name; see find_unique_files() to determine their names}
+\item{code}{the code as a character string}
+
+\item{specified_file}{the file name; use datavyur::datavyu_col_search() to determine their names}
 
 \item{directory}{the path to the directory as a character string; can be set with options(directory = "")}
-
-\item{code}{the code as a character string; defaults to code01}
 
 \item{units}{the units the data will be prepared in; either "m" (minutes), "s" (default; seconds), or "ms" (milli-seconds)}
 }

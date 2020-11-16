@@ -1,27 +1,26 @@
 #' Summarize a datavyu column
 #'
 #' @param column the column as a character string
-#' @param code the code as a character string; defaults to code01
+#' @param code the code as a character string
 #' @param directory the path to the directory as a character string; can be set with options(directory = "")
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @param summary either "frequency" or "duration"
 #' @return A data frame generated with the janitor package
 #' @export
 #' @examples
-#' summarize_column(column = "LogClass_AS_ActivityFormat",
-#'                  directory = "ex-data/datavyu_output_07-06-2020_14-46")
+#' \dontrun{
+#' summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26")
 #'
-#' summarize_column(column = "LogClass_AS_ActivityFormat",
-#'                  directory = "ex-data/datavyu_output_07-06-2020_14-46",
+#' summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
 #'                  by_file = TRUE)
 #'
-#' summarize_column(column = "LogClass_AS_ActivityFormat",
-#'                  directory = "ex-data/datavyu_output_07-06-2020_14-46",
+#' summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
 #'                  by_file = TRUE,
 #'                  summary = "duration")
+#' }
 
-summarize_column <- function(column = NULL,
-                             code = NULL,
+summarize_column <- function(column,
+                             code,
                              directory = NULL,
                              by_file = FALSE,
                              summary = "frequency") {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/1-plot-column-summary.R
 \name{plot_column_summary}
 \alias{plot_column_summary}
-\title{Plot code duration for a datavu column}
+\title{Plot code duration for a datavyu column}
 \usage{
 plot_column_summary(datavyu_object)
 }
@@ -13,30 +13,26 @@ plot_column_summary(datavyu_object)
 A ggplot2 plot
 }
 \description{
-Plot code duration for a datavu column
+Plot code duration for a datavyu column
 }
 \examples{
+\dontrun{
+freq_summary <- summarize_column(column = "childhands", code = "childhands.hand", directory = system.file("extdata", "datavyu_output_11-16-2020_13-26", package = "datavyu"))
 
-freq_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                 directory = "ex-data/datavyu_output_07-06-2020_14-46")
-
-freq_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                         directory = "ex-data/datavyu_output_07-06-2020_14-46",
+freq_summary_by_file <- summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
                                          by_file = TRUE)
 
 plot_column_summary(freq_summary)
 plot_column_summary(freq_summary_by_file)
 
-duration_summary <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                     directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                     what = "duration")
+duration_summary <- summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
+                                     summary = "duration")
 
-duration_summary_by_file <- summarize_column(column = "LogClass_AS_ActivityFormat",
-                                             directory = "ex-data/datavyu_output_07-06-2020_14-46",
-                                             what = "duration",
+duration_summary_by_file <- summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
+                                             summary = "duration",
                                              by_file = TRUE)
 
 plot_column_summary(duration_summary)
 plot_column_summary(duration_summary_by_file)
-
+}
 }

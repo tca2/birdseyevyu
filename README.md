@@ -48,94 +48,10 @@ datavyu software to prepare the native `.opf` files for analysis here.
 
 Using {datavyur} (not this package, but one that this package -
 {datavyu} - relies on), you can find information on all of the files
-(and their columns and codes) in a given directory:
+(and their columns and codes) in a given directory (not run here:
 
 ``` r
-library(datavyur)
-
-summary_of_files <- datavyur::datavyu_col_search("ex-data/datavyu_output_11-16-2020_13-26")
-
-summary_of_files
-#>     file      column   codes   classes
-#> 1  dyad1  childhands    hand character
-#> 2  dyad1 parenthands    hand character
-#> 3  dyad2  childhands    hand character
-#> 4  dyad2 parenthands    hand character
-#> 5  dyad3  childhands    hand character
-#> 6  dyad1  childhands    look   integer
-#> 7  dyad1 parenthands    look   integer
-#> 8  dyad2  childhands    look   integer
-#> 9  dyad2 parenthands    look   integer
-#> 10 dyad3  childhands    look   integer
-#> 11 dyad3 parenthands    look   integer
-#> 12 dyad1  childhands  offset   integer
-#> 13 dyad1 parenthands  offset   integer
-#> 14 dyad2  childhands  offset   integer
-#> 15 dyad2 parenthands  offset   integer
-#> 16 dyad3  childhands  offset   integer
-#> 17 dyad3 parenthands  offset   integer
-#> 18 dyad1  childhands   onset   integer
-#> 19 dyad1 parenthands   onset   integer
-#> 20 dyad2  childhands   onset   integer
-#> 21 dyad2 parenthands   onset   integer
-#> 22 dyad3  childhands   onset   integer
-#> 23 dyad3 parenthands   onset   integer
-#> 24 dyad1  childhands ordinal   integer
-#> 25 dyad1 parenthands ordinal   integer
-#> 26 dyad2  childhands ordinal   integer
-#> 27 dyad2 parenthands ordinal   integer
-#> 28 dyad3  childhands ordinal   integer
-#> 29 dyad3 parenthands ordinal   integer
-#>                                                                                     local
-#> 1   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
-#> 2  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
-#> 3   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
-#> 4  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
-#> 5   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
-#> 6   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
-#> 7  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
-#> 8   /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
-#> 9  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
-#> 10  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
-#> 11 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
-#> 12  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
-#> 13 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
-#> 14  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
-#> 15 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
-#> 16  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
-#> 17 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
-#> 18  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
-#> 19 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
-#> 20  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
-#> 21 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
-#> 22  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
-#> 23 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
-#> 24  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad1.csv
-#> 25 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad1.csv
-#> 26  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad2.csv
-#> 27 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad2.csv
-#> 28  /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/childhands__dyad3.csv
-#> 29 /Users/jrosenb8/datavyu/ex-data/datavyu_output_11-16-2020_13-26/parenthands__dyad3.csv
-```
-
-We can easily find *distinct* files and columns using {dplyr} function
-`distinct()`:
-
-``` r
-library(dplyr)
-
-summary_of_files %>% 
-  distinct(file)
-#>    file
-#> 1 dyad1
-#> 2 dyad2
-#> 3 dyad3
-
-summary_of_files %>% 
-  distinct(column)
-#>        column
-#> 1  childhands
-#> 2 parenthands
+datavyur::datavyu_col_search("ex-data/datavyu_output_11-16-2020_13-26")
 ```
 
 ## Summarizing a column
@@ -146,14 +62,14 @@ frequency of codes for a specified column.
 Note that, by default, the code name combines the column and code names;
 so, the `hand` code in the above summary would be combined with its
 column `childhands` (or `parenthands`) to be specified as
-`childhands_hand` or `parenthands_hand`:
+`childhands.hand` or `parenthands_hand`:
 
 ``` r
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
-                 directory = "ex-data/datavyu_output_11-16-2020_13-26")
+                 code = "childhands.hand",
+                 directory = "inst/extdata/datavyu_output_11-16-2020_13-26")
 #> # A tibble: 5 x 3
-#>   childhands_hand     n percent
+#>   childhands.hand     n percent
 #> * <chr>           <dbl>   <dbl>
 #> 1 "both"             25  0.291 
 #> 2 "left"             22  0.256 
@@ -172,17 +88,17 @@ option that let the folder file path you set be used *by default*,
 though you can over-ride it any time you like.
 
 ``` r
-options(directory = "ex-data/datavyu_output_11-16-2020_13-26")
+options(directory = "inst/extdata/datavyu_output_11-16-2020_13-26")
 ```
 
 Then, use this default by changing the the `by_file` argument to `TRUE`:
 
 ``` r
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  by_file = TRUE)
 #> # A tibble: 11 x 4
-#>    file  childhands_hand     n percent
+#>    file  childhands.hand     n percent
 #>  * <chr> <chr>           <dbl>   <dbl>
 #>  1 dyad1 ""                  9   0.18 
 #>  2 dyad1 "both"             15   0.3  
@@ -204,10 +120,10 @@ argument(defaults as `"frequency"`) to `"duration"`:
 
 ``` r
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  summary = "duration")
 #> # A tibble: 5 x 3
-#>   childhands_hand duration     percent
+#>   childhands.hand duration     percent
 #> * <chr>           <chr>          <dbl>
 #> 1 "right"         00:22:20:078  0.311 
 #> 2 "left"          00:21:24:616  0.298 
@@ -220,11 +136,11 @@ Columns of durations can also be summarized by file:
 
 ``` r
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  by_file = TRUE,
                  summary = "duration")
 #> # A tibble: 11 x 4
-#>    file  childhands_hand duration     percent
+#>    file  childhands.hand duration     percent
 #>  * <chr> <chr>           <chr>          <dbl>
 #>  1 dyad1 "left"          00:14:39:030  0.496 
 #>  2 dyad1 "both"          00:05:44:939  0.195 
@@ -248,7 +164,7 @@ the output from `summarize_column()` to an object (we call this
 Then, we use this output in the function `plot_column_summary()`:
 
 ``` r
-freq_summary <- summarize_column(column = "childhands", code = "childhands_hand")
+freq_summary <- summarize_column(column = "childhands", code = "childhands.hand")
 
 plot_column_summary(freq_summary)
 ```
@@ -258,38 +174,38 @@ plot_column_summary(freq_summary)
 This also works by file—so long as the column is summarized by file:
 
 ``` r
-freq_summary <- summarize_column(column = "childhands", code = "childhands_hand",
+freq_summary <- summarize_column(column = "childhands", code = "childhands.hand",
                                  by_file = TRUE, summary = "duration")
 
 plot_column_summary(freq_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 Similarly, if the output is for the duration, rather than the frequency,
 the durations are plotted:
 
 ``` r
-duration_summary <- summarize_column(column = "childhands", code = "childhands_hand",
+duration_summary <- summarize_column(column = "childhands", code = "childhands.hand",
                                      summary = "duration")
 
 plot_column_summary(duration_summary)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 Like for frequency, these can be ploted by file:
 
 ``` r
 duration_summary_by_file <- summarize_column(column = "childhands", 
-                                             code = "childhands_hand",
+                                             code = "childhands.hand",
                                              summary = "duration",
                                              by_file = TRUE)
 
 plot_column_summary(duration_summary_by_file)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 ## Using the pipe operator
 
@@ -297,13 +213,13 @@ Finally, output can be passed between functions with the pipe operator:
 
 ``` r
 summarize_column(column = "childhands", 
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  summary = "duration",
                  by_file = TRUE) %>% 
   plot_column_summary()
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ## Time series preparation and plot (in-development)
 
@@ -317,7 +233,7 @@ Note that the available files can be found using
 
 ``` r
 prepared_time_series <- prep_time_series(column = "childhands",
-                                         code = "childhands_hand",
+                                         code = "childhands.hand",
                                          specified_file = "dyad1")
 
 prepared_time_series
@@ -345,7 +261,7 @@ We can see how using milliseconds increases the number of data points:
 
 ``` r
 prepared_time_series_ms <- prep_time_series(column = "childhands",
-                                            code = "childhands_hand",
+                                            code = "childhands.hand",
                                             specified_file = "dyad1",
                                             units = "ms")
 
@@ -375,7 +291,7 @@ seconds:
 plot_time_series(prepared_time_series)
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 ## Features in-development
 

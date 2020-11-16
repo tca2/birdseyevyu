@@ -47,40 +47,23 @@ Please see the [preparing data](preparing-data.html) vignette to use the datavyu
 
 ## Exploring the columns and files
 
-Using {datavyur} (not this package, but one that this package - {datavyu} - relies on), you can find information on all of the files (and their columns and codes) in a given directory:
+Using {datavyur} (not this package, but one that this package - {datavyu} - relies on), you can find information on all of the files (and their columns and codes) in a given directory (not run here:
 
-```{r}
-library(datavyur)
-
-summary_of_files <- datavyur::datavyu_col_search("ex-data/datavyu_output_11-16-2020_13-26")
-
-summary_of_files
+```{r, eval = FALSE}
+datavyur::datavyu_col_search("ex-data/datavyu_output_11-16-2020_13-26")
 ```
-
-We can easily find _distinct_ files and columns using {dplyr} function `distinct()`:
-
-```{r}
-library(dplyr)
-
-summary_of_files %>% 
-  distinct(file)
-
-summary_of_files %>% 
-  distinct(column)
-```
-
 
 ## Summarizing a column
 
 {datavyu} can help to summarize a column. It defaults to summarizing 
 the frequency of codes for a specified column.
 
-Note that, by default, the code name combines the column and code names; so, the `hand` code in the above summary would be combined with its column `childhands` (or `parenthands`) to be specified as `childhands_hand` or `parenthands_hand`:
+Note that, by default, the code name combines the column and code names; so, the `hand` code in the above summary would be combined with its column `childhands` (or `parenthands`) to be specified as `childhands.hand` or `parenthands_hand`:
 
 ```{r}
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
-                 directory = "ex-data/datavyu_output_11-16-2020_13-26")
+                 code = "childhands.hand",
+                 directory = "inst/extdata/datavyu_output_11-16-2020_13-26")
 ```
 
 ---
@@ -93,14 +76,14 @@ that let the folder file path you set be used *by default*, though
 you can over-ride it any time you like.
 
 ```{r}
-options(directory = "ex-data/datavyu_output_11-16-2020_13-26")
+options(directory = "inst/extdata/datavyu_output_11-16-2020_13-26")
 ```
 
 Then, use this default by changing the the `by_file` argument to `TRUE`: 
 
 ```{r}
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  by_file = TRUE)
 ```
 
@@ -110,7 +93,7 @@ To summarize durations (instead of frequencies) change the `summary` argument(de
 
 ```{r}
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  summary = "duration")
 ```
 
@@ -118,7 +101,7 @@ Columns of durations can also be summarized by file:
 
 ```{r}
 summarize_column(column = "childhands",
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  by_file = TRUE,
                  summary = "duration")
 ```
@@ -132,7 +115,7 @@ be named whatever we like).
 Then, we use this output in the function `plot_column_summary()`:
 
 ```{r, eval}
-freq_summary <- summarize_column(column = "childhands", code = "childhands_hand")
+freq_summary <- summarize_column(column = "childhands", code = "childhands.hand")
 
 plot_column_summary(freq_summary)
 ```
@@ -140,7 +123,7 @@ plot_column_summary(freq_summary)
 This also works by file---so long as the column is summarized by file:
 
 ```{r}
-freq_summary <- summarize_column(column = "childhands", code = "childhands_hand",
+freq_summary <- summarize_column(column = "childhands", code = "childhands.hand",
                                  by_file = TRUE, summary = "duration")
 
 plot_column_summary(freq_summary)
@@ -149,7 +132,7 @@ plot_column_summary(freq_summary)
 Similarly, if the output is for the duration, rather than the frequency, the durations are plotted:
 
 ```{r}
-duration_summary <- summarize_column(column = "childhands", code = "childhands_hand",
+duration_summary <- summarize_column(column = "childhands", code = "childhands.hand",
                                      summary = "duration")
 
 plot_column_summary(duration_summary)
@@ -159,7 +142,7 @@ Like for frequency, these can be ploted by file:
 
 ```{r}
 duration_summary_by_file <- summarize_column(column = "childhands", 
-                                             code = "childhands_hand",
+                                             code = "childhands.hand",
                                              summary = "duration",
                                              by_file = TRUE)
 
@@ -172,7 +155,7 @@ Finally, output can be passed between functions with the pipe operator:
 
 ```{r}
 summarize_column(column = "childhands", 
-                 code = "childhands_hand",
+                 code = "childhands.hand",
                  summary = "duration",
                  by_file = TRUE) %>% 
   plot_column_summary()
@@ -186,7 +169,7 @@ Note that the available files can be found using `datavyur::datavyu_col_search()
 
 ```{r}
 prepared_time_series <- prep_time_series(column = "childhands",
-                                         code = "childhands_hand",
+                                         code = "childhands.hand",
                                          specified_file = "dyad1")
 
 prepared_time_series
@@ -199,7 +182,7 @@ We can see how using milliseconds increases the number of data points:
 
 ```{r}
 prepared_time_series_ms <- prep_time_series(column = "childhands",
-                                            code = "childhands_hand",
+                                            code = "childhands.hand",
                                             specified_file = "dyad1",
                                             units = "ms")
 

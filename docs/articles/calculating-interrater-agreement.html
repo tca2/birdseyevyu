@@ -365,7 +365,7 @@
 <span class="co">#&gt;  9     8 ni   </span>
 <span class="co">#&gt; 10     9 ni   </span>
 <span class="co">#&gt; # … with 4,870 more rows</span></pre></body></html></div>
-<p>We’ll do a <a href="https://dplyr.tidyverse.org/reference/join.html">“full” join</a>, retaining all time stamps for both files. First, we must rename one (or both) of the two <code>code</code> columns. Having done this, we can easily compare the two once joined:</p>
+<p>We’ll do a <a href="https://dplyr.tidyverse.org/reference/join.html">“full” join</a>, re] taining all time stamps for both files. First, we must rename one (or both) of the two <code>code</code> columns. Having done this, we can easily compare the two once joined:</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">prepared_time_series_tm</span> <span class="kw">&lt;-</span> <span class="fu">rename</span>(<span class="no">prepared_time_series_tm</span>, <span class="kw">code_tm</span> <span class="kw">=</span> <span class="no">code</span>)
 <span class="no">prepared_time_series_hh</span> <span class="kw">&lt;-</span> <span class="fu">rename</span>(<span class="no">prepared_time_series_hh</span>, <span class="kw">code_hh</span> <span class="kw">=</span> <span class="no">code</span>)
 

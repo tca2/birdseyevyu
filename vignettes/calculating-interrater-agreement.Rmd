@@ -34,7 +34,7 @@ Next, let's prepare the files we wish to analyze. To do so, we have to export th
 
 1. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
 
-`csv2opf.rb`
+`datavyu2csv.rb`
 
 ## 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
 

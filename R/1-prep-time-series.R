@@ -29,6 +29,10 @@ prep_time_series <- function(column,
     stop("Please specify a column name to tabulate via the `column_name` argument")
   }
 
+  df_of_codes <- import_column("LogClass_AS_ActivityFormat", folder = here("irr-data", "datavyu_output_11-17-2020_14-11")) %>%
+    tibble::as_tibble() %>%
+    dplyr::select(1:4)
+
   df_of_codes <- datavyur::import_column(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
@@ -68,10 +72,41 @@ prep_time_series <- function(column,
       tidyr::fill(code) %>%
       dplyr::select(-name)
 
+    attributes(ddd)$multiple_files <- FALSE
+
+  } else {
+
+    df_of_codes <- df_of_codes %>%
+      dplyr::select(file, all_of(code), dplyr::contains("onset"), dplyr::contains("offset")) %>%
+      purrr::set_names(c("file", "code", "onset", "offset"))
+
+    if (units == "s") {
+      d <- df_of_codes %>%
+        dplyr::mutate(onset = round(onset / 1000), # allow manual specification of units
+                      offset = round(offset / 1000))
+    } else if (units == "m") {
+      d <- df_of_codes %>%
+        dplyr::mutate(onset = round(onset / (1000 * 60)), # allow manual specification of units
+                      offset = round(offset / (1000 * 60)))
+    } else if (units == "ms") {
+      d <- df_of_codes
+    }
+
+    d_split <- d %>%
+      group_by(file) %>%
+      group_split()
+
+    ddd <- d_split %>% map_df(prep_multiple_ts_files)
+
+    attributes(ddd)$multiple_files <- TRUE
+
+    ddd
+
   }
 
   attributes(ddd)$units <- units
 
   ddd
+
 }
 

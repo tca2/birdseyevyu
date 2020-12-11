@@ -63,6 +63,9 @@
       <a href="../articles/preparing-data.html">preparing-data</a>
     </li>
     <li>
+      <a href="../articles/tn-stem-ed.html">Plots for TN STEM Ed Research</a>
+    </li>
+    <li>
       <a href="../articles/using-datavyur-with-datavyu.html">using-datavyur-with-datavyu</a>
     </li>
   </ul>
@@ -85,7 +88,8 @@
 
       
 
-      </header><script src="calculating-interrater-agreement_files/header-attrs-2.3/header-attrs.js"></script><script src="calculating-interrater-agreement_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="calculating-interrater-agreement_files/header-attrs-2.5/header-attrs.js"></script><script src="calculating-interrater-agreement_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="calculating-interrater-agreement_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="calculating-interrater-agreement_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Calculating Interrater Agreement</h1>
@@ -102,27 +106,29 @@
 <h1 class="hasAnchor">
 <a href="#loading-setting-up" class="anchor"></a>Loading, setting up</h1>
 <p>First, load the {datavyu} and {datavyur} packages and the {tidyverse} suite of packages:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">datavyu</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">datavyur</span>) <span class="co"># (install via `devtools::install_github("iamamutt/datavyu/datavyur")`)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>) <span class="co"># install via install.packages("tidyverse")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">irr</span>) <span class="co"># install via install.packages("irr")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">patchwork</span>) <span class="co"># install via install.packages("patchwork")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">here</span>) <span class="co"># install.packages("here")</span></pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tca2/datavyu">datavyu</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">datavyur</span><span class="op">)</span> <span class="co"># (install via `devtools::install_github("iamamutt/datavyu/datavyur")`)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># install via install.packages("tidyverse")</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">irr</a></span><span class="op">)</span> <span class="co"># install via install.packages("irr")</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span> <span class="co"># install via install.packages("patchwork")</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span> <span class="co"># install.packages("here")</span></code></pre></div>
 <div id="preparing-the-data-in-datavyu-the-softwarenot-the-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#preparing-the-data-in-datavyu-the-softwarenot-the-package" class="anchor"></a>Preparing the data in datavyu (the software—not the package!)</h2>
+<a href="#preparing-the-data-in-datavyu-the-softwarenot-the-package" class="anchor"></a>1. Preparing the data in datavyu (the software—not the package!)</h2>
 <p>Next, let’s prepare the files we wish to analyze. To do so, we have to export them from the datavyu software, as follows:</p>
 <ol style="list-style-type: decimal">
 <li>Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more <code>.opf</code> files:</li>
 </ol>
-<p><code>csv2opf.rb</code></p>
+<p><code>datavyu2csv.rb</code></p>
 </div>
 <div id="open-the-directory-that-the-ruby-script-created-a-number-of-csv-files-for-each--opf-file-should-now-be-created-" class="section level2">
 <h2 class="hasAnchor">
 <a href="#open-the-directory-that-the-ruby-script-created-a-number-of-csv-files-for-each--opf-file-should-now-be-created-" class="anchor"></a>2. Open the directory that the Ruby script created; a number of CSV files for each <code>.opf</code> file should now be created.</h2>
 <p>This is the directory (folder) passed to the datavyu functions below.</p>
 <p>The <a href="https://here.r-lib.org/">{here} package</a> can be used to flexibly (across computers/operating systems) specify file paths: To save on typing, the directory can be set for an entire R session via the following:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">directory</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"irr-data"</span>, <span class="st">"datavyu_output_11-16-2020_14-13"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>directory <span class="op">=</span> <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"irr-data"</span>, <span class="st">"datavyu_output_11-16-2020_14-13"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="summarizing-a-column" class="section level1">
@@ -130,32 +136,36 @@
 <a href="#summarizing-a-column" class="anchor"></a>Summarizing a column</h1>
 <p>Frequency of codes; note that the code is the code listed appended to the column name after a period.</p>
 <p>Note that you may wish to look at the names of the files, columns, and codes; the following function can be used to do that:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyu_col_search</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"irr-data"</span>, <span class="st">"datavyu_output_11-16-2020_14-13"</span>))</pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_IS"</span>,
-                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"LogClass_IS.i"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyu_col_search</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"irr-data"</span>, <span class="st">"datavyu_output_11-16-2020_14-13"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"LogClass_IS"</span>,
+                 code <span class="op">=</span> <span class="st">"LogClass_IS.i"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;   LogClass_IS.i     n percent</span>
 <span class="co">#&gt; * &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 ni                4   0.667</span>
-<span class="co">#&gt; 2 i                 2   0.333</span></pre></body></html></div>
+<span class="co">#&gt; 2 i                 2   0.333</span></code></pre></div>
 <p>Frequency of codes by file:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_IS"</span>,
-                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"LogClass_IS.i"</span>,
-                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"LogClass_IS"</span>,
+                 code <span class="op">=</span> <span class="st">"LogClass_IS.i"</span>,
+                 by_file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   file                         LogClass_IS.i     n percent</span>
 <span class="co">#&gt; * &lt;chr&gt;                        &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 HH T201 14-12-03 Content Log i                 1   0.333</span>
 <span class="co">#&gt; 2 HH T201 14-12-03 Content Log ni                2   0.667</span>
 <span class="co">#&gt; 3 TM 14-12-03 T201 Content Log i                 1   0.333</span>
-<span class="co">#&gt; 4 TM 14-12-03 T201 Content Log ni                2   0.667</span></pre></body></html></div>
+<span class="co">#&gt; 4 TM 14-12-03 T201 Content Log ni                2   0.667</span></code></pre></div>
 <p>Plot of duration (note that <code>summary = "duration"</code> can be added to any of the above) by file:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">freq_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_IS"</span>,
-                                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"LogClass_IS.i"</span>,
-                                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                                 <span class="kw">summary</span> <span class="kw">=</span> <span class="st">"duration"</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">freq_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"LogClass_IS"</span>,
+                                 code <span class="op">=</span> <span class="st">"LogClass_IS.i"</span>,
+                                 by_file <span class="op">=</span> <span class="cn">TRUE</span>,
+                                 summary <span class="op">=</span> <span class="st">"duration"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">freq_summary</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_column_summary.html">plot_column_summary</a></span><span class="op">(</span><span class="va">freq_summary</span><span class="op">)</span></code></pre></div>
 <p><img src="calculating-interrater-agreement_files/figure-html/unnamed-chunk-6-1.png" width="1822.91666666667"></p>
 </div>
 <div id="inter-rater-agreement" class="section level1">
@@ -164,29 +174,33 @@
 <div id="plots" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plots" class="anchor"></a>Plots</h2>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">prepared_time_series_tm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/prep_time_series.html">prep_time_series</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_IS"</span>,
-                                            <span class="kw">code</span> <span class="kw">=</span> <span class="st">"LogClass_IS.i"</span>,
-                                            <span class="kw">specified_file</span> <span class="kw">=</span> <span class="st">"TM 14-12-03 T201 Content Log"</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">prepared_time_series_tm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prep_time_series.html">prep_time_series</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"LogClass_IS"</span>,
+                                            code <span class="op">=</span> <span class="st">"LogClass_IS.i"</span>,
+                                            specified_file <span class="op">=</span> <span class="st">"TM 14-12-03 T201 Content Log"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span>(<span class="no">prepared_time_series_tm</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span><span class="op">(</span><span class="va">prepared_time_series_tm</span><span class="op">)</span></code></pre></div>
 <p><img src="calculating-interrater-agreement_files/figure-html/unnamed-chunk-7-1.png" width="1822.91666666667"></p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r">
-<span class="no">prepared_time_series_hh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/prep_time_series.html">prep_time_series</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"LogClass_IS"</span>,
-                                            <span class="kw">code</span> <span class="kw">=</span> <span class="st">"LogClass_IS.i"</span>,
-                                            <span class="kw">specified_file</span> <span class="kw">=</span> <span class="st">"HH T201 14-12-03 Content Log"</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">prepared_time_series_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prep_time_series.html">prep_time_series</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"LogClass_IS"</span>,
+                                            code <span class="op">=</span> <span class="st">"LogClass_IS.i"</span>,
+                                            specified_file <span class="op">=</span> <span class="st">"HH T201 14-12-03 Content Log"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span>(<span class="no">prepared_time_series_hh</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span><span class="op">(</span><span class="va">prepared_time_series_hh</span><span class="op">)</span></code></pre></div>
 <p><img src="calculating-interrater-agreement_files/figure-html/unnamed-chunk-7-2.png" width="1822.91666666667"> These could be composed together using the patchwork library:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span>(<span class="no">prepared_time_series_tm</span>) +
-  <span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span>(<span class="no">prepared_time_series_hh</span>) +
-  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span>(<span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span><span class="op">(</span><span class="va">prepared_time_series_tm</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/plot_time_series.html">plot_time_series</a></span><span class="op">(</span><span class="va">prepared_time_series_hh</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="calculating-interrater-agreement_files/figure-html/unnamed-chunk-8-1.png" width="1822.91666666667"></p>
 </div>
 <div id="agreement-statistics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#agreement-statistics" class="anchor"></a>Agreement statistics</h2>
 <p>First, looking at data:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">prepared_time_series_tm</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">prepared_time_series_tm</span>
 <span class="co">#&gt; # A tibble: 4,880 x 2</span>
 <span class="co">#&gt;       ts code </span>
 <span class="co">#&gt;  * &lt;dbl&gt; &lt;chr&gt;</span>
@@ -201,7 +215,7 @@
 <span class="co">#&gt;  9     8 ni   </span>
 <span class="co">#&gt; 10     9 ni   </span>
 <span class="co">#&gt; # … with 4,870 more rows</span>
-<span class="no">prepared_time_series_hh</span>
+<span class="va">prepared_time_series_hh</span>
 <span class="co">#&gt; # A tibble: 4,880 x 2</span>
 <span class="co">#&gt;       ts code </span>
 <span class="co">#&gt;  * &lt;dbl&gt; &lt;chr&gt;</span>
@@ -215,15 +229,16 @@
 <span class="co">#&gt;  8     7 ni   </span>
 <span class="co">#&gt;  9     8 ni   </span>
 <span class="co">#&gt; 10     9 ni   </span>
-<span class="co">#&gt; # … with 4,870 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # … with 4,870 more rows</span></code></pre></div>
 <p>We’ll do a <a href="https://dplyr.tidyverse.org/reference/join.html">“full” join</a>, re] taining all time stamps for both files. First, we must rename one (or both) of the two <code>code</code> columns. Having done this, we can easily compare the two once joined:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">prepared_time_series_tm</span> <span class="kw">&lt;-</span> <span class="fu">rename</span>(<span class="no">prepared_time_series_tm</span>, <span class="kw">code_tm</span> <span class="kw">=</span> <span class="no">code</span>)
-<span class="no">prepared_time_series_hh</span> <span class="kw">&lt;-</span> <span class="fu">rename</span>(<span class="no">prepared_time_series_hh</span>, <span class="kw">code_hh</span> <span class="kw">=</span> <span class="no">code</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">prepared_time_series_tm</span> <span class="op">&lt;-</span> <span class="fu">rename</span><span class="op">(</span><span class="va">prepared_time_series_tm</span>, code_tm <span class="op">=</span> <span class="va">code</span><span class="op">)</span>
+<span class="va">prepared_time_series_hh</span> <span class="op">&lt;-</span> <span class="fu">rename</span><span class="op">(</span><span class="va">prepared_time_series_hh</span>, code_hh <span class="op">=</span> <span class="va">code</span><span class="op">)</span>
 
-<span class="no">joined_data</span> <span class="kw">&lt;-</span> <span class="no">prepared_time_series_tm</span> <span class="kw">%&gt;%</span>
-  <span class="fu">full_join</span>(<span class="no">prepared_time_series_hh</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"ts"</span>)
+<span class="va">joined_data</span> <span class="op">&lt;-</span> <span class="va">prepared_time_series_tm</span> <span class="op">%&gt;%</span> 
+  <span class="fu">full_join</span><span class="op">(</span><span class="va">prepared_time_series_hh</span>, by <span class="op">=</span> <span class="st">"ts"</span><span class="op">)</span>
 
-<span class="no">joined_data</span>
+<span class="va">joined_data</span>
 <span class="co">#&gt; # A tibble: 4,886 x 3</span>
 <span class="co">#&gt;       ts code_tm code_hh</span>
 <span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  </span>
@@ -237,16 +252,18 @@
 <span class="co">#&gt;  8     7 ni      ni     </span>
 <span class="co">#&gt;  9     8 ni      ni     </span>
 <span class="co">#&gt; 10     9 ni      ni     </span>
-<span class="co">#&gt; # … with 4,876 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # … with 4,876 more rows</span></code></pre></div>
 <p>We can calculate agreement using the {irr} package, passing only the 2nd and 3rd columns (with the codes) to the function <code><a href="https://rdrr.io/pkg/irr/man/agree.html">agree()</a></code> (from the {irr} function):</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/irr/man/agree.html">agree</a></span>(<span class="no">joined_data</span>[, <span class="fl">2</span>:<span class="fl">3</span>])
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/irr/man/agree.html">agree</a></span><span class="op">(</span><span class="va">joined_data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;  Percentage agreement (Tolerance=0)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Subjects = 4886 </span>
 <span class="co">#&gt;    Raters = 2 </span>
-<span class="co">#&gt;   %-agree = 99.5</span></pre></body></html></div>
+<span class="co">#&gt;   %-agree = 99.5</span></code></pre></div>
 <p>We can do the same for Cohen’s Kappa using the <code>kappa2</code> statistic:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/irr/man/kappa2.html">kappa2</a></span>(<span class="no">joined_data</span>[, <span class="fl">2</span>:<span class="fl">3</span>])
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/irr/man/kappa2.html">kappa2</a></span><span class="op">(</span><span class="va">joined_data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;  Cohen's Kappa for 2 Raters (Weights: unweighted)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Subjects = 4886 </span>
@@ -254,7 +271,7 @@
 <span class="co">#&gt;     Kappa = 0.961 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;         z = 67.2 </span>
-<span class="co">#&gt;   p-value = 0</span></pre></body></html></div>
+<span class="co">#&gt;   p-value = 0</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -274,7 +291,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

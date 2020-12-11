@@ -1,10 +1,11 @@
 pandoc: 2.9.2.1
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   calculating-interrater-agreement: calculating-interrater-agreement.html
   intro-to-datavyu: intro-to-datavyu.html
   preparing-data: preparing-data.html
+  tn-stem-ed: tn-stem-ed.html
   using-datavyur-with-datavyu: using-datavyur-with-datavyu.html
-last_built: 2020-11-17T00:13Z
+last_built: 2020-12-11T20:09Z
 

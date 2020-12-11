@@ -28,11 +28,12 @@ library(patchwork) # install via install.packages("patchwork")
 library(here) # install.packages("here")
 ```
 
-## Preparing the data in datavyu (the software---not the package!)
+## 1. Preparing the data in datavyu (the software---not the package!)
 
 Next, let's prepare the files we wish to analyze. To do so, we have to export them from the datavyu software, as follows:
 
 1. Run the following Ruby script within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
+
 
 `datavyu2csv.rb`
 

@@ -63,6 +63,9 @@
       <a href="articles/preparing-data.html">preparing-data</a>
     </li>
     <li>
+      <a href="articles/tn-stem-ed.html">Plots for TN STEM Ed Research</a>
+    </li>
+    <li>
       <a href="articles/using-datavyur-with-datavyu.html">using-datavyur-with-datavyu</a>
     </li>
   </ul>
@@ -98,9 +101,11 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>First, install the datavyu software; see <a href="https://datavyu.org/download.html">here</a></p>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"tca2/datavyu"</span>)</pre></div>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">datavyu</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"tca2/datavyu"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tca2/datavyu">datavyu</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="preparing-data-for-analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -111,16 +116,18 @@
 <h2 class="hasAnchor">
 <a href="#exploring-the-columns-and-files" class="anchor"></a>Exploring the columns and files</h2>
 <p>Using {datavyur} (not this package, but one that this package - {datavyu} - relies on), you can find information on all of the files (and their columns and codes) in a given directory (not run here:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="kw pkg">datavyur</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyu_col_search</a></span>(<span class="st">"ex-data/datavyu_output_11-16-2020_13-26"</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">datavyur</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyu_col_search</a></span><span class="op">(</span><span class="st">"ex-data/datavyu_output_11-16-2020_13-26"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="summarizing-a-column" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summarizing-a-column" class="anchor"></a>Summarizing a column</h2>
 <p>{datavyu} can help to summarize a column. It defaults to summarizing the frequency of codes for a specified column.</p>
 <p>Note that, by default, the code name combines the column and code names; so, the <code>hand</code> code in the above summary would be combined with its column <code>childhands</code> (or <code>parenthands</code>) to be specified as <code>childhands.hand</code> or <code>parenthands_hand</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                 <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"inst/extdata/datavyu_output_11-16-2020_13-26"</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>,
+                 code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                 directory <span class="op">=</span> <span class="st">"inst/extdata/datavyu_output_11-16-2020_13-26"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;   childhands.hand     n percent</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;</span>
@@ -128,15 +135,17 @@
 <span class="co">#&gt; 2 "left"             22  0.256 </span>
 <span class="co">#&gt; 3 "right"            21  0.244 </span>
 <span class="co">#&gt; 4 ""                 17  0.198 </span>
-<span class="co">#&gt; 5 "l"                 1  0.0116</span></pre></div>
+<span class="co">#&gt; 5 "l"                 1  0.0116</span></code></pre></div>
 <hr>
 <p>We can also explore the frequencies <em>by file</em> by changing the <code>by_file</code> argument to <code>TRUE</code>.</p>
 <p>We’ll be typing that folder file path a number of times. You can set an option that let the folder file path you set be used <em>by default</em>, though you can over-ride it any time you like.</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">directory</span> <span class="kw">=</span> <span class="st">"inst/extdata/datavyu_output_11-16-2020_13-26"</span>)</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>directory <span class="op">=</span> <span class="st">"inst/extdata/datavyu_output_11-16-2020_13-26"</span><span class="op">)</span></code></pre></div>
 <p>Then, use this default by changing the the <code>by_file</code> argument to <code>TRUE</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>,
+                 code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                 by_file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 11 x 4</span>
 <span class="co">#&gt;    file  childhands.hand     n percent</span>
 <span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;</span>
@@ -150,12 +159,13 @@
 <span class="co">#&gt;  8 dyad2 "right"            10   0.303</span>
 <span class="co">#&gt;  9 dyad3 "l"                 1   0.333</span>
 <span class="co">#&gt; 10 dyad3 "left"              1   0.333</span>
-<span class="co">#&gt; 11 dyad3 "right"             1   0.333</span></pre></div>
+<span class="co">#&gt; 11 dyad3 "right"             1   0.333</span></code></pre></div>
 <hr>
 <p>To summarize durations (instead of frequencies) change the <code>summary</code> argument(defaults as <code>"frequency"</code>) to <code>"duration"</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                 <span class="kw">summary</span> <span class="kw">=</span> <span class="st">"duration"</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>,
+                 code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                 summary <span class="op">=</span> <span class="st">"duration"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;   childhands.hand duration     percent</span>
 <span class="co">#&gt; * &lt;chr&gt;           &lt;chr&gt;          &lt;dbl&gt;</span>
@@ -163,12 +173,13 @@
 <span class="co">#&gt; 2 "left"          00:21:24:616  0.298 </span>
 <span class="co">#&gt; 3 ""              00:14:14:433  0.199 </span>
 <span class="co">#&gt; 4 "both"          00:12:25:497  0.173 </span>
-<span class="co">#&gt; 5 "l"             00:01:19:214  0.0184</span></pre></div>
+<span class="co">#&gt; 5 "l"             00:01:19:214  0.0184</span></code></pre></div>
 <p>Columns of durations can also be summarized by file:</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                 <span class="kw">summary</span> <span class="kw">=</span> <span class="st">"duration"</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>,
+                 code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                 by_file <span class="op">=</span> <span class="cn">TRUE</span>,
+                 summary <span class="op">=</span> <span class="st">"duration"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 11 x 4</span>
 <span class="co">#&gt;    file  childhands.hand duration     percent</span>
 <span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;          &lt;dbl&gt;</span>
@@ -182,47 +193,52 @@
 <span class="co">#&gt;  8 dyad2 "left"          00:02:11:428  0.0764</span>
 <span class="co">#&gt;  9 dyad3 "right"         00:07:37:749  0.564 </span>
 <span class="co">#&gt; 10 dyad3 "left"          00:04:34:158  0.338 </span>
-<span class="co">#&gt; 11 dyad3 "l"             00:01:19:214  0.0977</span></pre></div>
+<span class="co">#&gt; 11 dyad3 "l"             00:01:19:214  0.0977</span></code></pre></div>
 </div>
 <div id="ploting-the-results-of-a-summary-of-a-column" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ploting-the-results-of-a-summary-of-a-column" class="anchor"></a>Ploting the results of a summary of a column</h2>
 <p>{datavyu} can also help to plot the summary of a column. Here, we save the output from <code><a href="reference/summarize_column.html">summarize_column()</a></code> to an object (we call this <code>freq_summary</code>, but it can be named whatever we like).</p>
 <p>Then, we use this output in the function <code><a href="reference/plot_column_summary.html">plot_column_summary()</a></code>:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="no">freq_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>, <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>)
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">freq_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>, code <span class="op">=</span> <span class="st">"childhands.hand"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">freq_summary</span>)</pre></div>
+<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span><span class="op">(</span><span class="va">freq_summary</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-eval-1.png" width="100%"></p>
 <p>This also works by file—so long as the column is summarized by file:</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">freq_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>, <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">summary</span> <span class="kw">=</span> <span class="st">"duration"</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">freq_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>, code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                                 by_file <span class="op">=</span> <span class="cn">TRUE</span>, summary <span class="op">=</span> <span class="st">"duration"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">freq_summary</span>)</pre></div>
+<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span><span class="op">(</span><span class="va">freq_summary</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
 <p>Similarly, if the output is for the duration, rather than the frequency, the durations are plotted:</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="no">duration_summary</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>, <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                                     <span class="kw">summary</span> <span class="kw">=</span> <span class="st">"duration"</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">duration_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>, code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                                     summary <span class="op">=</span> <span class="st">"duration"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">duration_summary</span>)</pre></div>
+<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span><span class="op">(</span><span class="va">duration_summary</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="100%"></p>
 <p>Like for frequency, these can be ploted by file:</p>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="no">duration_summary_by_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                                             <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                                             <span class="kw">summary</span> <span class="kw">=</span> <span class="st">"duration"</span>,
-                                             <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">duration_summary_by_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>, 
+                                             code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                                             summary <span class="op">=</span> <span class="st">"duration"</span>,
+                                             by_file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>(<span class="no">duration_summary_by_file</span>)</pre></div>
+<span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span><span class="op">(</span><span class="va">duration_summary_by_file</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="100%"></p>
 </div>
 <div id="using-the-pipe-operator" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-the-pipe-operator" class="anchor"></a>Using the pipe operator</h2>
 <p>Finally, output can be passed between functions with the pipe operator:</p>
-<div class="sourceCode" id="cb13"><pre class="r"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                 <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                 <span class="kw">summary</span> <span class="kw">=</span> <span class="st">"duration"</span>,
-                 <span class="kw">by_file</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span>()</pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/summarize_column.html">summarize_column</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>, 
+                 code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                 summary <span class="op">=</span> <span class="st">"duration"</span>,
+                 by_file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/plot_column_summary.html">plot_column_summary</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%"></p>
 </div>
 <div id="time-series-preparation-and-plot-in-development" class="section level2">
@@ -230,11 +246,12 @@
 <a href="#time-series-preparation-and-plot-in-development" class="anchor"></a>Time series preparation and plot (in-development)</h2>
 <p>To visualize frequency of a certain coded datavyu column accounting for the duration of the video, we can use the function <code><a href="reference/plot_time_series.html">plot_time_series()</a></code>. First we must prepare the data via saving the <code><a href="reference/prep_time_series.html">prep_time_series()</a></code> function as an object (here we use <code>prepared_time_series</code>).</p>
 <p>Note that the available files can be found using <code><a href="https://rdrr.io/pkg/datavyur/man/datavyu_col_search.html">datavyur::datavyu_col_search()</a></code> (described above):</p>
-<div class="sourceCode" id="cb14"><pre class="r"><span class="no">prepared_time_series</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/prep_time_series.html">prep_time_series</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                                         <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                                         <span class="kw">specified_file</span> <span class="kw">=</span> <span class="st">"dyad1"</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">prepared_time_series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prep_time_series.html">prep_time_series</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>,
+                                         code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                                         specified_file <span class="op">=</span> <span class="st">"dyad1"</span><span class="op">)</span>
 
-<span class="no">prepared_time_series</span>
+<span class="va">prepared_time_series</span>
 <span class="co">#&gt; # A tibble: 1,823 x 2</span>
 <span class="co">#&gt;       ts code </span>
 <span class="co">#&gt;  * &lt;dbl&gt; &lt;chr&gt;</span>
@@ -248,15 +265,16 @@
 <span class="co">#&gt;  8    36 left </span>
 <span class="co">#&gt;  9    37 left </span>
 <span class="co">#&gt; 10    38 left </span>
-<span class="co">#&gt; # … with 1,813 more rows</span></pre></div>
+<span class="co">#&gt; # … with 1,813 more rows</span></code></pre></div>
 <p>The <code>units</code> argument defaults to “s” (seconds), but can be changed to “m” (rounds the data to minutes) or “ms” (retains datavyu’s default units, milliseconds).</p>
 <p>We can see how using milliseconds increases the number of data points:</p>
-<div class="sourceCode" id="cb15"><pre class="r"><span class="no">prepared_time_series_ms</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/prep_time_series.html">prep_time_series</a></span>(<span class="kw">column</span> <span class="kw">=</span> <span class="st">"childhands"</span>,
-                                            <span class="kw">code</span> <span class="kw">=</span> <span class="st">"childhands.hand"</span>,
-                                            <span class="kw">specified_file</span> <span class="kw">=</span> <span class="st">"dyad1"</span>,
-                                            <span class="kw">units</span> <span class="kw">=</span> <span class="st">"ms"</span>)
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">prepared_time_series_ms</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prep_time_series.html">prep_time_series</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"childhands"</span>,
+                                            code <span class="op">=</span> <span class="st">"childhands.hand"</span>,
+                                            specified_file <span class="op">=</span> <span class="st">"dyad1"</span>,
+                                            units <span class="op">=</span> <span class="st">"ms"</span><span class="op">)</span>
 
-<span class="no">prepared_time_series_ms</span>
+<span class="va">prepared_time_series_ms</span>
 <span class="co">#&gt; # A tibble: 1,772,038 x 2</span>
 <span class="co">#&gt;       ts code </span>
 <span class="co">#&gt;  * &lt;int&gt; &lt;chr&gt;</span>
@@ -270,9 +288,10 @@
 <span class="co">#&gt;  8 28853 left </span>
 <span class="co">#&gt;  9 28854 left </span>
 <span class="co">#&gt; 10 28855 left </span>
-<span class="co">#&gt; # … with 1,772,028 more rows</span></pre></div>
+<span class="co">#&gt; # … with 1,772,028 more rows</span></code></pre></div>
 <p>Your <code>prepared_time_series_ms</code> object can now be plotted usinf the <code><a href="reference/plot_time_series.html">plot_time_series()</a></code> function. Here is an example of how time series data can be represented, utilizing the functions defaulted unit value of seconds:</p>
-<div class="sourceCode" id="cb16"><pre class="r"><span class="fu"><a href="reference/plot_time_series.html">plot_time_series</a></span>(<span class="no">prepared_time_series</span>)</pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/plot_time_series.html">plot_time_series</a></span><span class="op">(</span><span class="va">prepared_time_series</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-15-1.png" width="100%"></p>
 </div>
 <div id="features-in-development" class="section level2">
@@ -353,7 +372,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

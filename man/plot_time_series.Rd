@@ -4,9 +4,11 @@
 \alias{plot_time_series}
 \title{Plot code frequency for a datavu column}
 \usage{
-plot_time_series(datavyu_ts_object)
+plot_time_series(datavyu_ts_object, normalize_ts = FALSE)
 }
 \arguments{
+\item{normalize_ts}{whether or not to normalize the time stamps to start at 0; defaults to FALSE}
+
 \item{data_ts_object}{the output from prep_time_series()}
 }
 \value{

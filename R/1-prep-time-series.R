@@ -13,15 +13,14 @@ prep_time_series <- function(column,
                              code,
                              specified_file = NULL,
                              directory = NULL,
-                             units = "s") {
+                             units = "s",
+                             normalize_ts = FALSE) {
 
   # finding directory option
   if (is.null(directory)) {
-    if (is.null(directory)) {
-      directory <- getOption("directory")
-    } else {
-      stop("No directory specified or set via options(directory = ''; please specify one")
-    }
+    directory <- getOption("directory")
+  } else {
+    stop("No directory specified or set via options(directory = ''; please specify one")
   }
 
   # argument check
@@ -29,14 +28,10 @@ prep_time_series <- function(column,
     stop("Please specify a column name to tabulate via the `column_name` argument")
   }
 
-  df_of_codes <- import_column("LogClass_AS_ActivityFormat", folder = here("irr-data", "datavyu_output_11-17-2020_14-11")) %>%
+  df_of_codes <- datavyur::import_datavyu(column = column,
+                                          folder = directory) %>%
     tibble::as_tibble() %>%
-    dplyr::select(1:4)
-
-  df_of_codes <- datavyur::import_column(column = column,
-                                         folder = directory) %>%
-    tibble::as_tibble() %>%
-    dplyr::select(1:4, all_of(code))
+    dplyr::select(1:5, all_of(code))
 
   # all of this is for a single file
   if (!is.null(specified_file)) {
@@ -74,6 +69,10 @@ prep_time_series <- function(column,
 
     attributes(ddd)$multiple_files <- FALSE
 
+    if (normalize_ts == TRUE) {
+      ddd %>% mutate(ts = ts - min(ts))
+    }
+
   } else {
 
     df_of_codes <- df_of_codes %>%
@@ -100,7 +99,12 @@ prep_time_series <- function(column,
 
     attributes(ddd)$multiple_files <- TRUE
 
-    ddd
+    if (normalize_ts == TRUE) {
+      ddd <- ddd %>%
+        group_by(file) %>%
+        mutate(ts = ts - min(ts)) %>%
+        ungroup()
+    }
 
   }
 

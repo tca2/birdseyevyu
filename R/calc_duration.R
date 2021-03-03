@@ -16,7 +16,7 @@ calc_duration <- function(column = NULL,
     stop("Please specify a column name to tabulate via the `column_name` argument")
   }
 
-  df_of_codes <- datavyur::import_column(column = column,
+  df_of_codes <- datavyur::import_datavyu(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
     dplyr::select(1:4, all_of(code))

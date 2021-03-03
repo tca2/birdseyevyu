@@ -1,6 +1,6 @@
 ---
 title: "Plots for TN STEM Ed Research"
-output: pdf_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 ```{r}
 library(datavyu)
-library(datavyur) # (install via `devtools::install_github("iamamutt/datavyu/datavyur")`)
+library(datavyur) # (install via `devtools::install_github("iamamutt/datavyur")`)
 library(tidyverse) # install via install.packages("tidyverse")
 library(irr) # install via install.packages("irr")
 library(here) # install.packages("here")
@@ -20,8 +20,8 @@ library(cowplot)  # install via install.packages("cowplot")
 options(directory = here("irr-data", "datavyu_output_11-17-2020_14-11"))
 ```
 
-```{r, eval = FALSE}
-datavyu_col_search(here("irr-data", "datavyu_output_11-17-2020_14-11")) %>% 
+```{r}
+datavyu_search(here("irr-data", "datavyu_output_11-17-2020_14-11")) %>% 
   distinct(file, column, codes) %>% 
   arrange(column)
 ```
@@ -29,26 +29,65 @@ datavyu_col_search(here("irr-data", "datavyu_output_11-17-2020_14-11")) %>%
 Here, I just took the file, column, and codes from above, passing them to `prep_time_series()`. Right now, the code has to include the column; we'll have to change that.
 
 ```{r}
-prepared_time_series <- prep_time_series(column = "LogClass_AS_ActivityFormat",
-                                           code = "LogClass_AS_ActivityFormat.code01") %>% 
-  mutate(code = toupper(code)) 
+prepared_time_series_1 <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                           code = "code01") %>% 
+  mutate(code = toupper(code))
 
-prepared_time_series <- prepared_time_series %>% 
-  mutate(file = as.factor(file))
+prepared_time_series_2 <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                           code = "code01",
+                                           specified_file = "AW T102 14-02-17 Content Log")%>% 
+  mutate(code = toupper(code))
 
-levels(prepared_time_series$file) <- c("T602", "T101", "T201", "T102", "T103")
+prepared_time_series_3 <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                           code = "code01",
+                                           specified_file = "AW and AP Consensus T101 14-02-10 Content Log") %>% 
+  mutate(code = toupper(code))
 
-prepared_time_series <- prepared_time_series %>% 
-  mutate(file = fct_relevel(file, c("T101", "T103", "T201", "T102", "T602")))
+prepared_time_series_4 <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                           code = "code01",
+                                           specified_file = "AW and AP T201 14-12-03 Consensus Log") %>% 
+  mutate(code = toupper(code))
+
+prepared_time_series_5 <- prep_time_series(column = "LogClass_AS_ActivityFormat",
+                                           code = "code01",
+                                           specified_file = "EP 14-03-04 T103 Content Log Consensus")%>% 
+  mutate(code = toupper(code))
 ```
 
 ```{r}
-plot_time_series(prepared_time_series, normalize_ts = TRUE) +
-  hrbrthemes::theme_ipsum(base_size = 14) +
-  scale_color_brewer("Code", palette = 3, type = "qual") +
-  ggtitle("Activity Format")
+p1 <- plot_time_series(prepared_time_series_1) +
+  labs(subtitle = NULL) +
+  hrbrthemes::theme_ipsum(base_size = 13)+
+  xlab(NULL) +
+  ggtitle("T602")
+
+p2 <- plot_time_series(prepared_time_series_2) +
+  labs(subtitle = NULL) +
+  hrbrthemes::theme_ipsum(base_size = 13)+
+  xlab(NULL) +
+  ggtitle("T102")
+
+p3 <- plot_time_series(prepared_time_series_3) +
+  labs(subtitle = NULL) +
+  hrbrthemes::theme_ipsum(base_size = 13)+
+  xlab(NULL) +
+  ggtitle("T101")
+
+p4 <- plot_time_series(prepared_time_series_4) +
+  labs(subtitle = NULL) +
+  hrbrthemes::theme_ipsum(base_size = 13)+
+  xlab(NULL) +
+  ggtitle("T201")
+
+p5 <- plot_time_series(prepared_time_series_5) +
+  labs(subtitle = NULL) +
+  hrbrthemes::theme_ipsum(base_size = 13)+
+  xlab(NULL) +
+  ggtitle("T103")
 ```
 
 ```{r}
-ggsave(here("irr-data", "five-teachers-af-4.png"), width = 8, height = 7)
+plot_grid(p1, p2, p3, p4, p5, ncol = 2)
+
+ggsave("five-teachers-af.png", width = 10, height = 10)
 ```

@@ -9,7 +9,8 @@ prep_time_series(
   code,
   specified_file = NULL,
   directory = NULL,
-  units = "s"
+  units = "s",
+  normalize_ts = FALSE
 )
 }
 \arguments{

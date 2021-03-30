@@ -50,7 +50,7 @@ Please see the [preparing data](preparing-data.html) vignette to use the datavyu
 Using {datavyur} (not this package, but one that this package - {datavyu} - relies on), you can find information on all of the files (and their columns and codes) in a given directory (not run here:
 
 ```{r, eval = FALSE}
-datavyur::datavyu_col_search("ex-data/datavyu_output_11-16-2020_13-26")
+datavyur::datavyu_search("inst/extdata/datavyu_output_11-16-2020_13-26")
 ```
 
 ## Summarizing a column
@@ -62,8 +62,9 @@ Note that, by default, the code name combines the column and code names; so, the
 
 ```{r}
 summarize_column(column = "childhands",
-                 code = "childhands.hand",
-                 directory = "inst/extdata/datavyu_output_11-16-2020_13-26")
+                 code = "hand",
+                 directory = "inst/extdata/datavyu_output_11-16-2020_13-26",
+                 summary = "duration")
 ```
 
 ---

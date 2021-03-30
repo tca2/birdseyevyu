@@ -19,7 +19,7 @@ calc_duration <- function(column = NULL,
   df_of_codes <- datavyur::import_datavyu(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
-    dplyr::select(1:4, all_of(code))
+    dplyr::select(1:5, all_of(code))
 
   # this is if a code name is not provided
   if (is.null(code)) {

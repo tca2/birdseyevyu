@@ -23,7 +23,8 @@ Imports:
     purrr,
     stringr,
     tidyr,
-    rlang
+    rlang,
+    devtools
 Suggests: 
     testthat,
     knitr,

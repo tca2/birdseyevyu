@@ -18,7 +18,12 @@ Imports:
     magrittr,
     tibble,
     datavyur,
-    lubridate
+    lubridate,
+    janitor,
+    purrr,
+    stringr,
+    tidyr,
+    rlang
 Suggests: 
     testthat,
     knitr,

@@ -7,9 +7,9 @@
 plot_time_series(datavyu_ts_object, normalize_ts = FALSE)
 }
 \arguments{
-\item{normalize_ts}{whether or not to normalize the time stamps to start at 0; defaults to FALSE}
+\item{datavyu_ts_object}{the output from prep_time_series()}
 
-\item{data_ts_object}{the output from prep_time_series()}
+\item{normalize_ts}{whether or not to normalize the time stamps to start at 0; defaults to FALSE}
 }
 \value{
 A ggplot2 plot

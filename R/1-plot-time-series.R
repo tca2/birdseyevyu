@@ -1,6 +1,6 @@
 #' Plot code frequency for a datavu column
 #'
-#' @param data_ts_object the output from prep_time_series()
+#' @param datavyu_ts_object the output from prep_time_series()
 #' @return A ggplot2 plot
 #' @param normalize_ts whether or not to normalize the time stamps to start at 0; defaults to FALSE
 #' @export

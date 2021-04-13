@@ -3,4 +3,10 @@
 \docType{package}
 \name{datavyu}
 \alias{datavyu}
-\title{datavyu: XXX}
+\title{datavyu: Prepare and Create Output from datavyu Coding Files}
+\description{
+This package is designed to make it easier to summarize and plot
+output from the qualitative audiovisual data coding software datavyu. Relying
+on the {datavyu} R package to process the data, this package focuses on
+summarizing the frequency and duration of codes and plotting their output.
+}

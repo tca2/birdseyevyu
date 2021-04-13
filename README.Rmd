@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 devtools::load_all(".")
 ```
 
-# datavyu
+# birdseyevyu
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -24,21 +24,21 @@ devtools::load_all(".")
 [![Travis build status](https://travis-ci.com/tca2/datavyu.svg?branch=master)](https://travis-ci.com/tca2/datavyu)
 <!-- badges: end -->
 
-The goal of {datavyu} is to to  to facilitate the use of the open-source **datavyu** software for the analysis of qualitative audiovisual data. This package extensively uses [{datavyur}](https://github.com/iamamutt/datavyu) for preparing the data for summary statistics and plotting functions in this package. We do not intend to duplicate the functionality of that excellent package; instead we focus on summarizing datavyu output and preparing the output for use in other analyses.
+The goal of {birdseyevyu} is to to  to facilitate the use of the open-source **datavyu** software for the analysis of qualitative audiovisual data. This package extensively uses [{datavyur}](https://github.com/iamamutt/datavyu) for preparing the data for summary statistics and plotting functions in this package. We do not intend to duplicate the functionality of that excellent package; instead we focus on summarizing datavyu output and preparing the output for use in other analyses.
 
 ## Installation
 
-First, install the datavyu software; see [here](https://datavyu.org/download.html)
+First, install the datavyu softwar; see [here](https://datavyu.org/download.html)
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version of this package from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("tca2/datavyu")
+devtools::install_github("tca2/birdseyevyu")
 ```
 
 ```{r, eval = FALSE}
-library(datavyu)
+library(birdseyevyu)
 ```
 
 ## Preparing data for analysis
@@ -47,15 +47,16 @@ Please see the [preparing data](preparing-data.html) vignette to use the datavyu
 
 ## Exploring the columns and files
 
-Using {datavyur} (not this package, but one that this package - {datavyu} - relies on), you can find information on all of the files (and their columns and codes) in a given directory (not run here:
+Using the _other_ R package that works with datavyu, {datavyur} you can find information on all of the files (and their columns and codes) in a given directory (not run here:
 
 ```{r, eval = FALSE}
-datavyur::datavyu_search("inst/extdata/datavyu_output_11-16-2020_13-26")
+library(datavyur)
+datavyu_search("inst/extdata/datavyu_output_11-16-2020_13-26")
 ```
 
 ## Summarizing a column
 
-{datavyu} can help to summarize a column. It defaults to summarizing 
+{birdseyevyu} can help to summarize a column. It defaults to summarizing 
 the frequency of codes for a specified column.
 
 Note that, by default, the code name combines the column and code names; so, the `hand` code in the above summary would be combined with its column `childhands` (or `parenthands`) to be specified as `childhands.hand` or `parenthands_hand`:
@@ -109,7 +110,7 @@ summarize_column(column = "childhands",
 
 ## Ploting the results of a summary of a column
 
-{datavyu} can also help to plot the summary of a column. Here, we save the output
+{birdseyevyu} can also help to plot the summary of a column. Here, we save the output
 from `summarize_column()` to an object (we call this `freq_summary`, but it can 
 be named whatever we like). 
 
@@ -197,8 +198,8 @@ plot_time_series(prepared_time_series)
 
 ## Features in-development
 
-- interrater
-- by file `prep_time_series()`
+- inter-rater agreement
+- creating a tidy data frame for ad hoc and custom analyses
 - Plotting code co-occurrences with `plot_cooccurence()`
 - Summarizing an entire file (not just a single column in a file) with `summarize_file()`
 - Addressing a number of [issues](https://github.com/tca2/datavyu/issues), including some that relate to the {datavyur} package
@@ -206,11 +207,6 @@ plot_time_series(prepared_time_series)
 ## Contributing
 
 Please note that the datavyu project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
-
-## pkgdown website
-
-Because this repository is private, the [{pkgdown}](https://pkgdown.r-lib.org/)-generated website for this package
-is available only in the `/docs` directory. Drag the `index.html` file in that directory into a browser to view this site.
 
 ## Acknowledgment
 

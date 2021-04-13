@@ -20,11 +20,10 @@ knitr::opts_chunk$set(
 
 # Loading, setting up
 
-First, load the {datavyu} and {datavyur} packages and the {tidyverse} suite of packages:
+First, load the {birdseyevyu} package and the {tidyverse} suite of packages:
 
 ```{r setup, message=F}
-library(datavyu)
-library(datavyur) # (install via `devtools::install_github("iamamutt/datavyu/datavyur")`)
+library(birdseyevyu)
 library(tidyverse) # install via install.packages("tidyverse")
 library(irr) # install via install.packages("irr")
 library(patchwork) # install via install.packages("patchwork")
@@ -53,13 +52,6 @@ options(directory = here("irr-data", "datavyu_output_11-16-2020_14-13"))
 # Summarizing a column
 
 Frequency of codes; note that the code is the code listed appended to the column name after a period.
-
-Note that you may wish to look at the names of the files, columns, and codes; the following function can be used to do that:
-
-```{r, eval = FALSE}
-datavyu_col_search(here("irr-data", "datavyu_output_11-16-2020_14-13"))
-```
-
 
 ```{r}
 summarize_column(column = "LogClass_IS",

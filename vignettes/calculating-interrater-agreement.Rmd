@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+**Note: This vignette is not _run_ now because of changes in how the R package works**
+
 # Loading, setting up
 
 First, load the {datavyu} and {datavyur} packages and the {tidyverse} suite of packages:

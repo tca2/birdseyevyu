@@ -9,3 +9,6 @@
 ^CODE_OF_CONDUCT\.md$
 ^datavyu2csv\.rb$
 ^.travis$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

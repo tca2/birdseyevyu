@@ -24,7 +24,7 @@ in other analyses.
 
 ## Installation
 
-First, install the datavyu softwar; see
+First, install the datavyu qualitative coding software; see
 [here](https://datavyu.org/download.html)
 
 You can install the development version of this package from
@@ -33,9 +33,13 @@ install the package*. First, uncomment the line for
 `# install.packages("remotes")` by removing the \# symbol. Then run both
 that and the next line of code to install the package.
 
+We’ll also install a second package, datavyur, which can assist with our
+work with datavyu output.
+
 ``` r
 # install.packages("remotes")
 remotes::install_github("tca2/birdseyevyu")
+remotes::install_github("iamamutt/datavyur")
 ```
 
 ``` r
@@ -44,16 +48,14 @@ library(birdseyevyu)
 
 ## Preparing data for analysis
 
-*note*: The use of this package requires the use of the **datavyu**
+*note*: The use of this package requires the use of the *datavyu*
 software’s [Ruby API](https://datavyu.org/user-guide/api.html); note
-that while **datavyu** has a graphical user interface, it is accompanied
+that while *datavyu* has a graphical user interface, it is accompanied
 by a number of Ruby scripts.
 
 #### 1. Run the following Ruby script (available in this repository) within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
 
-`datavyu2csv.rb`
-
-<!-- I ran this on the Empirical Analyses folder to generate a bunch of data -->
+[`datavyu2csv.rb`](https://github.com/tca2/birdseyevyu/blob/master/datavyu2csv.rb)
 
 #### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
 

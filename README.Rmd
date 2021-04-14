@@ -30,11 +30,14 @@ The goal of {birdseyevyu} is to to  to facilitate the use of the open-source **d
 
 First, install the datavyu softwar; see [here](https://datavyu.org/download.html)
 
-You can install the development version of this package from [GitHub](https://github.com/) with:
+You can install the development version of this package from [GitHub](https://github.com/) with; 
+for now, _this is how you'll have to install the package_. First, uncomment the line 
+for `# install.packages("remotes")` by removing the # symbol. Then run both that and
+the next line of code to install the package.
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("tca2/birdseyevyu")
+# install.packages("remotes")
+remotes::install_github("tca2/birdseyevyu")
 ```
 
 ```{r, eval = FALSE}
@@ -53,13 +56,13 @@ library(birdseyevyu)
 
 #### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
 
-This is the directory (folder) passed to the datavyu functions below.
+This is the directory (folder) passed to the function `options()`, described below.
 
 ## Exploring the columns and files
 
-Using the _other_ R package that works with datavyu, {datavyur} you can find information on all of the files (and their columns and codes) in a given directory (not run here:
+Using the _other_ R package that works with datavyu, {datavyur} you can find information on all of the files (and their columns and codes) in a given directory (not run here):
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 library(datavyur)
 
 datavyu_search("inst/extdata/datavyu_output_11-16-2020_13-26")

@@ -28,11 +28,14 @@ First, install the datavyu softwar; see
 [here](https://datavyu.org/download.html)
 
 You can install the development version of this package from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/) with; for now, *this is how you’ll have to
+install the package*. First, uncomment the line for
+`# install.packages("remotes")` by removing the \# symbol. Then run both
+that and the next line of code to install the package.
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("tca2/birdseyevyu")
+# install.packages("remotes")
+remotes::install_github("tca2/birdseyevyu")
 ```
 
 ``` r
@@ -54,110 +57,19 @@ by a number of Ruby scripts.
 
 #### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
 
-This is the directory (folder) passed to the datavyu functions below.
+This is the directory (folder) passed to the function `options()`,
+described below.
 
 ## Exploring the columns and files
 
 Using the *other* R package that works with datavyu, {datavyur} you can
 find information on all of the files (and their columns and codes) in a
-given directory (not run here:
+given directory (not run here):
 
 ``` r
 library(datavyur)
 
 datavyu_search("inst/extdata/datavyu_output_11-16-2020_13-26")
-#> Warning: Using internal example data instead of user data!
-#> Warning: no column to subset for inst/extdata/datavyu_output_11-16-2020_13-26
-#>         column   codes  file
-#> 1   childhands    hand dyad1
-#> 2   childhands    hand dyad2
-#> 3   childhands    hand dyad3
-#> 4   childhands    look dyad1
-#> 5   childhands    look dyad2
-#> 6   childhands    look dyad3
-#> 7   childhands  offset dyad1
-#> 8   childhands  offset dyad2
-#> 9   childhands  offset dyad3
-#> 10  childhands   onset dyad1
-#> 11  childhands   onset dyad2
-#> 12  childhands   onset dyad3
-#> 13  childhands ordinal dyad1
-#> 14  childhands ordinal dyad2
-#> 15  childhands ordinal dyad3
-#> 16 parenthands    hand dyad1
-#> 17 parenthands    hand dyad2
-#> 18 parenthands    look dyad1
-#> 19 parenthands    look dyad2
-#> 20 parenthands    look dyad3
-#> 21 parenthands  offset dyad1
-#> 22 parenthands  offset dyad2
-#> 23 parenthands  offset dyad3
-#> 24 parenthands   onset dyad1
-#> 25 parenthands   onset dyad2
-#> 26 parenthands   onset dyad3
-#> 27 parenthands ordinal dyad1
-#> 28 parenthands ordinal dyad2
-#> 29 parenthands ordinal dyad3
-#>                                                                                                     local
-#> 1   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad1.csv
-#> 2   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad2.csv
-#> 3   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad3.csv
-#> 4   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad1.csv
-#> 5   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad2.csv
-#> 6   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad3.csv
-#> 7   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad1.csv
-#> 8   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad2.csv
-#> 9   /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad3.csv
-#> 10  /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad1.csv
-#> 11  /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad2.csv
-#> 12  /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad3.csv
-#> 13  /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad1.csv
-#> 14  /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad2.csv
-#> 15  /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/childhands__dyad3.csv
-#> 16 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad1.csv
-#> 17 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad2.csv
-#> 18 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad1.csv
-#> 19 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad2.csv
-#> 20 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad3.csv
-#> 21 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad1.csv
-#> 22 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad2.csv
-#> 23 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad3.csv
-#> 24 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad1.csv
-#> 25 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad2.csv
-#> 26 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad3.csv
-#> 27 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad1.csv
-#> 28 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad2.csv
-#> 29 /Library/Frameworks/R.framework/Versions/4.0/Resources/library/datavyur/extdata/parenthands__dyad3.csv
-#>      classes            combined old_classes
-#> 1  character     childhands.hand   character
-#> 2  character     childhands.hand   character
-#> 3  character     childhands.hand   character
-#> 4    numeric     childhands.look     numeric
-#> 5    numeric     childhands.look     numeric
-#> 6    numeric     childhands.look     numeric
-#> 7    numeric   childhands.offset     numeric
-#> 8    numeric   childhands.offset     numeric
-#> 9    numeric   childhands.offset     numeric
-#> 10   numeric    childhands.onset     numeric
-#> 11   numeric    childhands.onset     numeric
-#> 12   numeric    childhands.onset     numeric
-#> 13   numeric  childhands.ordinal     numeric
-#> 14   numeric  childhands.ordinal     numeric
-#> 15   numeric  childhands.ordinal     numeric
-#> 16 character    parenthands.hand   character
-#> 17 character    parenthands.hand   character
-#> 18   numeric    parenthands.look     numeric
-#> 19   numeric    parenthands.look     numeric
-#> 20   numeric    parenthands.look     numeric
-#> 21   numeric  parenthands.offset     numeric
-#> 22   numeric  parenthands.offset     numeric
-#> 23   numeric  parenthands.offset     numeric
-#> 24   numeric   parenthands.onset     numeric
-#> 25   numeric   parenthands.onset     numeric
-#> 26   numeric   parenthands.onset     numeric
-#> 27   numeric parenthands.ordinal     numeric
-#> 28   numeric parenthands.ordinal     numeric
-#> 29   numeric parenthands.ordinal     numeric
 ```
 
 ## Summarizing a column

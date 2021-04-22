@@ -2,6 +2,9 @@
 #'
 #' @param datavyu_object a datavyu object created by `summarize_column()`
 #' @return A ggplot2 plot
+#' @importFrom rlang .data
+#' @importFrom stats reorder
+
 
 plot_duration <- function(datavyu_object) {
 
@@ -19,10 +22,10 @@ plot_duration <- function(datavyu_object) {
     # plotting
     datavyu_object %>%
       dplyr::rename(var = 1) %>%
-      dplyr::mutate(duration = as.numeric(duration),
-             sum_duration_minutes = duration / 60) %>%
-      ggplot2::ggplot(ggplot2::aes(x = reorder(var, sum_duration_minutes),
-                          y = sum_duration_minutes)) +
+      dplyr::mutate(duration = as.numeric(.data$duration),
+             sum_duration_minutes = .data$duration / 60) %>%
+      ggplot2::ggplot(ggplot2::aes(x = reorder(.data$var, .data$sum_duration_minutes),
+                          y = .data$sum_duration_minutes)) +
       ggplot2::geom_col() +
       ggplot2::coord_flip() +
       ggplot2::ylab("Minutes") +
@@ -48,10 +51,10 @@ plot_duration <- function(datavyu_object) {
     # plotting
     datavyu_object %>%
       dplyr::rename(var = 2) %>% # this is to grab the code
-      dplyr::mutate(duration = as.numeric(duration),
-             sum_duration_minutes = duration / 60) %>%
-      ggplot2::ggplot(ggplot2::aes(x = reorder(var, sum_duration_minutes),
-                          y = sum_duration_minutes)) +
+      dplyr::mutate(duration = as.numeric(.data$duration),
+             sum_duration_minutes = .data$duration / 60) %>%
+      ggplot2::ggplot(ggplot2::aes(x = reorder(.data$var, .data$sum_duration_minutes),
+                          y = .data$sum_duration_minutes)) +
       ggplot2::geom_col() +
       ggplot2::coord_flip() +
       ggplot2::facet_wrap("file") +

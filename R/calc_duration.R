@@ -5,6 +5,7 @@
 #' @param directory the path to the directory as a character string
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @return A data frame generated with the janitor package
+#' @importFrom rlang .data
 
 calc_duration <- function(column = NULL,
                           code = NULL,
@@ -19,7 +20,7 @@ calc_duration <- function(column = NULL,
   df_of_codes <- datavyur::import_datavyu(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
-    dplyr::select(1:5, all_of(code))
+    dplyr::select(1:5, dplyr::all_of(code))
 
   # this is if a code name is not provided
   if (is.null(code)) {
@@ -39,12 +40,12 @@ calc_duration <- function(column = NULL,
 
     out <- df_of_codes %>%
       dplyr::group_by(!!rlang::sym(code)) %>%
-      dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
-      dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      dplyr::mutate(percent = sum_duration / sum(sum_duration)) %>%
-      dplyr::arrange(desc(sum_duration)) %>%
-      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time) %>%
-      dplyr::rename(duration = sum_duration) %>%
+      dplyr::mutate(duration = dplyr::if_else(.data$offset > .data$onset, .data$offset - .data$onset, .data$onset - .data$offset)) %>%
+      dplyr::summarize(sum_duration = sum(.data$duration, na.rm = TRUE)) %>%
+      dplyr::mutate(percent = .data$sum_duration / sum(.data$sum_duration)) %>%
+      dplyr::arrange(dplyr::desc(.data$sum_duration)) %>%
+      dplyr::mutate_at(dplyr::vars(.data$sum_duration), datavyur::ms2time) %>%
+      dplyr::rename(duration = .data$sum_duration) %>%
       tibble::as_tibble()
 
   } else {
@@ -57,14 +58,14 @@ calc_duration <- function(column = NULL,
 
     out <- list_of_times %>%
       purrr::map_df(~., .id = "id") %>%
-      dplyr::select(-id) %>% # why is there this and file? not sure
+      dplyr::select(-.data$id) %>% # why is there this and file? not sure
       dplyr::group_by(file, !!rlang::sym(code)) %>%
-      dplyr::mutate(duration = dplyr::if_else(offset > onset, offset - onset, onset - offset)) %>%
-      dplyr::summarize(sum_duration = sum(duration, na.rm = TRUE)) %>%
-      dplyr::arrange(file, desc(sum_duration)) %>%
-      dplyr::mutate(percent = sum_duration / sum(sum_duration)) %>%
-      dplyr::mutate_at(dplyr::vars(sum_duration), datavyur::ms2time) %>%
-      dplyr::rename(duration = sum_duration) %>%
+      dplyr::mutate(duration = dplyr::if_else(.data$offset > .data$onset, .data$offset - .data$onset, .data$onset - .data$offset)) %>%
+      dplyr::summarize(sum_duration = sum(.data$duration, na.rm = TRUE)) %>%
+      dplyr::arrange(file, dplyr::desc(.data$sum_duration)) %>%
+      dplyr::mutate(percent = .data$sum_duration / sum(.data$sum_duration)) %>%
+      dplyr::mutate_at(dplyr::vars(.data$sum_duration), datavyur::ms2time) %>%
+      dplyr::rename(duration = .data$sum_duration) %>%
       tibble::as_tibble()
 
   }

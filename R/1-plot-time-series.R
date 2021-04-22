@@ -4,6 +4,7 @@
 #' @return A ggplot2 plot
 #' @param normalize_ts whether or not to normalize the time stamps to start at 0; defaults to FALSE
 #' @export
+#' @importFrom rlang .data
 #' @examples
 #' \dontrun{
 #' prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand", specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
@@ -17,15 +18,15 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
     if (normalize_ts == TRUE) {
 
       datavyu_ts_object <- datavyu_ts_object %>%
-        group_by(file) %>%
-        mutate(ts = ts - first(ts))
+        dplyr::group_by(file) %>%
+        dplyr::mutate(ts = .data$ts - dplyr::first(.data$ts))
 
     }
 
     units <- attributes(datavyu_ts_object)$units
 
     datavyu_ts_object %>%
-      ggplot2::ggplot(ggplot2::aes(x = ts, y = 1, color = code)) +
+      ggplot2::ggplot(ggplot2::aes(x = .data$ts, y = 1, color = .data$code)) +
       ggplot2::geom_point() +
       ggplot2::ylab(NULL) +
       ggplot2::xlab("Time (m)") +
@@ -42,13 +43,13 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
     if (normalize_ts == TRUE) {
 
       datavyu_ts_object <- datavyu_ts_object %>%
-        group_by(file) %>%
-        mutate(ts = ts - first(ts))
+        dplyr::group_by(file) %>%
+        dplyr::mutate(ts = .data$ts - dplyr::first(.data$ts))
 
     }
 
     datavyu_ts_object %>%
-      ggplot2::ggplot(ggplot2::aes(x = ts, y = 1, color = code)) +
+      ggplot2::ggplot(ggplot2::aes(x = .data$ts, y = 1, color = .data$code)) +
       facet_wrap(~file, ncol = 1) +
       ggplot2::geom_point() +
       ggplot2::ylab(NULL) +

@@ -17,20 +17,20 @@ Plot code duration for a datavyu column
 }
 \examples{
 \dontrun{
-freq_summary <- summarize_column(column = "childhands", code = "childhands.hand", directory = system.file("extdata", "datavyu_output_11-16-2020_13-26", package = "datavyu"))
+freq_summary <- summarize_column(column = "childhands", code = "childhands.hand",
+ directory = system.file("extdata", "datavyu_output_11-16-2020_13-26", package = "datavyu"))
 
-freq_summary_by_file <- summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
-                                         by_file = TRUE)
+freq_summary_by_file <- summarize_column(column = "childhands", code = "childhands.hand",
+ directory = "ex-data/datavyu_output_11-16-2020_13-26", by_file = TRUE)
 
 plot_column_summary(freq_summary)
 plot_column_summary(freq_summary_by_file)
 
-duration_summary <- summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
-                                     summary = "duration")
+duration_summary <- summarize_column(column = "childhands", code = "childhands.hand",
+ directory = "ex-data/datavyu_output_11-16-2020_13-26", summary = "duration")
 
-duration_summary_by_file <- summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
-                                             summary = "duration",
-                                             by_file = TRUE)
+duration_summary_by_file <- summarize_column(column = "childhands", code = "childhands.hand",
+ directory = "ex-data/datavyu_output_11-16-2020_13-26", summary = "duration", by_file = TRUE)
 
 plot_column_summary(duration_summary)
 plot_column_summary(duration_summary_by_file)

@@ -9,14 +9,16 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26")
+#' summarize_column(column = "childhands", code = "childhands.hand",
+#'   directory = "ex-data/datavyu_output_11-16-2020_13-26")
 #'
-#' summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
+#' summarize_column(column = "childhands", code = "childhands.hand",
+#'   directory = "ex-data/datavyu_output_11-16-2020_13-26",
 #'                  by_file = TRUE)
 #'
-#' summarize_column(column = "childhands", code = "childhands.hand", directory = "ex-data/datavyu_output_11-16-2020_13-26",
-#'                  by_file = TRUE,
-#'                  summary = "duration")
+#' summarize_column(column = "childhands", code = "childhands.hand",
+#'   directory = "ex-data/datavyu_output_11-16-2020_13-26",
+#'                  by_file = TRUE, summary = "duration")
 #' }
 
 summarize_column <- function(column,

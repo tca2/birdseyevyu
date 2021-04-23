@@ -19,7 +19,8 @@ Plot code frequency for a datavu column
 }
 \examples{
 \dontrun{
-prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand", specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
-plot_time_series(prepared_time_series)
+prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand",
+  specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
+  plot_time_series(prepared_time_series)
 }
 }

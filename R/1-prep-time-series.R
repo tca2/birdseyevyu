@@ -5,6 +5,7 @@
 #' @inheritParams summarize_column
 #' @inheritParams plot_time_series
 #' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
 #' @return a data frame
 #' @export
 #'
@@ -31,7 +32,7 @@ prep_time_series <- function(column,
   df_of_codes <- datavyur::import_datavyu(column = column,
                                           folder = directory) %>%
     tibble::as_tibble() %>%
-    dplyr::select(1:5, all_of(code))
+    dplyr::select(1:5, dplyr::all_of(code))
 
   # all of this is for a single file
   if (!is.null(specified_file)) {
@@ -40,17 +41,17 @@ prep_time_series <- function(column,
 
     # need to fix all of the object names below - for a single file
     df_of_codes <- df_of_codes %>%
-      dplyr::select(all_of(code), dplyr::contains("onset"), dplyr::contains("offset")) %>%
+      dplyr::select(dplyr::all_of(code), dplyr::contains("onset"), dplyr::contains("offset")) %>%
       purrr::set_names(c("code", "onset", "offset"))
 
     if (units == "s") {
       d <- df_of_codes %>%
-        dplyr::mutate(onset = round(onset / 1000), # allow manual specification of unitsing
-                      offset = round(offset / 1000))
+        dplyr::mutate(onset = round(.data$onset / 1000), # allow manual specification of unitsing
+                      offset = round(.data$offset / 1000))
     } else if (units == "m") {
       d <- df_of_codes %>%
-        dplyr::mutate(onset = round(onset / (1000 * 60)), # allow manual specification of unitsing
-                      offset = round(offset / (1000 * 60)))
+        dplyr::mutate(onset = round(.data$onset / (1000 * 60)), # allow manual specification of unitsing
+                      offset = round(.data$offset / (1000 * 60)))
     } else if (units == "ms") {
       d <- df_of_codes
     }
@@ -61,49 +62,49 @@ prep_time_series <- function(column,
 
     d <- d %>%
       tidyr::pivot_longer(cols = c("onset", "offset")) %>%
-      dplyr::rename(ts = value)
+      dplyr::rename(ts = .data$value)
 
     ddd <- dplyr::left_join(dd, d, by = "ts") %>%
       tidyr::fill(code) %>%
-      dplyr::select(-name)
+      dplyr::select(-.data$name)
 
     attributes(ddd)$multiple_files <- FALSE
 
     if (normalize_ts == TRUE) {
-      ddd %>% mutate(ts = ts - min(ts))
+      ddd %>% dplyr::mutate(ts = .data$ts - min(.data$ts))
     }
 
   } else {
 
     df_of_codes <- df_of_codes %>%
-      dplyr::select(file, all_of(code), dplyr::contains("onset"), dplyr::contains("offset")) %>%
+      dplyr::select(file, dplyr::all_of(code), dplyr::contains("onset"), dplyr::contains("offset")) %>%
       purrr::set_names(c("file", "code", "onset", "offset"))
 
     if (units == "s") {
       d <- df_of_codes %>%
-        dplyr::mutate(onset = round(onset / 1000), # allow manual specification of units
-                      offset = round(offset / 1000))
+        dplyr::mutate(onset = round(.data$onset / 1000), # allow manual specification of units
+                      offset = round(.data$offset / 1000))
     } else if (units == "m") {
       d <- df_of_codes %>%
-        dplyr::mutate(onset = round(onset / (1000 * 60)), # allow manual specification of units
-                      offset = round(offset / (1000 * 60)))
+        dplyr::mutate(onset = round(.data$onset / (1000 * 60)), # allow manual specification of units
+                      offset = round(.data$offset / (1000 * 60)))
     } else if (units == "ms") {
       d <- df_of_codes
     }
 
     d_split <- d %>%
-      group_by(file) %>%
-      group_split()
+      dplyr::group_by(file) %>%
+      dplyr::group_split()
 
-    ddd <- d_split %>% map_df(prep_multiple_ts_files)
+    ddd <- d_split %>% purrr::map_df(prep_multiple_ts_files)
 
     attributes(ddd)$multiple_files <- TRUE
 
     if (normalize_ts == TRUE) {
       ddd <- ddd %>%
-        group_by(file) %>%
-        mutate(ts = ts - min(ts)) %>%
-        ungroup()
+        dplyr::group_by(file) %>%
+        dplyr::mutate(ts = .data$ts - min(.data$ts)) %>%
+        dplyr::ungroup()
     }
 
   }

@@ -1,4 +1,4 @@
 library(testthat)
-library(datavyu)
+library(birdseyevyu)
 
-test_check("datavyu")
+test_check("birdseyevyu")

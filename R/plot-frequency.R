@@ -2,6 +2,8 @@
 #'
 #' @param datavyu_object a datavyu object created by `summarize_column()`
 #' @return A ggplot2 plot
+#' @importFrom rlang .data
+
 
 plot_frequency <- function(datavyu_object) {
 
@@ -10,8 +12,8 @@ plot_frequency <- function(datavyu_object) {
     names(datavyu_object)[1] <- "var"
 
     datavyu_object %>%
-      ggplot2::ggplot(ggplot2::aes(x = reorder(var, n),
-                          y = n)) +
+      ggplot2::ggplot(ggplot2::aes(x = reorder(.data$var, .data$n),
+                          y = .data$n)) +
       ggplot2::geom_col() +
       ggplot2::xlab(NULL) +
       ggplot2::coord_flip()
@@ -36,8 +38,8 @@ plot_frequency <- function(datavyu_object) {
     names(datavyu_object)[2] <- "var"
 
     datavyu_object %>%
-      ggplot2::ggplot(ggplot2::aes(x = reorder(var, n),
-                          y = n)) +
+      ggplot2::ggplot(ggplot2::aes(x = reorder(.data$var, .data$n),
+                          y = .data$n)) +
       ggplot2::geom_col() +
       ggplot2::coord_flip() +
       ggplot2::facet_wrap("file") +

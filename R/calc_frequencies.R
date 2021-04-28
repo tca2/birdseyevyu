@@ -5,6 +5,7 @@
 #' @param directory the path to the directory as a character string
 #' @param by_file whether or not to calculate the frequencies by file (logical)
 #' @return A data frame generated with the janitor package
+#' @importFrom rlang .data
 
 calc_frequencies <- function(column,
                              code,
@@ -19,13 +20,13 @@ calc_frequencies <- function(column,
   df_of_codes <- datavyur::import_datavyu(column = column,
                                          folder = directory) %>%
     tibble::as_tibble() %>%
-    dplyr::select(1:4, all_of(code))
+    dplyr::select(1:4, dplyr::all_of(code))
 
   if (by_file == FALSE) {
 
     out <- df_of_codes %>%
-      janitor::tabyl(all_of(code)) %>%
-      dplyr::arrange(dplyr::desc(n)) %>%
+      janitor::tabyl(dplyr::all_of(code)) %>%
+      dplyr::arrange(dplyr::desc(.data$n)) %>%
       as_tibble()
 
   } else {
@@ -33,13 +34,13 @@ calc_frequencies <- function(column,
     list_of_freqs <- df_of_codes %>%
       dplyr::group_by(file) %>%
       dplyr::group_split() %>%
-      purrr::map(janitor::tabyl, all_of(code))
+      purrr::map(janitor::tabyl, dplyr::all_of(code))
 
     names(list_of_freqs) <- unique(df_of_codes$file)
 
     out <- list_of_freqs %>%
       purrr::map_df(~., .id = "id") %>%
-      dplyr::rename(file = id) %>%
+      dplyr::rename(file = .data$id) %>%
       tibble::as_tibble()
 
   }

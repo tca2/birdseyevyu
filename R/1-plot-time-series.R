@@ -1,4 +1,4 @@
-#' Plot code frequency for a datavu column
+#' Plot code frequency for a datavyu column
 #'
 #' @param datavyu_ts_object the output from prep_time_series()
 #' @return A ggplot2 plot
@@ -66,3 +66,40 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
   }
 
 }
+
+#' Plot code frequency for a datavyu column IN A NEW WAY
+#'
+#' @param datafile the file with onsets and offsets
+#' @return A ggplot2 plot
+#' @param normalize_ts whether or not to normalize the time stamps to start at 0; defaults to FALSE
+#' @export
+#' @importFrom rlang .data
+#' @examples
+#' \dontrun{
+#' prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand",
+#'   specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
+#'   plot_time_series_NEW(prepared_time_series)
+#' }
+
+plot_time_series_NEW <- function(datafile) {
+  datafile %>%
+    ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$file, yend = .data$file, color = .data$code01)) +
+    ggplot2::geom_segment(size = 2) +
+    ggplot2::xlab("Time (m)") +
+    ggplot2::ylab(NULL) +
+    ggplot2::scale_x_time() +
+    ggplot2::theme(axis.title.y = ggplot2::element_blank(),
+                   axis.text.y = ggplot2::element_blank(),
+                   axis.ticks.y = ggplot2::element_blank()) +
+    ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
+    ggplot2::theme_minimal() +
+    ggplot2::scale_colour_manual("", values = c(RColorBrewer::brewer.pal(n = 7, name = "Greys")[1:5], "goldenrod2", RColorBrewer::brewer.pal(n = 7, name = "Greys")[6]),
+      labels = c("assessment",
+                 "content discussion",
+                 "groupwork",
+                 "launch",
+                 "other",
+                 "student presentation",
+                 "teacher presentation"))
+}
+

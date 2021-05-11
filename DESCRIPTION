@@ -1,6 +1,6 @@
 Package: birdseyevyu
 Title: Prepare and Create Output from datavyu Coding Files
-Version: 0.1.0
+Version: 0.1.7.9999
 Authors@R: 
     person(given = "Joshua",
            family = "Rosenberg",

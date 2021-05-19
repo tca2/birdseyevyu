@@ -24,3 +24,10 @@ prep_multiple_ts_files <- function(d) {
   out
 
 }
+
+create_duration <- function(x) {
+  lubridate::ddays(as.integer(x[1])) +
+    lubridate::dminutes(as.integer(x[2])) +
+    lubridate::dseconds(as.integer(x[3])) +
+    lubridate::dmilliseconds(as.integer(x[4]))
+}

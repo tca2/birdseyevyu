@@ -54,6 +54,13 @@ summarize_column <- function(column,
                                      directory = directory,
                                      by_file = by_file)
 
+    split_time <- duration_output$duration %>%
+      str_split(":")
+
+    duration_output$duration <- purrr::map_dbl(split_time, create_duration)
+
+    message("The duration column represents the duration in seconds")
+
     attributes(duration_output)$type <- summary
     attributes(duration_output)$by_file <- by_file
 

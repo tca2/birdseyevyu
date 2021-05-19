@@ -4,12 +4,14 @@
 \alias{plot_time_series_NEW}
 \title{Plot code frequency for a datavyu column IN A NEW WAY}
 \usage{
-plot_time_series_NEW(datafile)
+plot_time_series_NEW(datafile = NULL, directory = NULL, colors = 1)
 }
 \arguments{
 \item{datafile}{the file with onsets and offsets}
 
-\item{normalize_ts}{whether or not to normalize the time stamps to start at 0; defaults to FALSE}
+\item{directory}{path to a directory containing multiple such files or a vector of file locations}
+
+\item{colors}{color palette to use, options from \code{ggplot2::scale_color_brewer()} function}
 }
 \value{
 A ggplot2 plot

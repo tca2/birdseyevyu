@@ -23,6 +23,7 @@ Imports:
     stringr,
     tidyr,
     rlang,
+    readr,
     devtools
 Suggests: 
     testthat,

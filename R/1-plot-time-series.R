@@ -70,8 +70,9 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
 #' Plot code frequency for a datavyu column IN A NEW WAY
 #'
 #' @param datafile the file with onsets and offsets
+#' @param directory path to a directory containing multiple such files or a vector of file locations
+#' @param colors color palette to use, options from `ggplot2::scale_color_brewer()` function
 #' @return A ggplot2 plot
-#' @param normalize_ts whether or not to normalize the time stamps to start at 0; defaults to FALSE
 #' @export
 #' @importFrom rlang .data
 #' @examples
@@ -81,25 +82,39 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
 #'   plot_time_series_NEW(prepared_time_series)
 #' }
 
-plot_time_series_NEW <- function(datafile) {
-  datafile %>%
-    ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$file, yend = .data$file, color = .data$code01)) +
-    ggplot2::geom_segment(size = 2) +
-    ggplot2::xlab("Time (m)") +
-    ggplot2::ylab(NULL) +
-    ggplot2::scale_x_time() +
-    ggplot2::theme(axis.title.y = ggplot2::element_blank(),
-                   axis.text.y = ggplot2::element_blank(),
-                   axis.ticks.y = ggplot2::element_blank()) +
-    ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
-    ggplot2::theme_minimal() +
-    ggplot2::scale_colour_manual("", values = c(RColorBrewer::brewer.pal(n = 7, name = "Greys")[1:5], "goldenrod2", RColorBrewer::brewer.pal(n = 7, name = "Greys")[6]),
-      labels = c("assessment",
-                 "content discussion",
-                 "groupwork",
-                 "launch",
-                 "other",
-                 "student presentation",
-                 "teacher presentation"))
+plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) {
+  if(!is.null(datafile)){
+    datafile %>%
+      ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$code01, yend = .data$code01, color = .data$code01)) +
+      ggplot2::geom_segment(size = 6) +
+      ggplot2::xlab("Time (m)") +
+      ggplot2::ylab(NULL) +
+      ggplot2::scale_x_time() +
+      ggplot2::theme(axis.title.y = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_blank(),
+                     axis.ticks.y = ggplot2::element_blank()) +
+      ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
+      ggplot2::theme_minimal() +
+      scale_color_brewer(type = "qual", palette = colors)
+  }
+  else if(!is.null(directory)){
+    if(is.list(directory)){
+      files <- directory
+    } else if (is.character(directory)){
+      files <- list.files(directory, pattern = "\\.csv", full.names = TRUE)
+    }
+    comb_data <- purrr::map_df(files, readr::read_csv)
+    comb_data %>%
+      ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$file, yend = .data$file, color = .data$code01)) +
+      ggplot2::geom_segment(size = 6) +
+      ggplot2::xlab("Time (m)") +
+      ggplot2::ylab(NULL) +
+      ggplot2::scale_x_time() +
+      ggplot2::theme(axis.title.y = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_blank(),
+                     axis.ticks.y = ggplot2::element_blank()) +
+      ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
+      ggplot2::theme_minimal() +
+      scale_color_brewer(type = "qual", palette = colors)
+  }
 }
-

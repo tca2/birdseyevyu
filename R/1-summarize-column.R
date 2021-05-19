@@ -55,7 +55,7 @@ summarize_column <- function(column,
                                      by_file = by_file)
 
     split_time <- duration_output$duration %>%
-      str_split(":")
+      stringr::str_split(":")
 
     duration_output$duration <- purrr::map_dbl(split_time, create_duration)
 

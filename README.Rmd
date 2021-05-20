@@ -119,10 +119,10 @@ my_summary
 Columns of durations can also be summarized by file:
 
 ```{r}
-summarize_column(column = "childhands",
-                 code = "hand",
-                 by_file = TRUE,
-                 summary = "duration")
+duration_output <- summarize_column(column = "childhands",
+                                    code = "hand",
+                                    by_file = TRUE,
+                                    summary = "duration")
 ```
 
 ## Ploting the results of a summary of a column

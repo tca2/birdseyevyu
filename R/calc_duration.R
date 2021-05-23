@@ -64,7 +64,7 @@ calc_duration <- function(column = NULL,
       dplyr::summarize(sum_duration = sum(.data$duration, na.rm = TRUE)) %>%
       dplyr::arrange(file, dplyr::desc(.data$sum_duration)) %>%
       dplyr::mutate(percent = .data$sum_duration / sum(.data$sum_duration)) %>%
-      dplyr::mutate_at(dplyr::vars(.data$sum_duration), datavyur::ms2time) %>%
+      # dplyr::mutate_at(dplyr::vars(.data$sum_duration), datavyur::ms2time) %>%
       dplyr::rename(duration = .data$sum_duration) %>%
       tibble::as_tibble()
 

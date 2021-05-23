@@ -53,3 +53,7 @@ time2s <- function(x) {
 
   duration
 }
+
+ms2min <- function(x) {
+  x / 1000 / 60
+}

@@ -1,7 +1,3 @@
-time_seq <- function(onset, offset) {
-  seq(from = onset, to = offset)
-}
-
 #' Prep multiple files
 #'
 #' @param d input
@@ -45,6 +41,7 @@ prep_multiple_ts_files <- function(d) {
 #'
 #' @param x time input as a vector
 #' @return output
+#' @export
 
 time2s <- function(x) {
   duration_df <- stringr::str_split(x, ":") %>%

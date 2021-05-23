@@ -91,7 +91,7 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
     datafile %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$code01, yend = .data$code01, color = .data$code01)) +
       ggplot2::geom_segment(size = 6) +
-      ggplot2::xlab("Time") +
+      ggplot2::xlab("Time (DHMS)") +
       ggplot2::ylab(NULL) +
       ggplot2::scale_x_time() +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(),
@@ -112,7 +112,7 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
       mutate_at(vars(onset, offset), ms2min) %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$file, yend = .data$file, color = .data$code01)) +
       ggplot2::geom_segment(size = 6) +
-      ggplot2::xlab("Time") +
+      ggplot2::xlab("Time (DHMS)") +
       ggplot2::ylab(NULL) +
       ggplot2::scale_x_time() +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(),

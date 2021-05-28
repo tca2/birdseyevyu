@@ -84,10 +84,14 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
 
 plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) {
   if(!is.null(datafile)){
+
+    datafile <- datafile %>%
+      mutate_at(vars(onset, offset), ms2min)
+
     datafile %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$code01, yend = .data$code01, color = .data$code01)) +
       ggplot2::geom_segment(size = 6) +
-      ggplot2::xlab("Time (m)") +
+      ggplot2::xlab("Time (DHMS)") +
       ggplot2::ylab(NULL) +
       ggplot2::scale_x_time() +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(),
@@ -105,9 +109,10 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
     }
     comb_data <- purrr::map_df(files, readr::read_csv)
     comb_data %>%
+      mutate_at(vars(onset, offset), ms2min) %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$file, yend = .data$file, color = .data$code01)) +
       ggplot2::geom_segment(size = 6) +
-      ggplot2::xlab("Time (m)") +
+      ggplot2::xlab("Time (DHMS)") +
       ggplot2::ylab(NULL) +
       ggplot2::scale_x_time() +
       ggplot2::theme(axis.title.y = ggplot2::element_blank(),

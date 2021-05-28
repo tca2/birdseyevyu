@@ -1,7 +1,3 @@
-time_seq <- function(onset, offset) {
-  seq(from = onset, to = offset)
-}
-
 #' Prep multiple files
 #'
 #' @param d input
@@ -40,3 +36,24 @@ prep_multiple_ts_files <- function(d) {
 #   split_character_string <- split_time(x)
 #   parse_duration(split_character_string[[1]])
 # }
+
+#' Convert time to seconds
+#'
+#' @param x time input as a vector
+#' @return output
+#' @export
+
+time2s <- function(x) {
+  duration_df <- stringr::str_split(x, ":") %>%
+    as.data.frame()
+
+  duration <- lubridate::duration(hour = as.numeric(duration_df[1, ]),
+                                                 minute = as.numeric(duration_df[2, ]),
+                                                 second = as.numeric(stringr::str_c(as.numeric(duration_df[3, ]), ".", as.numeric(duration_df[4, ]))))
+
+  duration
+}
+
+ms2min <- function(x) {
+  x / 1000 / 60
+}

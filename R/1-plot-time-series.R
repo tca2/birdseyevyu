@@ -86,9 +86,9 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
   if(!is.null(datafile)){
 
     datafile <- datafile %>%
-      mutate_at(vars(onset, offset), ms2min)
+      dplyr::mutate_at(vars(.data$onset, .data$offset), ms2min)
 
-    datafile %>%
+    p <- datafile %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$code01, yend = .data$code01, color = .data$code01)) +
       ggplot2::geom_segment(size = 6) +
       ggplot2::xlab("Time (DHMS)") +
@@ -98,8 +98,14 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
                      axis.text.y = ggplot2::element_blank(),
                      axis.ticks.y = ggplot2::element_blank()) +
       ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
-      ggplot2::theme_minimal() +
-      scale_color_brewer(type = "qual", palette = colors)
+      ggplot2::theme_minimal() #+
+      #scale_color_brewer(type = "qual", palette = colors)
+
+    if(length(unique(datafile$code01)) <= 8){
+      p + scale_color_brewer(type = "qual", palette = colors)
+    } else {
+      p + scale_color_discrete()
+    }
   }
   else if(!is.null(directory)){
     if(is.list(directory)){
@@ -108,7 +114,7 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
       files <- list.files(directory, pattern = "\\.csv", full.names = TRUE)
     }
     comb_data <- purrr::map_df(files, readr::read_csv)
-    comb_data %>%
+    p <- comb_data %>%
       mutate_at(vars(onset, offset), ms2min) %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$file, yend = .data$file, color = .data$code01)) +
       ggplot2::geom_segment(size = 6) +
@@ -119,7 +125,12 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
                      axis.text.y = ggplot2::element_blank(),
                      axis.ticks.y = ggplot2::element_blank()) +
       ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
-      ggplot2::theme_minimal() +
-      scale_color_brewer(type = "qual", palette = colors)
+      ggplot2::theme_minimal() #+
+      #scale_color_brewer(type = "qual", palette = colors)
+    if(length(unique(comb_data$code01)) <= 8){
+      p + scale_color_brewer(type = "qual", palette = colors)
+    } else {
+      p + scale_color_discrete()
+    }
   }
 }

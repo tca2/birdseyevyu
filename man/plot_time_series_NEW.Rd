@@ -4,7 +4,13 @@
 \alias{plot_time_series_NEW}
 \title{Plot code frequency for a datavyu column IN A NEW WAY}
 \usage{
-plot_time_series_NEW(datafile = NULL, directory = NULL, colors = 1)
+plot_time_series_NEW(
+  datafile = NULL,
+  directory = NULL,
+  colors = 1,
+  cat_order = NULL,
+  color_scale = NULL
+)
 }
 \arguments{
 \item{datafile}{the file with onsets and offsets}
@@ -12,6 +18,10 @@ plot_time_series_NEW(datafile = NULL, directory = NULL, colors = 1)
 \item{directory}{path to a directory containing multiple such files or a vector of file locations}
 
 \item{colors}{color palette to use, options from \code{ggplot2::scale_color_brewer()} function}
+
+\item{cat_order}{character vector of the order in which to display codes in plot}
+
+\item{color_scale}{a named character vector manually specifying a color scale will also reorder based on order provided}
 }
 \value{
 A ggplot2 plot

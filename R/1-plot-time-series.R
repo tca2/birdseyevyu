@@ -72,6 +72,8 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
 #' @param datafile the file with onsets and offsets
 #' @param directory path to a directory containing multiple such files or a vector of file locations
 #' @param colors color palette to use, options from `ggplot2::scale_color_brewer()` function
+#' @param cat_order character vector of the order in which to display codes in plot
+#' @param color_scale a named character vector manually specifying a color scale will also reorder based on order provided
 #' @return A ggplot2 plot
 #' @export
 #' @importFrom rlang .data
@@ -82,11 +84,15 @@ plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
 #'   plot_time_series_NEW(prepared_time_series)
 #' }
 
-plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) {
+plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1, cat_order = NULL, color_scale = NULL) {
   if(!is.null(datafile)){
 
     datafile <- datafile %>%
       dplyr::mutate_at(vars(.data$onset, .data$offset), ms2min)
+
+    if(!is.null(cat_order)){
+      datafile <- mutate(datafile, code01 = factor(code01, levels = cat_order))
+    }
 
     p <- datafile %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$code01, yend = .data$code01, color = .data$code01)) +
@@ -98,14 +104,20 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1) 
                      axis.text.y = ggplot2::element_blank(),
                      axis.ticks.y = ggplot2::element_blank()) +
       ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
-      ggplot2::theme_minimal() #+
-      #scale_color_brewer(type = "qual", palette = colors)
+      ggplot2::theme_minimal()
 
-    if(length(unique(datafile$code01)) <= 8){
-      p + scale_color_brewer(type = "qual", palette = colors)
-    } else {
-      p + scale_color_discrete()
-    }
+    if(!is.null(color_scale)){
+        p <- p + scale_color_manual(values = color_scale, breaks = rev(names(color_scale))) + scale_y_discrete(limits = names(color_scale))
+      } else if(length(unique(datafile$code01)) <= 8){
+        p <- p + scale_color_brewer(type = "qual", palette = colors)
+      } else {
+        p <- p + scale_color_discrete()
+      }
+
+    #if(!is.null(cat_order)){
+        #p <- p + scale_y_discrete(limits = cat_order)
+      #}
+    p
   }
   else if(!is.null(directory)){
     if(is.list(directory)){

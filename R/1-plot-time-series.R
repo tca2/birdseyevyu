@@ -1,97 +1,30 @@
 #' Plot code frequency for a datavyu column
 #'
-#' @param datavyu_ts_object the output from prep_time_series()
-#' @return A ggplot2 plot
-#' @param normalize_ts whether or not to normalize the time stamps to start at 0; defaults to FALSE
-#' @export
-#' @importFrom rlang .data
-#' @examples
-#' \dontrun{
-#' prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand",
-#'   specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
-#'   plot_time_series(prepared_time_series)
-#' }
-
-plot_time_series <- function(datavyu_ts_object, normalize_ts = FALSE) {
-
-  if (attributes(datavyu_ts_object)$multiple_files == FALSE) {
-
-    if (normalize_ts == TRUE) {
-
-      datavyu_ts_object <- datavyu_ts_object %>%
-        dplyr::group_by(file) %>%
-        dplyr::mutate(ts = .data$ts - dplyr::first(.data$ts))
-
-    }
-
-    units <- attributes(datavyu_ts_object)$units
-
-    datavyu_ts_object %>%
-      ggplot2::ggplot(ggplot2::aes(x = .data$ts, y = 1, color = .data$code)) +
-      ggplot2::geom_point() +
-      ggplot2::ylab(NULL) +
-      ggplot2::xlab("Time (m)") +
-      ggplot2::theme(axis.title.y = ggplot2::element_blank(),
-                     axis.text.y = ggplot2::element_blank(),
-                     axis.ticks.y = ggplot2::element_blank()) +
-      ggplot2::scale_y_discrete(breaks = NULL) +
-      ggplot2::labs(subtitle = stringr::str_c("Units: ", units)) +
-      ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 14)) +
-      ggplot2::scale_x_time()
-
-  } else {
-
-    if (normalize_ts == TRUE) {
-
-      datavyu_ts_object <- datavyu_ts_object %>%
-        dplyr::group_by(file) %>%
-        dplyr::mutate(ts = .data$ts - dplyr::first(.data$ts))
-
-    }
-
-    datavyu_ts_object %>%
-      ggplot2::ggplot(ggplot2::aes(x = .data$ts, y = 1, color = .data$code)) +
-      facet_wrap(~file, ncol = 1) +
-      ggplot2::geom_point() +
-      ggplot2::ylab(NULL) +
-      ggplot2::xlab("Time (m)") +
-      ggplot2::theme(axis.title.y = ggplot2::element_blank(),
-                     axis.text.y = ggplot2::element_blank(),
-                     axis.ticks.y = ggplot2::element_blank()) +
-      ggplot2::scale_y_discrete(breaks = NULL) +
-      # ggplot2::labs(subtitle = stringr::str_c("Units: ", attributes(datavyu_ts_object)$units)) +
-      ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 14)) +
-      ggplot2::scale_x_time()
-
-  }
-
-}
-
-#' Plot code frequency for a datavyu column IN A NEW WAY
-#'
-#' @param datafile the file with onsets and offsets
-#' @param directory path to a directory containing multiple such files or a vector of file locations
+#' @param columns the column or columns to select as character string or vector
+#' @param directory path to where csv files are to be found with `datavyur::import_datavyu()`
 #' @param colors color palette to use, options from `ggplot2::scale_color_brewer()` function
 #' @param cat_order character vector of the order in which to display codes in plot
 #' @param color_scale a named character vector manually specifying a color scale will also reorder based on order provided
 #' @return A ggplot2 plot
 #' @export
 #' @importFrom rlang .data
-#' @examples
-#' \dontrun{
-#' prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand",
-#'   specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
-#'   plot_time_series_NEW(prepared_time_series)
-#' }
 
-plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1, cat_order = NULL, color_scale = NULL) {
-  if(!is.null(datafile)){
+plot_time_series <- function(columns, directory = NULL, colors = 1, cat_order = NULL, color_scale = NULL) {
+
+  # if directory isn't provided use the one set as option
+  if(is.null(directory)){
+    directory <- getOption("directory")
+  }
+
+  if(length(columns) == 1){
+
+    datafile <- datavyur::import_datavyu(folder = directory, columns = columns)
 
     datafile <- datafile %>%
       dplyr::mutate_at(vars(.data$onset, .data$offset), ms2min)
 
     if(!is.null(cat_order)){
-      datafile <- mutate(datafile, code01 = factor(code01, levels = cat_order))
+      datafile <- dplyr::mutate(datafile, code01 = factor(.data$code01, levels = cat_order))
     }
 
     p <- datafile %>%
@@ -107,27 +40,32 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1, 
       ggplot2::theme_minimal()
 
     if(!is.null(color_scale)){
-        p <- p + scale_color_manual(values = color_scale, breaks = rev(names(color_scale))) + scale_y_discrete(limits = names(color_scale))
-      } else if(length(unique(datafile$code01)) <= 8){
-        p <- p + scale_color_brewer(type = "qual", palette = colors)
-      } else {
-        p <- p + scale_color_discrete()
-      }
+      p <- p + scale_color_manual(values = color_scale, breaks = rev(names(color_scale))) + scale_y_discrete(limits = names(color_scale))
+    } else if(length(unique(datafile$code01)) <= 8){
+      p <- p + scale_color_brewer(type = "qual", palette = colors)
+    } else {
+      p <- p + scale_color_discrete()
+    }
 
     #if(!is.null(cat_order)){
-        #p <- p + scale_y_discrete(limits = cat_order)
-      #}
+    #p <- p + scale_y_discrete(limits = cat_order)
+    #}
     p
-  }
-  else if(!is.null(directory)){
-    if(is.list(directory)){
-      files <- directory
-    } else if (is.character(directory)){
-      files <- list.files(directory, pattern = "\\.csv", full.names = TRUE)
-    }
-    comb_data <- purrr::map_df(files, readr::read_csv)
+  } else {
+
+    comb_data <- datavyur::import_datavyu(folder = directory, column = columns, as_list = TRUE)
+
+    # now select the right columns and bind rows
+
+    #names <- Reduce(intersect, lapply(FUN = colnames, comb_data))
+    names <- c("file", "column", "ordinal", "onset", "offset", "code01")
+
+    comb_data <- comb_data %>%
+      purrr::map(dplyr::select, names) %>%
+      dplyr::bind_rows()
+
     p <- comb_data %>%
-      mutate_at(vars(onset, offset), ms2min) %>%
+      dplyr::mutate_at(vars(.data$onset, .data$offset), ms2min) %>%
       ggplot2::ggplot(aes(x = .data$onset, xend = .data$offset, y = .data$file, yend = .data$file, color = .data$code01)) +
       ggplot2::geom_segment(size = 6) +
       ggplot2::xlab("Time (DHMS)") +
@@ -138,7 +76,7 @@ plot_time_series_NEW <- function(datafile = NULL, directory = NULL, colors = 1, 
                      axis.ticks.y = ggplot2::element_blank()) +
       ggplot2::theme(text = ggplot2::element_text(family = "Times", size = 15)) +
       ggplot2::theme_minimal() #+
-      #scale_color_brewer(type = "qual", palette = colors)
+    #scale_color_brewer(type = "qual", palette = colors)
     if(length(unique(comb_data$code01)) <= 8){
       p + scale_color_brewer(type = "qual", palette = colors)
     } else {

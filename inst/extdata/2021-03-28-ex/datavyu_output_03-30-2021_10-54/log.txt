@@ -1,0 +1,140 @@
+datavyu2csv initated at: Date: 03/30/2021 Time: 10:54
+
+Found the following files:
+
+AW T102 14-03-17 Conten Log.opf
+T101 14-02-10 Content Log Merged.opf
+
+================================================================================
+*Loading file: 'AW T102 14-03-17 Conten Log.opf'
+..Found column: LogClass_AS_ParticipationFormat
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_ParticipationFormat__AW T102 14-03-17 Conten Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_TeacherPrompt
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_TeacherPrompt__AW T102 14-03-17 Conten Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_ActivityFormat
+
+...Found arguments: code01, studentpresentername, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_ActivityFormat__AW T102 14-03-17 Conten Log.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IS
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogClass_IG
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogClass_TO_MathPresent
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogClass_TaskUsed
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogNotes
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogClass_IT
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+
+================================================================================
+*Loading file: 'T101 14-02-10 Content Log Merged.opf'
+..Found column: LogClass_AS_ActivityFormat
+
+...Found arguments: code01, studentpresentername, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_ActivityFormat__T101 14-02-10 Content Log Merged.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_TeacherPrompt
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_TeacherPrompt__T101 14-02-10 Content Log Merged.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_ParticipationFormat
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_ParticipationFormat__T101 14-02-10 Content Log Merged.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IS
+
+...Found arguments: i, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_IS__T101 14-02-10 Content Log Merged.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IG
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_IG__T101 14-02-10 Content Log Merged.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TO_MathPresent
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_TO_MathPresent__T101 14-02-10 Content Log Merged.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TaskUsed
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogNotes
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogClass_IT
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

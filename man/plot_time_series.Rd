@@ -4,23 +4,28 @@
 \alias{plot_time_series}
 \title{Plot code frequency for a datavyu column}
 \usage{
-plot_time_series(datavyu_ts_object, normalize_ts = FALSE)
+plot_time_series(
+  columns,
+  directory = NULL,
+  colors = 1,
+  cat_order = NULL,
+  color_scale = NULL
+)
 }
 \arguments{
-\item{datavyu_ts_object}{the output from prep_time_series()}
+\item{columns}{the column or columns to select as character string or vector}
 
-\item{normalize_ts}{whether or not to normalize the time stamps to start at 0; defaults to FALSE}
+\item{directory}{path to where csv files are to be found with \code{datavyur::import_datavyu()}}
+
+\item{colors}{color palette to use, options from \code{ggplot2::scale_color_brewer()} function}
+
+\item{cat_order}{character vector of the order in which to display codes in plot}
+
+\item{color_scale}{a named character vector manually specifying a color scale will also reorder based on order provided}
 }
 \value{
 A ggplot2 plot
 }
 \description{
 Plot code frequency for a datavyu column
-}
-\examples{
-\dontrun{
-prepared_time_series <- prep_time_series(column = "childhands", code = "childhands.hand",
-  specified_file = "dyad1", directory = "ex-data/datavyu_output_11-16-2020_13-26")
-  plot_time_series(prepared_time_series)
-}
 }

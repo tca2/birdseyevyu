@@ -1,7 +1,8 @@
-#' Plot code frequency for a datavu column
+#' Plot code frequency for a datavyu column
 #'
 #' @param specified_file the file name; use datavyur::datavyu_col_search() to determine their names
 #' @param units the units the data will be prepared in; either "m" (minutes), "s" (default; seconds), or "ms" (milli-seconds)
+#' @param normalize_ts set to TRUE to normalize the time series
 #' @inheritParams summarize_column
 #' @inheritParams plot_time_series
 #' @importFrom magrittr "%>%"

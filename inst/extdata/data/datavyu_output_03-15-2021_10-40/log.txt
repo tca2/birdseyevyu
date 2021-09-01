@@ -1,0 +1,80 @@
+datavyu2csv initated at: Date: 03/15/2021 Time: 10:40
+
+Found the following files:
+
+EP 15-02-26 T602 Content Log Spinup Updated.opf
+
+================================================================================
+*Loading file: 'EP 15-02-26 T602 Content Log Spinup Updated.opf'
+..Found column: LogClass_AS_ParticipationFormat
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_ParticipationFormat__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_TeacherPrompt
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_TeacherPrompt__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_AS_ActivityFormat
+
+...Found arguments: code01, studentpresentername, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_AS_ActivityFormat__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IS
+
+...Found arguments: i, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_IS__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_IG
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_IG__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TO_MathPresent
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_TO_MathPresent__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+..Found column: LogClass_TaskUsed
+
+...Found arguments: nameoftask, taskonserver, knowwhattaskis, notesep, notesed, notesck, notesnm, notesbb, notesjm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_TaskUsed__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+..Found column: LogNotes
+
+--------------------------------------------------------------------------------
+!! No coded cells found! Skipping column
+--------------------------------------------------------------------------------
+
+..Found column: LogClass_IT
+
+...Found arguments: code01, notesep, notesed, notesck, notesnm, notesap, notesaw, noteshh, notestm
+
+....Writing cells to file: 'LogClass_IT__EP 15-02-26 T602 Content Log Spinup Updated.csv'
+
+.....done with .csv file
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

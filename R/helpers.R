@@ -1,3 +1,8 @@
+
+time_seq <- function(onset, offset) {
+  seq(from = onset, to = offset)
+}
+
 #' Prep multiple files
 #'
 #' @param d input

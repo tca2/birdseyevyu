@@ -2,7 +2,6 @@
 
 export(plot_column_summary)
 export(plot_time_series)
-export(plot_time_series_NEW)
 export(prep_time_series)
 export(summarize_column)
 export(time2s)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/1-prep-time-series.R
 \name{prep_time_series}
 \alias{prep_time_series}
-\title{Plot code frequency for a datavu column}
+\title{Plot code frequency for a datavyu column}
 \usage{
 prep_time_series(
   column,
@@ -24,11 +24,11 @@ prep_time_series(
 
 \item{units}{the units the data will be prepared in; either "m" (minutes), "s" (default; seconds), or "ms" (milli-seconds)}
 
-\item{normalize_ts}{whether or not to normalize the time stamps to start at 0; defaults to FALSE}
+\item{normalize_ts}{set to TRUE to normalize the time series}
 }
 \value{
 a data frame
 }
 \description{
-Plot code frequency for a datavu column
+Plot code frequency for a datavyu column
 }

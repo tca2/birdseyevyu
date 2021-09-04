@@ -24,7 +24,8 @@ Imports:
     tidyr,
     rlang,
     readr,
-    devtools
+    devtools,
+    here
 Suggests: 
     testthat,
     knitr,

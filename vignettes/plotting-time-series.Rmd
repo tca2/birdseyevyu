@@ -2,10 +2,12 @@
 title: "Time Series Plots"
 author: "Alex Lishinski"
 date: "`r Sys.Date()`"
-output: pdf_document
-vignette: >
-  %\VignetteIndexEntry{Time Series Plots}
-  %\VignetteEngine{knitr::rmarkdown}
+output:
+  html_document:
+    df_print: paged
+vignette: |
+  %\VignetteIndexEntry{Time Series Plots} 
+  %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -25,27 +27,15 @@ The default plot using 1 column puts each code on a separate line:
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(birdseyevyu)
-#library(here)
-getwd()
+library(here)
 
-#here()
-#here("extdata", "2021-03-28-ex", "datavyu_output_03-30-2021_10-54")
- 
-#plot_time_series(directory = system.file("inst", "extdata", "2021-03-28-ex", "datavyu_output_03-30-2021_10-54")
-#, columns = "LogClass_AS_ActivityFormat", colors = "Set3")
-
-plot_time_series(directory =  "2021-03-28-ex/datavyu_output_03-30-2021_10-54", columns = "LogClass_AS_ActivityFormat", colors = "Set3")
+plot_time_series(directory =  here("inst", "extdata", "2021-03-28-ex", "datavyu_output"), columns = "LogClass_AS_ActivityFormat", colors = "Set3")
 ```
-
-```{r}
-knitr::opts_chunk$set(eval = FALSE)
-```
-
 
 When using more than 1 column, each column is on a separate line:
 
 ```{r,warning=FALSE, message=FALSE}
-plot_time_series(directory =  "2021-03-28-ex/datavyu_output_03-30-2021_10-54", columns = c("LogClass_AS_ActivityFormat", "LogClass_AS_ParticipationFormat"), colors = "Set3")
+plot_time_series(directory =  here("inst", "extdata", "2021-03-28-ex", "datavyu_output"), columns = c("LogClass_AS_ActivityFormat", "LogClass_AS_ParticipationFormat"), colors = "Set3")
 ```
 
 ### Basic Color Palettes
@@ -53,15 +43,15 @@ plot_time_series(directory =  "2021-03-28-ex/datavyu_output_03-30-2021_10-54", c
 You can select one of the preexisting palettes that are part of `scale_color_brewer()`, using the `colors` argument and the number or name of these palettes. 
 
 ```{r}
-plot_time_series(directory = "data/datavyu_output_03-15-2021_10-40", columns = "LogClass_IG")
-plot_time_series(directory = "data/datavyu_output_03-15-2021_10-40", columns = "LogClass_IG", colors = 2)
-plot_time_series(directory = "data/datavyu_output_03-15-2021_10-40", columns = "LogClass_IG", colors = 3)
+plot_time_series(directory = here("inst", "extdata", "data", "datavyu_output"), columns = "LogClass_IG")
+plot_time_series(directory = here("inst", "extdata", "data", "datavyu_output"), columns = "LogClass_IG", colors = 2)
+plot_time_series(directory = here("inst", "extdata", "data", "datavyu_output"), columns = "LogClass_IG", colors = 3)
 ``` 
 
 This only works if there are 8 or less codes to be plotted. If there are 9 or more codes, the function defaults back to `scale_color_discrete()`, which picks evenly spaced colors from the color wheel.
 
 ```{r}
-plot_time_series(directory = "data/datavyu_output_03-15-2021_10-40", columns = c("LogClass_IG", "LogClass_AS_ParticipationFormat"), colors = 2)
+plot_time_series(directory = here("inst", "extdata", "data", "datavyu_output"), columns = c("LogClass_IG", "LogClass_AS_ParticipationFormat"), colors = 2)
 ```
 
 ### Custom Code Colors
@@ -71,7 +61,7 @@ You can now put the codes in a different order by specifying a character vector 
 ```{r}
 order <- c("n" , "b" , "y", "o" , "g" , "r")
 
-plot_time_series(directory = "data/datavyu_output_03-15-2021_10-40", columns = "LogClass_IG", cat_order = order)
+plot_time_series(directory = here("inst", "extdata", "data", "datavyu_output"), columns = "LogClass_IG", cat_order = order)
 ```
 
 You can also pick colors completely manually by providing the hex codes for whatever colors you want using the `color_scale` argument. Doing this will also order the codes from top to bottom using the order provided, as with the `cat_order` argument.
@@ -80,6 +70,6 @@ You can also pick colors completely manually by providing the hex codes for what
 colors <- c("n" = "#FFF430", "b" = "#9C59D1", "y" = "#000000", "o" = "#D00070", 
             "g" = "#8C4799", "r" = "#0032A0")
 
-plot_time_series(directory = "data/datavyu_output_03-15-2021_10-40", columns = "LogClass_IG", color_scale = colors)
+plot_time_series(directory = here("inst", "extdata", "data", "datavyu_output"), columns = "LogClass_IG", color_scale = colors)
 ```
 

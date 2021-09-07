@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summarize a datavyu column — summarize_column • birdseyevyu</title>
+<title>Prep multiple files — prep_multiple_ts_files • birdseyevyu</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Summarize a datavyu column — summarize_column" />
-<meta property="og:description" content="Summarize a datavyu column" />
+<meta property="og:title" content="Prep multiple files — prep_multiple_ts_files" />
+<meta property="og:description" content="Prep multiple files" />
 
 
 
@@ -126,66 +126,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summarize a datavyu column</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tca2/birdseyevyu/blob/master/R/1-summarize-column.R'><code>R/1-summarize-column.R</code></a></small>
-    <div class="hidden name"><code>summarize_column.Rd</code></div>
+    <h1>Prep multiple files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tca2/birdseyevyu/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>prep_multiple_ts_files.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Summarize a datavyu column</p>
+    <p>Prep multiple files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>summarize_column</span><span class='op'>(</span>
-  <span class='va'>column</span>,
-  <span class='va'>code</span>,
-  directory <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by_file <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  summary <span class='op'>=</span> <span class='st'>"frequency"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>prep_multiple_ts_files</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>column</th>
-      <td><p>the column as a character string</p></td>
-    </tr>
-    <tr>
-      <th>code</th>
-      <td><p>the code as a character string</p></td>
-    </tr>
-    <tr>
-      <th>directory</th>
-      <td><p>the path to the directory as a character string; can be set with options(directory = "")</p></td>
-    </tr>
-    <tr>
-      <th>by_file</th>
-      <td><p>whether or not to calculate the frequencies by file (logical)</p></td>
-    </tr>
-    <tr>
-      <th>summary</th>
-      <td><p>either "frequency" or "duration"</p></td>
+      <th>d</th>
+      <td><p>input</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame generated with the janitor package</p>
+    <p>output</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>summarize_column</span><span class='op'>(</span>column <span class='op'>=</span> <span class='st'>"childhands"</span>, code <span class='op'>=</span> <span class='st'>"childhands.hand"</span>,
-  directory <span class='op'>=</span> <span class='st'>"ex-data/datavyu_output_11-16-2020_13-26"</span><span class='op'>)</span>
-
-<span class='fu'>summarize_column</span><span class='op'>(</span>column <span class='op'>=</span> <span class='st'>"childhands"</span>, code <span class='op'>=</span> <span class='st'>"childhands.hand"</span>,
-  directory <span class='op'>=</span> <span class='st'>"ex-data/datavyu_output_11-16-2020_13-26"</span>,
-                 by_file <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='fu'>summarize_column</span><span class='op'>(</span>column <span class='op'>=</span> <span class='st'>"childhands"</span>, code <span class='op'>=</span> <span class='st'>"childhands.hand"</span>,
-  directory <span class='op'>=</span> <span class='st'>"ex-data/datavyu_output_11-16-2020_13-26"</span>,
-                 by_file <span class='op'>=</span> <span class='cn'>TRUE</span>, summary <span class='op'>=</span> <span class='st'>"duration"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

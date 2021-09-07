@@ -49,15 +49,7 @@ library(birdseyevyu)
 
 ## Preparing data for analysis
 
-*note*: The use of this package requires the use of the *datavyu* software's [Ruby API](https://datavyu.org/user-guide/api.html); note that while *datavyu* has a graphical user interface, it is accompanied by a number of Ruby scripts.
-
-#### 1. Run the following Ruby script (available in this repository) within the datavyu software by selecting Script and then Run Script; select a directory with one or more `.opf` files:
-
-[`datavyu2csv.rb`](https://github.com/tca2/birdseyevyu/blob/master/datavyu2csv.rb)
-
-#### 2. Open the directory that the Ruby script created; a number of CSV files for each `.opf` file should now be created.
-
-This is the directory (folder) passed to the function `options()`, described below.
+See the Preparing Data for Analysis vignette.
 
 ## Exploring the columns and files
 
